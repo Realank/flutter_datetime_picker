@@ -1,3 +1,5 @@
+import 'dart:math';
+
 abstract class BasePickerModel {
   String leftStringAtIndex(int index);
   String middleStringAtIndex(int index);
@@ -77,14 +79,11 @@ class DatePickerModel extends CommonPickerModel {
   int minYear;
 
   List<int> _leapYearMonths = const <int>[1, 3, 5, 7, 8, 10, 12];
-  int _calcDateCount() {
-    final currentYear = _currentLeftIndex + minYear;
-    final currentMonth = _currentMiddleIndex + 1;
-
-    if (_leapYearMonths.contains(currentMonth)) {
+  int _calcDateCount(int year, int month) {
+    if (_leapYearMonths.contains(month)) {
       return 31;
-    } else if (currentMonth == 2) {
-      if ((currentYear % 4 == 0 && currentYear % 100 != 0) || currentYear % 400 == 0) {
+    } else if (month == 2) {
+      if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0) {
         return 29;
       }
       return 28;
@@ -93,7 +92,16 @@ class DatePickerModel extends CommonPickerModel {
   }
 
   DatePickerModel({this.maxYear = 2050, this.minYear = 1970, DateTime currentTime, String locale})
-      : super(currentTime: currentTime ?? DateTime.now(), locale: locale) {
+      : super(locale: locale) {
+    if (currentTime != null) {
+      int year = currentTime.year;
+      if (this.maxYear < year) {
+        currentTime = DateTime(this.maxYear, 12, 31);
+      } else if (this.minYear > year) {
+        currentTime = DateTime(this.minYear, 1, 1);
+      }
+    }
+    this.currentTime = currentTime ?? DateTime.now();
     _currentLeftIndex = this.currentTime.year - minYear;
     _currentMiddleIndex = this.currentTime.month - 1;
     _currentRightIndex = this.currentTime.day - 1;
@@ -104,7 +112,8 @@ class DatePickerModel extends CommonPickerModel {
     this.middleList = List.generate(12, (int index) {
       return '${index + 1}${_localeMonth()}';
     });
-    this.rightList = List.generate(_calcDateCount(), (int index) {
+    this.rightList = List.generate(
+        _calcDateCount(_currentLeftIndex + minYear, _currentMiddleIndex + 1), (int index) {
       return '${index + 1}${_localeDay()}';
     });
   }

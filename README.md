@@ -1,6 +1,6 @@
 # flutter_datetime_picker
 
-A flutter date time picker
+A flutter date time picker inspired by [flutter-cupertino-date-picker](https://github.com/wuzhendev/flutter-cupertino-date-picker)
 
 ## Getting Started
 

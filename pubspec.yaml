@@ -1,8 +1,8 @@
 name: flutter_datetime_picker
 description: A date time picker for flutter
 version: 0.1.0
-author:
-homepage:
+author: Realank <realank@126.com>
+homepage: https://github.com/Realank
 
 environment:
   sdk: ">=2.0.0-dev.68.0 <3.0.0"

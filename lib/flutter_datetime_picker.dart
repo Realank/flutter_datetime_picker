@@ -1,5 +1,6 @@
 library flutter_datetime_picker;
 
+export 'dateModel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dateModel.dart';
@@ -20,17 +21,18 @@ class DatePicker {
       {bool showTitleActions: true,
       DateChangedCallback onChanged,
       DateChangedCallback onConfirm,
-      locale: 'en_NZ'}) {
+      locale: 'en_NZ',
+      BasePickerModel pickerModel}) {
     Navigator.push(
         context,
         new _DatePickerRoute(
-          showTitleActions: showTitleActions,
-          onChanged: onChanged,
-          onConfirm: onConfirm,
-          locale: locale,
-          theme: Theme.of(context, shadowThemeOnly: true),
-          barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
-        ));
+            showTitleActions: showTitleActions,
+            onChanged: onChanged,
+            onConfirm: onConfirm,
+            locale: locale,
+            theme: Theme.of(context, shadowThemeOnly: true),
+            barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
+            pickerModel: pickerModel));
   }
 }
 

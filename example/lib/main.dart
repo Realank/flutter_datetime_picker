@@ -35,62 +35,19 @@ class HomePage extends StatelessWidget {
       body: Center(
         child: FlatButton(
             onPressed: () {
-              DatePicker.showDatePicker(
-                context,
-                showTitleActions: true,
-                locale: 'zh',
-                onChanged: (date) {
-                  print('change $date');
-                },
-                onConfirm: (date) {
-                  print('confirm $date');
-                },
-              );
+              DatePicker.showDatePicker(context, showTitleActions: true, locale: 'zh',
+                  onChanged: (date) {
+                print('change $date');
+              }, onConfirm: (date) {
+                print('confirm $date');
+              },
+                  pickerModel: DatePickerModel(
+                      minYear: 2000, maxYear: 2019, currentTime: DateTime(2017, 93)));
             },
             child: Text(
               'show date time picker',
               style: TextStyle(color: Colors.blue),
             )),
-      ),
-    );
-  }
-}
-
-class hello extends StatefulWidget {
-  @override
-  _helloState createState() => _helloState();
-}
-
-class _helloState extends State<hello> {
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-  }
-
-  @override
-  void didUpdateWidget(hello oldWidget) {
-    // TODO: implement didUpdateWidget
-    super.didUpdateWidget(oldWidget);
-  }
-
-  @override
-  void didChangeDependencies() {
-    // TODO: implement didChangeDependencies
-    super.didChangeDependencies();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(''),
       ),
     );
   }
