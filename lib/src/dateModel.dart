@@ -89,7 +89,9 @@ class CommonPickerModel extends BasePickerModel {
   }
 
   @override
-  DateTime finalTime() {}
+  DateTime finalTime() {
+    return null;
+  }
 }
 
 class DatePickerModel extends CommonPickerModel {
