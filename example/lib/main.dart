@@ -39,14 +39,11 @@ class HomePage extends StatelessWidget {
                 context,
                 showTitleActions: true,
                 locale: 'zh',
-                initialYear: 2018,
-                initialMonth: 6,
-                initialDate: 21,
-                onChanged: (year, month, day) {
-                  print('change $year-$month-$day');
+                onChanged: (date) {
+                  print('change $date');
                 },
-                onConfirm: (year, month, day) {
-                  print('confirm $year-$month-$day');
+                onConfirm: (date) {
+                  print('confirm $date');
                 },
               );
             },
@@ -54,6 +51,46 @@ class HomePage extends StatelessWidget {
               'show date time picker',
               style: TextStyle(color: Colors.blue),
             )),
+      ),
+    );
+  }
+}
+
+class hello extends StatefulWidget {
+  @override
+  _helloState createState() => _helloState();
+}
+
+class _helloState extends State<hello> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
+
+  @override
+  void didUpdateWidget(hello oldWidget) {
+    // TODO: implement didUpdateWidget
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(''),
       ),
     );
   }

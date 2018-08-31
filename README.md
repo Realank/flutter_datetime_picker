@@ -1,6 +1,6 @@
 # flutter_datetime_picker
 
-A new Flutter package.
+A flutter date time picker
 
 ## Getting Started
 
