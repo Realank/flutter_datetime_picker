@@ -33,21 +33,58 @@ class HomePage extends StatelessWidget {
         title: Text('Datetime Picker'),
       ),
       body: Center(
-        child: FlatButton(
-            onPressed: () {
-              DatePicker.showDatePicker(context, showTitleActions: true, locale: 'zh',
-                  onChanged: (date) {
-                print('change $date');
-              }, onConfirm: (date) {
-                print('confirm $date');
-              },
-                  pickerModel: DatePickerModel(
-                      minYear: 2000, maxYear: 2019, currentTime: DateTime(2017, 93)));
-            },
-            child: Text(
-              'show date time picker',
-              style: TextStyle(color: Colors.blue),
-            )),
+        child: Column(
+          children: <Widget>[
+            FlatButton(
+                onPressed: () {
+                  DatePicker.showDatePicker(context, showTitleActions: true, onChanged: (date) {
+                    print('change $date');
+                  }, onConfirm: (date) {
+                    print('confirm $date');
+                  }, currentTime: DateTime(2008, 12, 31, 23, 12, 34), locale: 'zh');
+                },
+                child: Text(
+                  'show date picker',
+                  style: TextStyle(color: Colors.blue),
+                )),
+            FlatButton(
+                onPressed: () {
+                  DatePicker.showTimePicker(context, showTitleActions: true, onChanged: (date) {
+                    print('change $date');
+                  }, onConfirm: (date) {
+                    print('confirm $date');
+                  }, currentTime: DateTime(2008, 12, 31, 23, 12, 34));
+                },
+                child: Text(
+                  'show time picker',
+                  style: TextStyle(color: Colors.blue),
+                )),
+            FlatButton(
+                onPressed: () {
+                  DatePicker.showDateTimePicker(context, showTitleActions: true, onChanged: (date) {
+                    print('change $date');
+                  }, onConfirm: (date) {
+                    print('confirm $date');
+                  }, currentTime: DateTime(2008, 12, 31, 23, 12, 34), locale: 'zh');
+                },
+                child: Text(
+                  'show date time picker (Chinese)',
+                  style: TextStyle(color: Colors.blue),
+                )),
+            FlatButton(
+                onPressed: () {
+                  DatePicker.showDateTimePicker(context, showTitleActions: true, onChanged: (date) {
+                    print('change $date');
+                  }, onConfirm: (date) {
+                    print('confirm $date');
+                  }, currentTime: DateTime(2008, 12, 31, 23, 12, 34));
+                },
+                child: Text(
+                  'show date time picker (English-America)',
+                  style: TextStyle(color: Colors.blue),
+                )),
+          ],
+        ),
       ),
     );
   }

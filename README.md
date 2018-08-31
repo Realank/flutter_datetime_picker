@@ -2,6 +2,12 @@
 
 A flutter date time picker inspired by [flutter-cupertino-date-picker](https://github.com/wuzhendev/flutter-cupertino-date-picker)
 
+you can choose date / time / date&time in English and Chinese, and you can also custom your own picker content
+
+| Date picker | Time picker | Date & Time picker (Chinese) | Date & Time  picker (English-America)|
+| --- | ------- |--- | ------- |
+|![](screenshot/date.png)|![](screenshot/time.png)|![](screenshot/datetime_chinese.png)|![](screenshot/datetime_english.png)|
+
 ## Getting Started
 
 For help getting started with Flutter, view our online [documentation](https://flutter.io/).

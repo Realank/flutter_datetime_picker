@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:flutter_datetime_picker/src/date_format.dart';
 
 abstract class BasePickerModel {
   String leftStringAtIndex(int index);
@@ -11,6 +12,9 @@ abstract class BasePickerModel {
   int currentMiddleIndex();
   int currentRightIndex();
   DateTime finalTime();
+  String leftDivider();
+  String rightDivider();
+  List<int> layoutProportions();
 }
 
 class CommonPickerModel extends BasePickerModel {
@@ -23,7 +27,7 @@ class CommonPickerModel extends BasePickerModel {
   int _currentRightIndex;
 
   String locale;
-  CommonPickerModel({this.currentTime, locale}) : this.locale = locale ?? 'cn';
+  CommonPickerModel({this.currentTime, locale}) : this.locale = locale ?? 'en';
 
   @override
   String leftStringAtIndex(int index) {
@@ -68,6 +72,21 @@ class CommonPickerModel extends BasePickerModel {
   @override
   void setRightIndex(int index) {
     _currentRightIndex = index;
+  }
+
+  @override
+  String leftDivider() {
+    return "";
+  }
+
+  @override
+  String rightDivider() {
+    return "";
+  }
+
+  @override
+  List<int> layoutProportions() {
+    return [1, 1, 1];
   }
 
   @override
@@ -146,7 +165,7 @@ class DatePickerModel extends CommonPickerModel {
   }
 
   String _localeYear() {
-    if (locale.matchAsPrefix('cn') == null) {
+    if (locale.matchAsPrefix('zh') == null) {
       return '';
     } else {
       return '年';
@@ -154,7 +173,7 @@ class DatePickerModel extends CommonPickerModel {
   }
 
   String _localeMonth() {
-    if (locale.matchAsPrefix('cn') == null) {
+    if (locale.matchAsPrefix('zh') == null) {
       return '';
     } else {
       return '月';
@@ -162,7 +181,7 @@ class DatePickerModel extends CommonPickerModel {
   }
 
   String _localeDay() {
-    if (locale.matchAsPrefix('cn') == null) {
+    if (locale.matchAsPrefix('zh') == null) {
       return '';
     } else {
       return '日';
@@ -175,5 +194,106 @@ class DatePickerModel extends CommonPickerModel {
     final month = _currentMiddleIndex + 1;
     final day = _currentRightIndex + 1;
     return DateTime(year, month, day);
+  }
+}
+
+class TimePickerModel extends CommonPickerModel {
+  TimePickerModel({DateTime currentTime, String locale}) : super(locale: locale) {
+    this.currentTime = currentTime ?? DateTime.now();
+    _currentLeftIndex = this.currentTime.hour;
+    _currentMiddleIndex = this.currentTime.minute;
+    _currentRightIndex = this.currentTime.second;
+  }
+
+  @override
+  String leftStringAtIndex(int index) {
+    if (index >= 0 && index < 24) {
+      return digits(index, 2);
+    } else {
+      return null;
+    }
+  }
+
+  @override
+  String middleStringAtIndex(int index) {
+    if (index >= 0 && index < 60) {
+      return digits(index, 2);
+    } else {
+      return null;
+    }
+  }
+
+  @override
+  String rightStringAtIndex(int index) {
+    if (index >= 0 && index < 60) {
+      return digits(index, 2);
+    } else {
+      return null;
+    }
+  }
+
+  @override
+  String leftDivider() {
+    return ":";
+  }
+
+  @override
+  String rightDivider() {
+    return ":";
+  }
+
+  @override
+  DateTime finalTime() {
+    return DateTime(currentTime.year, currentTime.month, currentTime.day, _currentLeftIndex,
+        _currentMiddleIndex, _currentRightIndex);
+  }
+}
+
+class DateTimePickerModel extends CommonPickerModel {
+  DateTimePickerModel({DateTime currentTime, String locale}) : super(locale: locale) {
+    this.currentTime = currentTime ?? DateTime.now();
+    _currentLeftIndex = 0;
+    _currentMiddleIndex = this.currentTime.hour;
+    _currentRightIndex = this.currentTime.minute;
+  }
+
+  @override
+  String leftStringAtIndex(int index) {
+    DateTime time = currentTime.add(Duration(days: index));
+    return formatDate(time, [ymdw], locale);
+  }
+
+  @override
+  String middleStringAtIndex(int index) {
+    if (index >= 0 && index < 24) {
+      return digits(index, 2);
+    } else {
+      return null;
+    }
+  }
+
+  @override
+  String rightStringAtIndex(int index) {
+    if (index >= 0 && index < 60) {
+      return digits(index, 2);
+    } else {
+      return null;
+    }
+  }
+
+  @override
+  DateTime finalTime() {
+    DateTime time = currentTime.add(Duration(days: _currentLeftIndex));
+    return DateTime(time.year, time.month, time.day, _currentMiddleIndex, _currentRightIndex);
+  }
+
+  @override
+  List<int> layoutProportions() {
+    return [4, 1, 1];
+  }
+
+  @override
+  String rightDivider() {
+    return ':';
   }
 }
