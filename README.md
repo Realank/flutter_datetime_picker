@@ -1,12 +1,14 @@
 # flutter_datetime_picker
 
+[Pub Package](https://pub.dartlang.org/packages/flutter_datetime_picker)
+
 A flutter date time picker inspired by [flutter-cupertino-date-picker](https://github.com/wuzhendev/flutter-cupertino-date-picker)
 
 you can choose date / time / date&time in English and Chinese, and you can also custom your own picker content
 
 | Date picker | Time picker | Date & Time picker (Chinese) | Date & Time  picker (English-America)|
 | --- | ------- |--- | ------- |
-|![](./date.png)|![](./time.png)|![](./datetime_chinese.png)|![](./datetime_english.png)|
+|![](./screen_date.png)|![](./screen_time.png)|![](./screen_datetime_chinese.png)|![](./screen_datetime_english.png)|
 
 ## Getting Started
 

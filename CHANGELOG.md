@@ -3,3 +3,4 @@
 ## [0.1.2] - fix bugs
 ## [0.1.3] - fix bugs
 ## [0.1.4] - change screenshot path
+## [0.1.5] - change screenshot path
