@@ -111,7 +111,11 @@ class DatePickerModel extends CommonPickerModel {
     return 30;
   }
 
-  DatePickerModel({this.maxYear = 2050, this.minYear = 1970, DateTime currentTime, String locale})
+  DatePickerModel(
+      {this.maxYear = 2050,
+      this.minYear = 1970,
+      DateTime currentTime,
+      String locale})
       : super(locale: locale) {
     if (currentTime != null) {
       int year = currentTime.year;
@@ -133,7 +137,8 @@ class DatePickerModel extends CommonPickerModel {
       return '${index + 1}${_localeMonth()}';
     });
     this.rightList = List.generate(
-        _calcDateCount(_currentLeftIndex + minYear, _currentMiddleIndex + 1), (int index) {
+        _calcDateCount(_currentLeftIndex + minYear, _currentMiddleIndex + 1),
+        (int index) {
       return '${index + 1}${_localeDay()}';
     });
   }
@@ -199,7 +204,8 @@ class DatePickerModel extends CommonPickerModel {
 }
 
 class TimePickerModel extends CommonPickerModel {
-  TimePickerModel({DateTime currentTime, String locale}) : super(locale: locale) {
+  TimePickerModel({DateTime currentTime, String locale})
+      : super(locale: locale) {
     this.currentTime = currentTime ?? DateTime.now();
     _currentLeftIndex = this.currentTime.hour;
     _currentMiddleIndex = this.currentTime.minute;
@@ -245,13 +251,14 @@ class TimePickerModel extends CommonPickerModel {
 
   @override
   DateTime finalTime() {
-    return DateTime(currentTime.year, currentTime.month, currentTime.day, _currentLeftIndex,
-        _currentMiddleIndex, _currentRightIndex);
+    return DateTime(currentTime.year, currentTime.month, currentTime.day,
+        _currentLeftIndex, _currentMiddleIndex, _currentRightIndex);
   }
 }
 
 class DateTimePickerModel extends CommonPickerModel {
-  DateTimePickerModel({DateTime currentTime, String locale}) : super(locale: locale) {
+  DateTimePickerModel({DateTime currentTime, String locale})
+      : super(locale: locale) {
     this.currentTime = currentTime ?? DateTime.now();
     _currentLeftIndex = 0;
     _currentMiddleIndex = this.currentTime.hour;
@@ -285,7 +292,8 @@ class DateTimePickerModel extends CommonPickerModel {
   @override
   DateTime finalTime() {
     DateTime time = currentTime.add(Duration(days: _currentLeftIndex));
-    return DateTime(time.year, time.month, time.day, _currentMiddleIndex, _currentRightIndex);
+    return DateTime(time.year, time.month, time.day, _currentMiddleIndex,
+        _currentRightIndex);
   }
 
   @override

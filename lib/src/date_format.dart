@@ -228,7 +228,9 @@ const String Z = 'Z';
 String formatDate(DateTime date, List<String> formats, String locale) {
   if (formats.first == ymdw) {
     final now = DateTime.now();
-    if (date.year == now.year && date.month == now.month && date.day == now.day) {
+    if (date.year == now.year &&
+        date.month == now.month &&
+        date.day == now.day) {
       //today
       if (locale == 'zh') {
         return '今天';
@@ -402,9 +404,25 @@ const List<String> monthZH = const <String>[
   '十二月'
 ];
 
-const List<String> dayZH = const ['星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期日'];
+const List<String> dayZH = const [
+  '星期一',
+  '星期二',
+  '星期三',
+  '星期四',
+  '星期五',
+  '星期六',
+  '星期日'
+];
 
-const List<String> dayShort = const ['Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun'];
+const List<String> dayShort = const [
+  'Mon',
+  'Tue',
+  'Wed',
+  'Thur',
+  'Fri',
+  'Sat',
+  'Sun'
+];
 
 const List<String> dayLong = const [
   'Monday',
@@ -416,4 +434,5 @@ const List<String> dayLong = const [
   'Sunday'
 ];
 
-int dayInYear(DateTime date) => date.difference(new DateTime(date.year, 1, 1)).inDays;
+int dayInYear(DateTime date) =>
+    date.difference(new DateTime(date.year, 1, 1)).inDays;

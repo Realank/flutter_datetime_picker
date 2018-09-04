@@ -37,11 +37,14 @@ class HomePage extends StatelessWidget {
           children: <Widget>[
             FlatButton(
                 onPressed: () {
-                  DatePicker.showDatePicker(context, showTitleActions: true, onChanged: (date) {
+                  DatePicker.showDatePicker(context, showTitleActions: true,
+                      onChanged: (date) {
                     print('change $date');
                   }, onConfirm: (date) {
                     print('confirm $date');
-                  }, currentTime: DateTime(2008, 12, 31, 23, 12, 34), locale: 'zh');
+                  },
+                      currentTime: DateTime(2008, 12, 31, 23, 12, 34),
+                      locale: 'zh');
                 },
                 child: Text(
                   'show date picker',
@@ -49,7 +52,8 @@ class HomePage extends StatelessWidget {
                 )),
             FlatButton(
                 onPressed: () {
-                  DatePicker.showTimePicker(context, showTitleActions: true, onChanged: (date) {
+                  DatePicker.showTimePicker(context, showTitleActions: true,
+                      onChanged: (date) {
                     print('change $date');
                   }, onConfirm: (date) {
                     print('confirm $date');
@@ -61,11 +65,14 @@ class HomePage extends StatelessWidget {
                 )),
             FlatButton(
                 onPressed: () {
-                  DatePicker.showDateTimePicker(context, showTitleActions: true, onChanged: (date) {
+                  DatePicker.showDateTimePicker(context, showTitleActions: true,
+                      onChanged: (date) {
                     print('change $date');
                   }, onConfirm: (date) {
                     print('confirm $date');
-                  }, currentTime: DateTime(2008, 12, 31, 23, 12, 34), locale: 'zh');
+                  },
+                      currentTime: DateTime(2008, 12, 31, 23, 12, 34),
+                      locale: 'zh');
                 },
                 child: Text(
                   'show date time picker (Chinese)',
@@ -73,7 +80,8 @@ class HomePage extends StatelessWidget {
                 )),
             FlatButton(
                 onPressed: () {
-                  DatePicker.showDateTimePicker(context, showTitleActions: true, onChanged: (date) {
+                  DatePicker.showDateTimePicker(context, showTitleActions: true,
+                      onChanged: (date) {
                     print('change $date');
                   }, onConfirm: (date) {
                     print('confirm $date');

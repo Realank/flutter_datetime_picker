@@ -5,3 +5,6 @@
 ## [0.1.4] - change screenshot path
 ## [0.1.5] - change screenshot path
 ## [0.1.6] - sync
+## [0.1.7] - pub.dartlang.org bug, re-submit
+## [0.1.8] - update description
+## [0.1.9] - update description
