@@ -8,3 +8,5 @@
 ## [0.1.7] - pub.dartlang.org bug, re-submit
 ## [0.1.8] - update description
 ## [0.1.9] - update description
+## [0.1.10] - update description
+## [1.0.0] - release stable version
