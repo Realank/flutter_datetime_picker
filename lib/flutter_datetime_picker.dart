@@ -268,7 +268,6 @@ class _DatePickerState extends State<_DatePickerComponent> {
                   scrollController: scrollController,
                   itemExtent: _kDatePickerItemHeight,
                   onSelectedItemChanged: (int index) {
-                    print('select change at $index');
                     selectedChangedWhenScrolling(index);
                   },
                   useMagnifier: true,
