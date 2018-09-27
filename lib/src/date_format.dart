@@ -234,18 +234,24 @@ String formatDate(DateTime date, List<String> formats, String locale) {
       //today
       if (locale == 'zh') {
         return '今天';
+      } else if (locale == 'nl') {
+        return 'Vandaag';
       } else {
         return 'Today';
       }
     } else if (date.year == now.year) {
       if (locale == 'zh') {
         return formatDate(date, [mm, '月', dd, '日 ', D], locale);
+      } else if (locale == 'nl') {
+        return formatDate(date, [D, ' ', dd, ' ', M], locale);
       } else {
         return formatDate(date, [D, ' ', M, ' ', dd], locale);
       }
     } else {
       if (locale == 'zh') {
         return formatDate(date, [yyyy, '年', mm, '月', dd, '日 ', D], locale);
+      } else if (locale == 'nl') {
+        return formatDate(date, [D, ' ', dd, ' ', M, ' ', yyyy], locale);
       } else {
         return formatDate(date, [D, ' ', M, ' ', dd, ',', yyyy], locale);
       }
@@ -266,12 +272,16 @@ String formatDate(DateTime date, List<String> formats, String locale) {
     } else if (format == MM) {
       if (locale == 'zh') {
         sb.write(monthZH[date.month - 1]);
+      } else if (locale == 'nl') {
+        sb.write(monthLongNL[date.month - 1]);
       } else {
         sb.write(monthLong[date.month - 1]);
       }
     } else if (format == M) {
       if (locale == 'zh') {
         sb.write(monthZH[date.month - 1]);
+      } else if (locale == 'nl') {
+        sb.write(monthShortNL[date.month - 1]);
       } else {
         sb.write(monthShort[date.month - 1]);
       }
@@ -288,12 +298,16 @@ String formatDate(DateTime date, List<String> formats, String locale) {
     } else if (format == DD) {
       if (locale == 'zh') {
         sb.write(dayZH[date.weekday - 1]);
+      } else if (locale == 'nl') {
+        sb.write(dayLongNL[date.weekday - 1]);
       } else {
         sb.write(dayLong[date.weekday - 1]);
       }
     } else if (format == D) {
       if (locale == 'zh') {
         sb.write(dayZH[date.weekday - 1]);
+      } else if (locale == 'nl') {
+        sb.write(dayShortNL[date.weekday - 1]);
       } else {
         sb.write(dayShort[date.weekday - 1]);
       }
@@ -432,6 +446,56 @@ const List<String> dayLong = const [
   'Friday',
   'Saturday',
   'Sunday'
+];
+
+const List<String> monthLongNL = const <String>[
+  'Januari',
+  'Februari',
+  'Maart',
+  'April',
+  'Mei',
+  'Juni',
+  'Juli',
+  'Augustus',
+  'September',
+  'Oktober',
+  'November',
+  'December',
+];
+
+const List<String> monthShortNL = const <String>[
+  'Jan',
+  'Feb',
+  'Mar',
+  'Apr',
+  'Mei',
+  'Jun',
+  'Jul',
+  'Aug',
+  'Sep',
+  'Okt',
+  'Nov',
+  'Dec',
+];
+
+const List<String> dayLongNL = const <String>[
+  'Maandag',
+  'Dinsdag',
+  'Woensdag',
+  'Donderdag',
+  'Vrijdag',
+  'Zaterdag',
+  'Zondag',
+];
+
+const List<String> dayShortNL = const <String>[
+  'Ma',
+  'Di',
+  'Wo',
+  'Do',
+  'Vr',
+  'Za',
+  'Zo',
 ];
 
 int dayInYear(DateTime date) =>
