@@ -1,3 +1,5 @@
+import 'i18n_model.dart';
+
 /// Outputs year as four digits
 ///
 /// Example:
@@ -90,13 +92,6 @@ const String WW = 'WW';
 ///     formatDate(new DateTime(1989, 2, 21), [W]);
 ///     // => 8
 const String W = 'W';
-
-/// Outputs week day as long name
-///
-/// Example:
-///     formatDate(new DateTime(2018, 1, 14), [DD]);
-///     // => sunday
-const String DD = 'DD';
 
 /// Outputs week day as long name
 ///
@@ -225,32 +220,24 @@ const String am = 'am';
 const String z = 'z';
 const String Z = 'Z';
 
-String formatDate(DateTime date, List<String> formats, String locale) {
+String formatDate(DateTime date, List<String> formats, LocaleType locale) {
   if (formats.first == ymdw) {
     final now = DateTime.now();
-    if (date.year == now.year &&
-        date.month == now.month &&
-        date.day == now.day) {
+    if (date.year == now.year && date.month == now.month && date.day == now.day) {
       //today
-      if (locale == 'zh') {
-        return '今天';
-      } else if (locale == 'nl') {
-        return 'Vandaag';
-      } else {
-        return 'Today';
-      }
+      return i18nObjInLocale(locale)['today'];
     } else if (date.year == now.year) {
-      if (locale == 'zh') {
+      if (locale == LocaleType.zh) {
         return formatDate(date, [mm, '月', dd, '日 ', D], locale);
-      } else if (locale == 'nl') {
+      } else if (locale == LocaleType.nl) {
         return formatDate(date, [D, ' ', dd, ' ', M], locale);
       } else {
         return formatDate(date, [D, ' ', M, ' ', dd], locale);
       }
     } else {
-      if (locale == 'zh') {
+      if (locale == LocaleType.zh) {
         return formatDate(date, [yyyy, '年', mm, '月', dd, '日 ', D], locale);
-      } else if (locale == 'nl') {
+      } else if (locale == LocaleType.nl) {
         return formatDate(date, [D, ' ', dd, ' ', M, ' ', yyyy], locale);
       } else {
         return formatDate(date, [D, ' ', M, ' ', dd, ',', yyyy], locale);
@@ -270,21 +257,11 @@ String formatDate(DateTime date, List<String> formats, String locale) {
     } else if (format == m) {
       sb.write(date.month);
     } else if (format == MM) {
-      if (locale == 'zh') {
-        sb.write(monthZH[date.month - 1]);
-      } else if (locale == 'nl') {
-        sb.write(monthLongNL[date.month - 1]);
-      } else {
-        sb.write(monthLong[date.month - 1]);
-      }
+      String monthLong = i18nObjInLocale(locale)['monthLong'][date.month - 1];
+      sb.write(monthLong);
     } else if (format == M) {
-      if (locale == 'zh') {
-        sb.write(monthZH[date.month - 1]);
-      } else if (locale == 'nl') {
-        sb.write(monthShortNL[date.month - 1]);
-      } else {
-        sb.write(monthShort[date.month - 1]);
-      }
+      String monthShort = i18nObjInLocale(locale)['monthShort'][date.month - 1];
+      sb.write(monthShort);
     } else if (format == dd) {
       sb.write(digits(date.day, 2));
     } else if (format == d) {
@@ -295,22 +272,9 @@ String formatDate(DateTime date, List<String> formats, String locale) {
       sb.write((dayInYear(date) + 7) ~/ 7);
     } else if (format == WW) {
       sb.write(digits((dayInYear(date) + 7) ~/ 7, 2));
-    } else if (format == DD) {
-      if (locale == 'zh') {
-        sb.write(dayZH[date.weekday - 1]);
-      } else if (locale == 'nl') {
-        sb.write(dayLongNL[date.weekday - 1]);
-      } else {
-        sb.write(dayLong[date.weekday - 1]);
-      }
     } else if (format == D) {
-      if (locale == 'zh') {
-        sb.write(dayZH[date.weekday - 1]);
-      } else if (locale == 'nl') {
-        sb.write(dayShortNL[date.weekday - 1]);
-      } else {
-        sb.write(dayShort[date.weekday - 1]);
-      }
+      String day = i18nObjInLocale(locale)['day'][date.weekday - 1];
+      sb.write(day);
     } else if (format == HH) {
       sb.write(digits(date.hour, 2));
     } else if (format == H) {
@@ -320,11 +284,7 @@ String formatDate(DateTime date, List<String> formats, String locale) {
     } else if (format == h) {
       sb.write(date.hour % 12);
     } else if (format == am) {
-      if (locale == 'zh') {
-        sb.write(date.hour < 12 ? '上午' : '下午');
-      } else {
-        sb.write(date.hour < 12 ? 'AM' : 'PM');
-      }
+      sb.write(date.hour < 12 ? i18nObjInLocale(locale)['am'] : i18nObjInLocale(locale)['pm']);
     } else if (format == nn) {
       sb.write(digits(date.minute, 2));
     } else if (format == n) {
@@ -373,130 +333,4 @@ String digits(int value, int length) {
   return ret;
 }
 
-const List<String> monthShort = const <String>[
-  'Jan',
-  'Feb',
-  'Mar',
-  'Apr',
-  'May',
-  'Jun',
-  'Jul',
-  'Aug',
-  'Sep',
-  'Oct',
-  'Nov',
-  'Dec'
-];
-
-const List<String> monthLong = const <String>[
-  'January',
-  'February',
-  'March',
-  'April',
-  'May',
-  'June',
-  'July',
-  'August',
-  'September',
-  'October',
-  'November',
-  'December'
-];
-
-const List<String> monthZH = const <String>[
-  '一月',
-  '二月',
-  '三月',
-  '四月',
-  '五月',
-  '六月',
-  '七月',
-  '八月',
-  '九月',
-  '十月',
-  '十一月',
-  '十二月'
-];
-
-const List<String> dayZH = const [
-  '星期一',
-  '星期二',
-  '星期三',
-  '星期四',
-  '星期五',
-  '星期六',
-  '星期日'
-];
-
-const List<String> dayShort = const [
-  'Mon',
-  'Tue',
-  'Wed',
-  'Thur',
-  'Fri',
-  'Sat',
-  'Sun'
-];
-
-const List<String> dayLong = const [
-  'Monday',
-  'Tuesday',
-  'Wednesday',
-  'Thursday',
-  'Friday',
-  'Saturday',
-  'Sunday'
-];
-
-const List<String> monthLongNL = const <String>[
-  'Januari',
-  'Februari',
-  'Maart',
-  'April',
-  'Mei',
-  'Juni',
-  'Juli',
-  'Augustus',
-  'September',
-  'Oktober',
-  'November',
-  'December',
-];
-
-const List<String> monthShortNL = const <String>[
-  'Jan',
-  'Feb',
-  'Mar',
-  'Apr',
-  'Mei',
-  'Jun',
-  'Jul',
-  'Aug',
-  'Sep',
-  'Okt',
-  'Nov',
-  'Dec',
-];
-
-const List<String> dayLongNL = const <String>[
-  'Maandag',
-  'Dinsdag',
-  'Woensdag',
-  'Donderdag',
-  'Vrijdag',
-  'Zaterdag',
-  'Zondag',
-];
-
-const List<String> dayShortNL = const <String>[
-  'Ma',
-  'Di',
-  'Wo',
-  'Do',
-  'Vr',
-  'Za',
-  'Zo',
-];
-
-int dayInYear(DateTime date) =>
-    date.difference(new DateTime(date.year, 1, 1)).inDays;
+int dayInYear(DateTime date) => date.difference(new DateTime(date.year, 1, 1)).inDays;
