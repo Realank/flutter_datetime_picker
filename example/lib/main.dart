@@ -83,6 +83,18 @@ class HomePage extends StatelessWidget {
                   'show date time picker (English-America)',
                   style: TextStyle(color: Colors.blue),
                 )),
+            FlatButton(
+                onPressed: () {
+                  DatePicker.showDateTimePicker(context, showTitleActions: true, onChanged: (date) {
+                    print('change $date');
+                  }, onConfirm: (date) {
+                    print('confirm $date');
+                  }, currentTime: DateTime(2008, 12, 31, 23, 12, 34), locale: LocaleType.nl);
+                },
+                child: Text(
+                  'show date time picker (Dutch)',
+                  style: TextStyle(color: Colors.blue),
+                )),
           ],
         ),
       ),

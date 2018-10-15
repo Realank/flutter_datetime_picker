@@ -11,4 +11,5 @@
 ## [0.1.10] - update description
 ## [1.0.0] - release stable version
 ## [1.0.1] - fix day bug when changing month
-## [1.0.2] - added Dutch support
+## [1.0.2] - add Dutch support
+## [1.0.3] - add Dutch in demo
