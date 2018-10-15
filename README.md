@@ -7,9 +7,9 @@ A flutter date time picker inspired by [flutter-cupertino-date-picker](https://g
 you can choose date / time / date&time in English, Dutch and Chinese, and you can also custom your own picker content
 
 
-| Date picker | Time picker | Date & Time picker (Chinese) | Date & Time  picker (English-America)|
-| ------- | ------- |------- | ------- |
-|![]( screen_date.png)|![]( screen_time.png)|![]( screen_datetime_chinese.png)|![]( screen_datetime_english.png)|
+| Date picker | Time picker | Date & Time picker (Chinese) | Date & Time  picker (English-America)|Date & Time  picker (Dutch)|
+| ------- | ------- | ------- | ------- |------- |
+|![]( screen_date.png)|![]( screen_time.png)|![]( screen_datetime_chinese.png)|![]( screen_datetime_english.png)|![]( screen_datetime_dutch.png)|
 
 ## Usage
 ```

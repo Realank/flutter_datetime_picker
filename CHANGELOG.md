@@ -13,3 +13,4 @@
 ## [1.0.1] - fix day bug when changing month
 ## [1.0.2] - add Dutch support
 ## [1.0.3] - add Dutch in demo
+## [1.0.4] - add Dutch in readme
