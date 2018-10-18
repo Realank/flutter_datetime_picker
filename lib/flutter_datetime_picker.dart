@@ -299,7 +299,9 @@ class _DatePickerState extends State<_DatePickerComponent> {
         children: <Widget>[
           _renderColumnView(widget.pickerModel.leftStringAtIndex, leftScrollCtrl,
               widget.pickerModel.layoutProportions()[0], (index) {
-            widget.pickerModel.setLeftIndex(index);
+            setState(() {
+              widget.pickerModel.setLeftIndex(index);
+            });
             _notifyDateChanged();
           }, null),
           Text(
@@ -310,9 +312,10 @@ class _DatePickerState extends State<_DatePickerComponent> {
               widget.pickerModel.layoutProportions()[1], (index) {
             widget.pickerModel.setMiddleIndex(index);
           }, (index) {
-            refreshScrollOffset();
+            setState(() {
+              refreshScrollOffset();
+            });
             _notifyDateChanged();
-            setState(() {});
           }),
           Text(
             widget.pickerModel.rightDivider(),
@@ -320,7 +323,9 @@ class _DatePickerState extends State<_DatePickerComponent> {
           ),
           _renderColumnView(widget.pickerModel.rightStringAtIndex, rightScrollCtrl,
               widget.pickerModel.layoutProportions()[2], (index) {
-            widget.pickerModel.setRightIndex(index);
+            setState(() {
+              widget.pickerModel.setRightIndex(index);
+            });
             _notifyDateChanged();
           }, null),
         ],
