@@ -16,18 +16,33 @@ class DatePickerThemeData extends Diagnosticable {
   final Color backgroundColor;
   final Color barrierColor;
 
-  const DatePickerThemeData({this.inherit, this.cancelStyle, this.doneStyle, this.itemStyle, this.backgroundColor, this.barrierColor});
+  final double containerHeight;
+  final double titleHeight;
+  final double itemHeight;
+
+  const DatePickerThemeData({
+    this.inherit,
+    this.cancelStyle,
+    this.doneStyle,
+    this.itemStyle,
+    this.backgroundColor,
+    this.barrierColor,
+    this.containerHeight = 210.0,
+    this.titleHeight = 44.0,
+    this.itemHeight = 36.0,
+  });
 
   /// Creates a copy of this theme data but with the given fields replaced with
   /// the new values.
   DatePickerThemeData copyWith({
-    String cancelText,
     TextStyle cancelStyle,
-    String doneText,
     TextStyle doneStyle,
     TextStyle itemStyle,
     Color backgroundColor,
     Color barrierColor,
+    double pickerHeight,
+    double pickerTitleHeight,
+    double pickerItemHeight,
   }) {
     return DatePickerThemeData(
       inherit: inherit,
@@ -36,6 +51,9 @@ class DatePickerThemeData extends Diagnosticable {
       itemStyle: itemStyle != null ? itemStyle.merge(this.itemStyle) : this.itemStyle,
       backgroundColor: backgroundColor ?? this.backgroundColor,
       barrierColor: barrierColor ?? this.barrierColor,
+      containerHeight: pickerHeight ?? this.containerHeight,
+      titleHeight: pickerTitleHeight ?? this.titleHeight,
+      itemHeight: pickerItemHeight ?? this.itemHeight,
     );
   }
 
@@ -63,6 +81,9 @@ class DatePickerThemeData extends Diagnosticable {
       itemStyle: other.itemStyle,
       backgroundColor: other.backgroundColor,
       barrierColor: other.barrierColor,
+      pickerHeight: other.containerHeight,
+      pickerTitleHeight: other.titleHeight,
+      pickerItemHeight: other.itemHeight,
     );
   }
 }

@@ -13,10 +13,6 @@ export 'package:flutter_datetime_picker/src/i18n_model.dart';
 typedef DateChangedCallback(DateTime time);
 typedef String StringAtIndexCallBack(int index);
 
-const double _kDatePickerHeight = 210.0;
-const double _kDatePickerTitleHeight = 44.0;
-const double _kDatePickerItemHeight = 36.0;
-
 class DatePicker {
   ///
   /// Display date picker bottom sheet.
@@ -225,7 +221,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
         builder: (BuildContext context, Widget child) {
           return new ClipRect(
             child: new CustomSingleChildLayout(
-              delegate: new _BottomPickerLayout(widget.route.animation.value, showTitleActions: widget.route.showTitleActions),
+              delegate: new _BottomPickerLayout(widget.route.animation.value, theme, showTitleActions: widget.route.showTitleActions),
               child: new GestureDetector(
                 child: Material(
                   color: Colors.transparent,
@@ -264,7 +260,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
       flex: layoutProportion,
       child: Container(
           padding: EdgeInsets.all(8.0),
-          height: _kDatePickerHeight,
+          height: theme.containerHeight,
           decoration: BoxDecoration(color: theme?.backgroundColor ?? Colors.white),
           child: NotificationListener(
               onNotification: (ScrollNotification notification) {
@@ -282,7 +278,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
                   key: key,
                   backgroundColor: theme?.backgroundColor ?? Colors.white,
                   scrollController: scrollController,
-                  itemExtent: _kDatePickerItemHeight,
+                  itemExtent: theme.itemHeight,
                   onSelectedItemChanged: (int index) {
                     selectedChangedWhenScrolling(index);
                   },
@@ -293,7 +289,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
                       return null;
                     }
                     return Container(
-                      height: _kDatePickerItemHeight,
+                      height: theme.itemHeight,
                       alignment: Alignment.center,
                       child: Text(
                         content,
@@ -353,13 +349,13 @@ class _DatePickerState extends State<_DatePickerComponent> {
     String cancel = _localeCancel();
 
     return Container(
-      height: _kDatePickerTitleHeight,
+      height: theme.titleHeight,
       decoration: BoxDecoration(color: theme?.backgroundColor ?? Colors.white),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Container(
-            height: _kDatePickerTitleHeight,
+            height: theme.titleHeight,
             child: FlatButton(
               child: Text(
                 '$cancel',
@@ -369,7 +365,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
             ),
           ),
           Container(
-            height: _kDatePickerTitleHeight,
+            height: theme.titleHeight,
             child: FlatButton(
               child: Text(
                 '$done',
@@ -398,17 +394,18 @@ class _DatePickerState extends State<_DatePickerComponent> {
 }
 
 class _BottomPickerLayout extends SingleChildLayoutDelegate {
-  _BottomPickerLayout(this.progress, {this.itemCount, this.showTitleActions});
+  _BottomPickerLayout(this.progress, this.theme, {this.itemCount, this.showTitleActions});
 
   final double progress;
   final int itemCount;
   final bool showTitleActions;
+  final DatePickerThemeData theme;
 
   @override
   BoxConstraints getConstraintsForChild(BoxConstraints constraints) {
-    double maxHeight = _kDatePickerHeight;
+    double maxHeight = theme.containerHeight;
     if (showTitleActions) {
-      maxHeight += _kDatePickerTitleHeight;
+      maxHeight += theme.titleHeight;
     }
 
     return new BoxConstraints(minWidth: constraints.maxWidth, maxWidth: constraints.maxWidth, minHeight: 0.0, maxHeight: maxHeight);
