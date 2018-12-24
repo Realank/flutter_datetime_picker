@@ -1,6 +1,6 @@
-import 'package:flutter_commons_lang/flutter_commons_lang.dart';
 import 'package:flutter_datetime_picker/src/date_format.dart';
 import 'package:flutter_datetime_picker/src/i18n_model.dart';
+import 'package:flutter_commons_lang/flutter_commons_lang.dart';
 
 abstract class BasePickerModel {
   String leftStringAtIndex(int index);
@@ -119,21 +119,6 @@ class DatePickerModel extends CommonPickerModel {
   int maxDay;
   int minDay;
 
-  List<int> _leapYearMonths = const <int>[1, 3, 5, 7, 8, 10, 12];
-
-  int _daysOfTheMonth(DateTime time) {
-    assert(time != null);
-    if (_leapYearMonths.contains(time.month)) {
-      return 31;
-    } else if (time.month == 2) {
-      if ((time.year % 4 == 0 && time.year % 100 != 0) || time.year % 400 == 0) {
-        return 29;
-      }
-      return 28;
-    }
-    return 30;
-  }
-
   DatePickerModel({DateTime currentTime, this.max, this.min, LocaleType locale}) : super(locale: locale) {
     if (currentTime != null) {
       if (max != null && currentTime.compareTo(max) > 0) {
@@ -143,39 +128,34 @@ class DatePickerModel extends CommonPickerModel {
       }
     }
     this.currentTime = currentTime ?? DateTime.now();
-
-    maxYear = max?.year ?? 2050;
-    minYear = min?.year ?? 1970;
-    minMonth = currentTime.year == min?.year ? min?.month : 1;
-    maxMonth = currentTime.year == max?.year ? max.month : 12;
-
-    _currentLeftIndex = this.currentTime.year - minYear;
-    _currentMiddleIndex = this.currentTime.month - minMonth;
-    _currentRightIndex = this.currentTime.day - 1;
-
     fillLeftLists();
     fillMiddleLists();
     fillRightLists();
+    _currentLeftIndex = this.currentTime.year - minYear;
+    _currentMiddleIndex = this.currentTime.month - minMonth;
+    _currentRightIndex = this.currentTime.day - minDay;
   }
 
   void fillLeftLists() {
+    maxYear = max?.year ?? 2050;
+    minYear = min?.year ?? 1970;
     this.leftList = List.generate(maxYear - minYear + 1, (int index) {
       return '${minYear + index}${_localeYear()}';
     });
   }
 
   void fillMiddleLists() {
-    minMonth = currentTime.year == min?.year ? min?.month : 1;
-    maxMonth = currentTime.year == max?.year ? max.month : 12;
+    minMonth = DateUtils.truncatedEquals(currentTime, min, DateUtils.YEAR) ? min?.month : 1;
+    maxMonth = DateUtils.truncatedEquals(currentTime, max, DateUtils.YEAR) ? max.month : 12;
     this.middleList = List.generate(maxMonth - minMonth + 1, (int index) {
       return '${minMonth + index}${_localeMonth()}';
     });
   }
 
   void fillRightLists() {
-    int dayCount = _daysOfTheMonth(currentTime);
-    minDay = currentTime.year == min?.year && currentTime.month == min?.month ? min.day : 1;
-    maxDay = currentTime.year == max?.year && currentTime.month == max?.month ? max.day : dayCount;
+    int dayCount = DateUtils.daysOfTheMonth(currentTime);
+    maxDay = DateUtils.truncatedEquals(currentTime, max, DateUtils.MONTH) ? max.day : dayCount;
+    minDay = DateUtils.truncatedEquals(currentTime, min, DateUtils.MONTH) ? min.day : 1;
     this.rightList = List.generate(maxDay - minDay + 1, (int index) {
       return '${minDay + index}${_localeDay()}';
     });
@@ -462,7 +442,7 @@ class DateTimePickerModel extends CommonPickerModel {
 
   @override
   List<int> layoutProportions() {
-    return [4, 1, 1];
+    return [3, 1, 1];
   }
 
   @override
