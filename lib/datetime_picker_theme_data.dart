@@ -10,16 +10,13 @@ class DatePickerThemeData extends Diagnosticable {
   /// font face.
   final bool inherit;
 
-  final String cancelText;
   final TextStyle cancelStyle;
-  final String doneText;
   final TextStyle doneStyle;
   final TextStyle itemStyle;
   final Color backgroundColor;
   final Color barrierColor;
 
-  const DatePickerThemeData(
-      {this.inherit, this.cancelText, this.cancelStyle, this.doneText, this.doneStyle, this.itemStyle, this.backgroundColor, this.barrierColor});
+  const DatePickerThemeData({this.inherit, this.cancelStyle, this.doneStyle, this.itemStyle, this.backgroundColor, this.barrierColor});
 
   /// Creates a copy of this theme data but with the given fields replaced with
   /// the new values.
@@ -34,9 +31,7 @@ class DatePickerThemeData extends Diagnosticable {
   }) {
     return DatePickerThemeData(
       inherit: inherit,
-      cancelText: cancelText ?? this.cancelText,
       cancelStyle: cancelStyle != null ? cancelStyle.merge(this.cancelStyle) : this.cancelStyle,
-      doneText: doneText ?? this.doneText,
       doneStyle: doneStyle != null ? doneStyle.merge(this.doneStyle) : this.doneStyle,
       itemStyle: itemStyle != null ? itemStyle.merge(this.itemStyle) : this.itemStyle,
       backgroundColor: backgroundColor ?? this.backgroundColor,
@@ -63,9 +58,7 @@ class DatePickerThemeData extends Diagnosticable {
     if (!other.inherit) return other;
 
     return copyWith(
-      cancelText: other.cancelText,
       cancelStyle: other.cancelStyle,
-      doneText: other.doneText,
       doneStyle: other.doneStyle,
       itemStyle: other.itemStyle,
       backgroundColor: other.backgroundColor,

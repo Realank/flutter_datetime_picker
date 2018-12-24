@@ -362,7 +362,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
             height: _kDatePickerTitleHeight,
             child: FlatButton(
               child: Text(
-                theme?.cancelText ?? '$cancel',
+                '$cancel',
                 style: theme?.cancelStyle,
               ),
               onPressed: () => Navigator.pop(context),
@@ -372,7 +372,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
             height: _kDatePickerTitleHeight,
             child: FlatButton(
               child: Text(
-                theme?.doneText ?? '$done',
+                '$done',
                 style: theme?.doneStyle,
               ),
               onPressed: () {
