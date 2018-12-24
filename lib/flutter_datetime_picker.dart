@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/src/date_model.dart';
 import 'package:flutter_datetime_picker/src/i18n_model.dart';
+
 export 'package:flutter_datetime_picker/src/date_model.dart';
 export 'package:flutter_datetime_picker/src/i18n_model.dart';
 
@@ -21,6 +22,8 @@ class DatePicker {
   ///
   static void showDatePicker(BuildContext context,
       {bool showTitleActions: true,
+      DateTime min,
+      DateTime max,
       DateChangedCallback onChanged,
       DateChangedCallback onConfirm,
       locale: LocaleType.en,
@@ -34,7 +37,7 @@ class DatePicker {
             locale: locale,
             theme: Theme.of(context, shadowThemeOnly: true),
             barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
-            pickerModel: DatePickerModel(currentTime: currentTime, locale: locale)));
+            pickerModel: DatePickerModel(currentTime: currentTime, max: max, min: min, locale: locale)));
   }
 
   ///
@@ -42,6 +45,8 @@ class DatePicker {
   ///
   static void showTimePicker(BuildContext context,
       {bool showTitleActions: true,
+      DateTime min,
+      DateTime max,
       DateChangedCallback onChanged,
       DateChangedCallback onConfirm,
       locale: LocaleType.en,
@@ -55,7 +60,7 @@ class DatePicker {
             locale: locale,
             theme: Theme.of(context, shadowThemeOnly: true),
             barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
-            pickerModel: TimePickerModel(currentTime: currentTime, locale: locale)));
+            pickerModel: TimePickerModel(currentTime: currentTime, max: max, min: min, locale: locale)));
   }
 
   ///
@@ -63,6 +68,8 @@ class DatePicker {
   ///
   static void showDateTimePicker(BuildContext context,
       {bool showTitleActions: true,
+      DateTime min,
+      DateTime max,
       DateChangedCallback onChanged,
       DateChangedCallback onConfirm,
       locale: LocaleType.en,
@@ -83,11 +90,7 @@ class DatePicker {
   /// Display date picker bottom sheet witch custom picker model.
   ///
   static void showPicker(BuildContext context,
-      {bool showTitleActions: true,
-      DateChangedCallback onChanged,
-      DateChangedCallback onConfirm,
-      locale: LocaleType.en,
-      BasePickerModel pickerModel}) {
+      {bool showTitleActions: true, DateChangedCallback onChanged, DateChangedCallback onConfirm, locale: LocaleType.en, BasePickerModel pickerModel}) {
     Navigator.push(
         context,
         new _DatePickerRoute(
@@ -143,8 +146,7 @@ class _DatePickerRoute<T> extends PopupRoute<T> {
   }
 
   @override
-  Widget buildPage(
-      BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
+  Widget buildPage(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
     Widget bottomSheet = new MediaQuery.removePadding(
       context: context,
       removeTop: true,
@@ -163,8 +165,7 @@ class _DatePickerRoute<T> extends PopupRoute<T> {
 }
 
 class _DatePickerComponent extends StatefulWidget {
-  _DatePickerComponent(
-      {Key key, @required this.route, this.onChanged, this.locale, this.pickerModel});
+  _DatePickerComponent({Key key, @required this.route, this.onChanged, this.locale, this.pickerModel});
 
   final DateChangedCallback onChanged;
 
@@ -190,12 +191,9 @@ class _DatePickerState extends State<_DatePickerComponent> {
   }
 
   void refreshScrollOffset() {
-    leftScrollCtrl =
-        new FixedExtentScrollController(initialItem: widget.pickerModel.currentLeftIndex());
-    middleScrollCtrl =
-        new FixedExtentScrollController(initialItem: widget.pickerModel.currentMiddleIndex());
-    rightScrollCtrl =
-        new FixedExtentScrollController(initialItem: widget.pickerModel.currentRightIndex());
+    leftScrollCtrl = new FixedExtentScrollController(initialItem: widget.pickerModel.currentLeftIndex());
+    middleScrollCtrl = new FixedExtentScrollController(initialItem: widget.pickerModel.currentMiddleIndex());
+    rightScrollCtrl = new FixedExtentScrollController(initialItem: widget.pickerModel.currentRightIndex());
   }
 
   @override
@@ -206,8 +204,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
         builder: (BuildContext context, Widget child) {
           return new ClipRect(
             child: new CustomSingleChildLayout(
-              delegate: new _BottomPickerLayout(widget.route.animation.value,
-                  showTitleActions: widget.route.showTitleActions),
+              delegate: new _BottomPickerLayout(widget.route.animation.value, showTitleActions: widget.route.showTitleActions),
               child: new GestureDetector(
                 child: Material(
                   color: Colors.transparent,
@@ -240,12 +237,8 @@ class _DatePickerState extends State<_DatePickerComponent> {
     return itemView;
   }
 
-  Widget _renderColumnView(
-      StringAtIndexCallBack stringAtIndexCB,
-      ScrollController scrollController,
-      int layoutProportion,
-      ValueChanged<int> selectedChangedWhenScrolling,
-      ValueChanged<int> selectedChangedWhenScrollEnd) {
+  Widget _renderColumnView(ValueKey key, StringAtIndexCallBack stringAtIndexCB, ScrollController scrollController, int layoutProportion,
+      ValueChanged<int> selectedChangedWhenScrolling, ValueChanged<int> selectedChangedWhenScrollEnd) {
     return Expanded(
       flex: layoutProportion,
       child: Container(
@@ -265,7 +258,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
                 return false;
               },
               child: CupertinoPicker.builder(
-                  key: ValueKey(widget.pickerModel.currentMiddleIndex()),
+                  key: key,
                   backgroundColor: Colors.white,
                   scrollController: scrollController,
                   itemExtent: _kDatePickerItemHeight,
@@ -297,35 +290,36 @@ class _DatePickerState extends State<_DatePickerComponent> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          _renderColumnView(widget.pickerModel.leftStringAtIndex, leftScrollCtrl,
-              widget.pickerModel.layoutProportions()[0], (index) {
+          _renderColumnView(
+              ValueKey(widget.pickerModel.currentLeftIndex()), widget.pickerModel.leftStringAtIndex, leftScrollCtrl, widget.pickerModel.layoutProportions()[0],
+              (index) {
+            widget.pickerModel.setLeftIndex(index);
+          }, (index) {
             setState(() {
-              widget.pickerModel.setLeftIndex(index);
+              refreshScrollOffset();
+              _notifyDateChanged();
             });
-            _notifyDateChanged();
-          }, null),
+          }),
           Text(
             widget.pickerModel.leftDivider(),
             style: TextStyle(color: Color(0xFF000046), fontSize: _kDatePickerFontSize),
           ),
-          _renderColumnView(widget.pickerModel.middleStringAtIndex, middleScrollCtrl,
+          _renderColumnView(ValueKey(widget.pickerModel.currentLeftIndex()), widget.pickerModel.middleStringAtIndex, middleScrollCtrl,
               widget.pickerModel.layoutProportions()[1], (index) {
             widget.pickerModel.setMiddleIndex(index);
           }, (index) {
             setState(() {
               refreshScrollOffset();
+              _notifyDateChanged();
             });
-            _notifyDateChanged();
           }),
           Text(
             widget.pickerModel.rightDivider(),
             style: TextStyle(color: Color(0xFF000046), fontSize: _kDatePickerFontSize),
           ),
-          _renderColumnView(widget.pickerModel.rightStringAtIndex, rightScrollCtrl,
+          _renderColumnView(ValueKey(widget.pickerModel.currentMiddleIndex()), widget.pickerModel.rightStringAtIndex, rightScrollCtrl,
               widget.pickerModel.layoutProportions()[2], (index) {
-            setState(() {
-              widget.pickerModel.setRightIndex(index);
-            });
+            widget.pickerModel.setRightIndex(index);
             _notifyDateChanged();
           }, null),
         ],
@@ -363,7 +357,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
               child: Text(
                 '$done',
                 style: TextStyle(
-                  color: Theme.of(context).primaryColor,
+                  color: Theme.of(context).accentColor,
                   fontSize: 16.0,
                 ),
               ),
@@ -403,11 +397,7 @@ class _BottomPickerLayout extends SingleChildLayoutDelegate {
       maxHeight += _kDatePickerTitleHeight;
     }
 
-    return new BoxConstraints(
-        minWidth: constraints.maxWidth,
-        maxWidth: constraints.maxWidth,
-        minHeight: 0.0,
-        maxHeight: maxHeight);
+    return new BoxConstraints(minWidth: constraints.maxWidth, maxWidth: constraints.maxWidth, minHeight: 0.0, maxHeight: maxHeight);
   }
 
   @override
