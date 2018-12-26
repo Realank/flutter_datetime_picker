@@ -15,3 +15,4 @@
 ## [1.0.3] - add Dutch in demo
 ## [1.0.4] - add Dutch in readme
 ## [1.0.5] - add max/min time limit for Date Picker, add theme
+## [1.0.6] - add comments

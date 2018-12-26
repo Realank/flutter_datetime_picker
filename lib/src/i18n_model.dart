@@ -98,7 +98,7 @@ final _i18nModel = {
     'pm': 'PM'
   }
 };
-
+//get international object
 Map<String, dynamic> i18nObjInLocale(LocaleType type) {
   switch (type) {
     case LocaleType.zh:

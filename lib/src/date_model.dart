@@ -2,27 +2,37 @@ import 'package:flutter_datetime_picker/src/date_format.dart';
 import 'package:flutter_datetime_picker/src/i18n_model.dart';
 import 'datetime_util.dart';
 
+//interface for picker data model
 abstract class BasePickerModel {
+  //a getter method for left column data, return null to end list
   String leftStringAtIndex(int index);
+  //a getter method for middle column data, return null to end list
   String middleStringAtIndex(int index);
+  //a getter method for right column data, return null to end list
   String rightStringAtIndex(int index);
-
+  //set selected left index
   void setLeftIndex(int index);
+  //set selected middle index
   void setMiddleIndex(int index);
+  //set selected right index
   void setRightIndex(int index);
-
+  //return current left index
   int currentLeftIndex();
+  //return current middle index
   int currentMiddleIndex();
+  //return current right index
   int currentRightIndex();
-
+  //return final time
   DateTime finalTime();
-
+  //return left divider string
   String leftDivider();
+  //return right divider string
   String rightDivider();
-
+  //layout proportions for 3 columns
   List<int> layoutProportions();
 }
 
+//a base class for picker data model
 class CommonPickerModel extends BasePickerModel {
   List<String> leftList;
   List<String> middleList;
@@ -102,6 +112,7 @@ class CommonPickerModel extends BasePickerModel {
   }
 }
 
+//a date picker model
 class DatePickerModel extends CommonPickerModel {
   DateTime maxTime;
   DateTime minTime;
@@ -121,52 +132,52 @@ class DatePickerModel extends CommonPickerModel {
     }
     this.currentTime = currentTime;
 
-    fillLeftLists();
-    fillMiddleLists();
-    fillRightLists();
-    int minMonth = minMonthOfCurrentYear();
-    int minDay = minDayOfCurrentMonth();
+    _fillLeftLists();
+    _fillMiddleLists();
+    _fillRightLists();
+    int minMonth = _minMonthOfCurrentYear();
+    int minDay = _minDayOfCurrentMonth();
     _currentLeftIndex = this.currentTime.year - this.minTime.year;
     _currentMiddleIndex = this.currentTime.month - minMonth;
     _currentRightIndex = this.currentTime.day - minDay;
   }
 
-  void fillLeftLists() {
+  void _fillLeftLists() {
     this.leftList = List.generate(maxTime.year - minTime.year + 1, (int index) {
       return '${minTime.year + index}${_localeYear()}';
     });
   }
 
-  int maxMonthOfCurrentYear() {
+  int _maxMonthOfCurrentYear() {
     return currentTime.year == maxTime.year ? maxTime.month : 12;
   }
 
-  int minMonthOfCurrentYear() {
+  int _minMonthOfCurrentYear() {
     return currentTime.year == minTime.year ? minTime.month : 1;
   }
 
-  int maxDayOfCurrentMonth() {
+  int _maxDayOfCurrentMonth() {
     int dayCount = calcDateCount(currentTime.year, currentTime.month);
     return currentTime.year == maxTime.year && currentTime.month == maxTime.month
         ? maxTime.day
         : dayCount;
   }
 
-  int minDayOfCurrentMonth() {
+  int _minDayOfCurrentMonth() {
     return currentTime.year == minTime.year && currentTime.month == minTime.month ? minTime.day : 1;
   }
 
-  void fillMiddleLists() {
-    int minMonth = minMonthOfCurrentYear();
-    int maxMonth = maxMonthOfCurrentYear();
+  void _fillMiddleLists() {
+    int minMonth = _minMonthOfCurrentYear();
+    int maxMonth = _maxMonthOfCurrentYear();
     this.middleList = List.generate(maxMonth - minMonth + 1, (int index) {
       return '${minMonth + index}${_localeMonth()}';
     });
   }
 
-  void fillRightLists() {
-    int maxDay = maxDayOfCurrentMonth();
-    int minDay = minDayOfCurrentMonth();
+  void _fillRightLists() {
+    int maxDay = _maxDayOfCurrentMonth();
+    int minDay = _minDayOfCurrentMonth();
     this.rightList = List.generate(maxDay - minDay + 1, (int index) {
       return '${minDay + index}${_localeDay()}';
     });
@@ -177,7 +188,7 @@ class DatePickerModel extends CommonPickerModel {
     super.setLeftIndex(index);
     //adjust middle
     int destYear = index + minTime.year;
-    int minMonth = minMonthOfCurrentYear();
+    int minMonth = _minMonthOfCurrentYear();
     DateTime newTime;
     //change date time
     if (currentTime.month == 2 && currentTime.day == 29) {
@@ -202,10 +213,10 @@ class DatePickerModel extends CommonPickerModel {
       currentTime = newTime;
     }
 
-    fillMiddleLists();
-    fillRightLists();
-    minMonth = minMonthOfCurrentYear();
-    int minDay = minDayOfCurrentMonth();
+    _fillMiddleLists();
+    _fillRightLists();
+    minMonth = _minMonthOfCurrentYear();
+    int minDay = _minDayOfCurrentMonth();
     _currentMiddleIndex = currentTime.month - minMonth;
     _currentRightIndex = currentTime.day - minDay;
   }
@@ -214,7 +225,7 @@ class DatePickerModel extends CommonPickerModel {
   void setMiddleIndex(int index) {
     super.setMiddleIndex(index);
     //adjust right
-    int minMonth = minMonthOfCurrentYear();
+    int minMonth = _minMonthOfCurrentYear();
     int destMonth = minMonth + index;
     DateTime newTime;
     //change date time
@@ -233,15 +244,15 @@ class DatePickerModel extends CommonPickerModel {
       currentTime = newTime;
     }
 
-    fillRightLists();
-    int minDay = minDayOfCurrentMonth();
+    _fillRightLists();
+    int minDay = _minDayOfCurrentMonth();
     _currentRightIndex = currentTime.day - minDay;
   }
 
   @override
   void setRightIndex(int index) {
     super.setRightIndex(index);
-    int minDay = minDayOfCurrentMonth();
+    int minDay = _minDayOfCurrentMonth();
     currentTime = DateTime(
       currentTime.year,
       currentTime.month,
@@ -306,6 +317,7 @@ class DatePickerModel extends CommonPickerModel {
   }
 }
 
+//a time picker model
 class TimePickerModel extends CommonPickerModel {
   TimePickerModel({DateTime currentTime, LocaleType locale}) : super(locale: locale) {
     this.currentTime = currentTime ?? DateTime.now();
@@ -359,6 +371,7 @@ class TimePickerModel extends CommonPickerModel {
   }
 }
 
+//a date&time picker model
 class DateTimePickerModel extends CommonPickerModel {
   DateTimePickerModel({DateTime currentTime, LocaleType locale}) : super(locale: locale) {
     this.currentTime = currentTime ?? DateTime.now();
