@@ -1,30 +1,23 @@
 import 'package:flutter_datetime_picker/src/date_format.dart';
 import 'package:flutter_datetime_picker/src/i18n_model.dart';
-import 'package:flutter_commons_lang/flutter_commons_lang.dart';
+import 'datetime_util.dart';
 
 abstract class BasePickerModel {
   String leftStringAtIndex(int index);
-
   String middleStringAtIndex(int index);
-
   String rightStringAtIndex(int index);
 
   void setLeftIndex(int index);
-
   void setMiddleIndex(int index);
-
   void setRightIndex(int index);
 
   int currentLeftIndex();
-
   int currentMiddleIndex();
-
   int currentRightIndex();
 
   DateTime finalTime();
 
   String leftDivider();
-
   String rightDivider();
 
   List<int> layoutProportions();
@@ -110,52 +103,70 @@ class CommonPickerModel extends BasePickerModel {
 }
 
 class DatePickerModel extends CommonPickerModel {
-  DateTime max;
-  DateTime min;
-  int maxYear;
-  int minYear;
-  int maxMonth;
-  int minMonth;
-  int maxDay;
-  int minDay;
+  DateTime maxTime;
+  DateTime minTime;
 
-  DatePickerModel({DateTime currentTime, this.max, this.min, LocaleType locale}) : super(locale: locale) {
+  DatePickerModel({DateTime currentTime, DateTime maxTime, DateTime minTime, LocaleType locale})
+      : super(locale: locale) {
+    this.maxTime = maxTime ?? DateTime(2049, 12, 31);
+    this.minTime = minTime ?? DateTime(1970, 1, 1);
+
+    currentTime = currentTime ?? DateTime.now();
     if (currentTime != null) {
-      if (max != null && currentTime.compareTo(max) > 0) {
-        currentTime = max;
-      } else if (min != null && currentTime.compareTo(min) < 0) {
-        currentTime = min;
+      if (currentTime.compareTo(this.maxTime) > 0) {
+        currentTime = this.maxTime;
+      } else if (currentTime.compareTo(this.minTime) < 0) {
+        currentTime = this.minTime;
       }
     }
-    this.currentTime = currentTime ?? DateTime.now();
+    this.currentTime = currentTime;
+
     fillLeftLists();
     fillMiddleLists();
     fillRightLists();
-    _currentLeftIndex = this.currentTime.year - minYear;
+    int minMonth = minMonthOfCurrentYear();
+    int minDay = minDayOfCurrentMonth();
+    _currentLeftIndex = this.currentTime.year - this.minTime.year;
     _currentMiddleIndex = this.currentTime.month - minMonth;
     _currentRightIndex = this.currentTime.day - minDay;
   }
 
   void fillLeftLists() {
-    maxYear = max?.year ?? 2050;
-    minYear = min?.year ?? 1970;
-    this.leftList = List.generate(maxYear - minYear + 1, (int index) {
-      return '${minYear + index}${_localeYear()}';
+    this.leftList = List.generate(maxTime.year - minTime.year + 1, (int index) {
+      return '${minTime.year + index}${_localeYear()}';
     });
   }
 
+  int maxMonthOfCurrentYear() {
+    return currentTime.year == maxTime.year ? maxTime.month : 12;
+  }
+
+  int minMonthOfCurrentYear() {
+    return currentTime.year == minTime.year ? minTime.month : 1;
+  }
+
+  int maxDayOfCurrentMonth() {
+    int dayCount = calcDateCount(currentTime.year, currentTime.month);
+    return currentTime.year == maxTime.year && currentTime.month == maxTime.month
+        ? maxTime.day
+        : dayCount;
+  }
+
+  int minDayOfCurrentMonth() {
+    return currentTime.year == minTime.year && currentTime.month == minTime.month ? minTime.day : 1;
+  }
+
   void fillMiddleLists() {
-    minMonth = DateUtils.truncatedEquals(currentTime, min, DateUtils.YEAR) ? min?.month : 1;
-    maxMonth = DateUtils.truncatedEquals(currentTime, max, DateUtils.YEAR) ? max.month : 12;
+    int minMonth = minMonthOfCurrentYear();
+    int maxMonth = maxMonthOfCurrentYear();
     this.middleList = List.generate(maxMonth - minMonth + 1, (int index) {
       return '${minMonth + index}${_localeMonth()}';
     });
   }
 
   void fillRightLists() {
-    int dayCount = DateUtils.daysOfTheMonth(currentTime);
-    maxDay = DateUtils.truncatedEquals(currentTime, max, DateUtils.MONTH) ? max.day : dayCount;
-    minDay = DateUtils.truncatedEquals(currentTime, min, DateUtils.MONTH) ? min.day : 1;
+    int maxDay = maxDayOfCurrentMonth();
+    int minDay = minDayOfCurrentMonth();
     this.rightList = List.generate(maxDay - minDay + 1, (int index) {
       return '${minDay + index}${_localeDay()}';
     });
@@ -163,43 +174,79 @@ class DatePickerModel extends CommonPickerModel {
 
   @override
   void setLeftIndex(int index) {
-    if (index - minYear > maxYear) index = maxYear - minYear;
     super.setLeftIndex(index);
-    int month = currentTime.month;
-    currentTime = DateUtils.set(currentTime, year: index + minYear);
-    fillMiddleLists();
-
-    if (month > maxMonth) {
-      setMiddleIndex(maxMonth - minMonth);
-    } else if (month < minMonth) {
-      setMiddleIndex(0);
+    //adjust middle
+    int destYear = index + minTime.year;
+    int minMonth = minMonthOfCurrentYear();
+    DateTime newTime;
+    //change date time
+    if (currentTime.month == 2 && currentTime.day == 29) {
+      newTime = DateTime(
+        destYear,
+        currentTime.month,
+        calcDateCount(destYear, 2),
+      );
     } else {
-      setMiddleIndex(month - minMonth);
+      newTime = DateTime(
+        destYear,
+        currentTime.month,
+        currentTime.day,
+      );
     }
+    //min/max check
+    if (newTime.isAfter(maxTime)) {
+      currentTime = maxTime;
+    } else if (newTime.isBefore(minTime)) {
+      currentTime = minTime;
+    } else {
+      currentTime = newTime;
+    }
+
+    fillMiddleLists();
+    fillRightLists();
+    minMonth = minMonthOfCurrentYear();
+    int minDay = minDayOfCurrentMonth();
+    _currentMiddleIndex = currentTime.month - minMonth;
+    _currentRightIndex = currentTime.day - minDay;
   }
 
   @override
   void setMiddleIndex(int index) {
-    if (index - minMonth > maxMonth) index = maxMonth - minMonth;
     super.setMiddleIndex(index);
-    int day = currentTime.day;
-    currentTime = DateUtils.set(currentTime, month: index + minMonth, day: 1);
-    fillRightLists();
-
-    if (day > maxDay) {
-      setRightIndex(maxDay - minDay);
-    } else if (day < minDay) {
-      setRightIndex(0);
+    //adjust right
+    int minMonth = minMonthOfCurrentYear();
+    int destMonth = minMonth + index;
+    DateTime newTime;
+    //change date time
+    int dayCount = calcDateCount(currentTime.year, destMonth);
+    newTime = DateTime(
+      currentTime.year,
+      destMonth,
+      currentTime.day <= dayCount ? currentTime.day : dayCount,
+    );
+    //min/max check
+    if (newTime.isAfter(maxTime)) {
+      currentTime = maxTime;
+    } else if (newTime.isBefore(minTime)) {
+      currentTime = minTime;
     } else {
-      setRightIndex(day - minDay);
+      currentTime = newTime;
     }
+
+    fillRightLists();
+    int minDay = minDayOfCurrentMonth();
+    _currentRightIndex = currentTime.day - minDay;
   }
 
   @override
   void setRightIndex(int index) {
-    if (index - minDay > maxDay) index = maxDay - minDay;
     super.setRightIndex(index);
-    currentTime = DateUtils.set(currentTime, day: index + minDay);
+    int minDay = minDayOfCurrentMonth();
+    currentTime = DateTime(
+      currentTime.year,
+      currentTime.month,
+      minDay + index,
+    );
   }
 
   @override
@@ -255,114 +302,23 @@ class DatePickerModel extends CommonPickerModel {
 
   @override
   DateTime finalTime() {
-    final year = _currentLeftIndex + minYear;
-    final month = _currentMiddleIndex + minMonth;
-    final day = _currentRightIndex + 1;
-    return DateTime(year, month, day);
+    return currentTime;
   }
 }
 
 class TimePickerModel extends CommonPickerModel {
-  DateTime max;
-  DateTime min;
-  int maxHour;
-  int minHour;
-  int maxMinute;
-  int minMinute;
-  int maxSecond;
-  int minSecond;
-
-  TimePickerModel({DateTime currentTime, this.max, this.min, LocaleType locale}) : super(locale: locale) {
-    if (currentTime != null) {
-      if (max != null && currentTime.compareTo(max) > 0) {
-        currentTime = max;
-      } else if (min != null && currentTime.compareTo(min) < 0) {
-        currentTime = min;
-      }
-    }
+  TimePickerModel({DateTime currentTime, LocaleType locale}) : super(locale: locale) {
     this.currentTime = currentTime ?? DateTime.now();
-
-    maxHour = max?.hour ?? 23;
-    minHour = min?.hour ?? 0;
-    maxMinute = DateUtils.truncatedEquals(currentTime, max, DateUtils.MINUTE) ? max.minute : 59;
-    minMinute = DateUtils.truncatedEquals(currentTime, min, DateUtils.MINUTE) ? min?.minute : 0;
 
     _currentLeftIndex = this.currentTime.hour;
     _currentMiddleIndex = this.currentTime.minute;
     _currentRightIndex = this.currentTime.second;
-
-    fillLeftLists();
-    fillMiddleLists();
-    fillRightLists();
-  }
-
-  void fillLeftLists() {
-    this.leftList = List.generate(maxHour - minHour + 1, (int index) {
-      return digits(minHour + index, 2);
-    });
-  }
-
-  void fillMiddleLists() {
-    maxMinute = DateUtils.truncatedEquals(currentTime, max, DateUtils.HOUR) ? max?.minute : 59;
-    minMinute = DateUtils.truncatedEquals(currentTime, min, DateUtils.HOUR) ? min?.minute : 0;
-    this.middleList = List.generate(maxMinute - minMinute + 1, (int index) {
-      return digits(minMinute + index, 2);
-    });
-  }
-
-  void fillRightLists() {
-    maxSecond = DateUtils.truncatedEquals(currentTime, max, DateUtils.MINUTE) ? max.second : 59;
-    minSecond = DateUtils.truncatedEquals(currentTime, min, DateUtils.MINUTE) ? min.second : 0;
-    this.rightList = List.generate(maxSecond - minSecond + 1, (int index) {
-      return digits(minSecond + index, 2);
-    });
-  }
-
-  @override
-  void setLeftIndex(int index) {
-    if (index - minHour > maxHour) index = maxHour - minHour;
-    super.setLeftIndex(index);
-    int minute = currentTime.minute;
-    currentTime = DateUtils.set(currentTime, hour: index + minHour);
-    fillMiddleLists();
-
-    if (minute > maxMinute) {
-      setMiddleIndex(maxMinute - minMinute);
-    } else if (minute < minMinute) {
-      setMiddleIndex(0);
-    } else {
-      setMiddleIndex(minute - minMinute);
-    }
-  }
-
-  @override
-  void setMiddleIndex(int index) {
-    if (index - minMinute > maxMinute) index = maxMinute - minMinute;
-    super.setMiddleIndex(index);
-    int second = currentTime.second;
-    currentTime = DateUtils.set(currentTime, minute: index + minMinute, second: 1);
-    fillRightLists();
-
-    if (second > maxSecond) {
-      setRightIndex(maxSecond - minSecond);
-    } else if (second < minSecond) {
-      setRightIndex(0);
-    } else {
-      setRightIndex(second - minSecond);
-    }
-  }
-
-  @override
-  void setRightIndex(int index) {
-    if (index - minSecond > maxSecond) index = maxSecond - minSecond;
-    super.setRightIndex(index);
-    currentTime = DateUtils.set(currentTime, second: index + minSecond);
   }
 
   @override
   String leftStringAtIndex(int index) {
-    if (index >= 0 && index < leftList.length) {
-      return leftList[index];
+    if (index >= 0 && index < 24) {
+      return digits(index, 2);
     } else {
       return null;
     }
@@ -370,8 +326,8 @@ class TimePickerModel extends CommonPickerModel {
 
   @override
   String middleStringAtIndex(int index) {
-    if (index >= 0 && index < middleList.length) {
-      return middleList[index];
+    if (index >= 0 && index < 60) {
+      return digits(index, 2);
     } else {
       return null;
     }
@@ -379,8 +335,8 @@ class TimePickerModel extends CommonPickerModel {
 
   @override
   String rightStringAtIndex(int index) {
-    if (index >= 0 && index < rightList.length) {
-      return rightList[index];
+    if (index >= 0 && index < 60) {
+      return digits(index, 2);
     } else {
       return null;
     }
@@ -398,7 +354,8 @@ class TimePickerModel extends CommonPickerModel {
 
   @override
   DateTime finalTime() {
-    return DateTime(currentTime.year, currentTime.month, currentTime.day, _currentLeftIndex, _currentMiddleIndex, _currentRightIndex);
+    return DateTime(currentTime.year, currentTime.month, currentTime.day, _currentLeftIndex,
+        _currentMiddleIndex, _currentRightIndex);
   }
 }
 
@@ -442,7 +399,7 @@ class DateTimePickerModel extends CommonPickerModel {
 
   @override
   List<int> layoutProportions() {
-    return [3, 1, 1];
+    return [4, 1, 1];
   }
 
   @override

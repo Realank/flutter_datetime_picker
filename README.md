@@ -15,11 +15,14 @@ you can choose date / time / date&time in English, Dutch and Chinese, and you ca
 ```
 FlatButton(
     onPressed: () {
-        DatePicker.showDateTimePicker(context, showTitleActions: true, onChanged: (date) {
-            print('change $date');
-        }, onConfirm: (date) {
-            print('confirm $date');
-        }, currentTime: DateTime(2008, 12, 31, 23, 12, 34), locale: 'zh');
+        DatePicker.showDatePicker(context,
+                              showTitleActions: true,
+                              minTime: DateTime(2018, 3, 5),
+                              maxTime: DateTime(2019, 6, 7), onChanged: (date) {
+                            print('change $date');
+                          }, onConfirm: (date) {
+                            print('confirm $date');
+                          }, currentTime: DateTime.now(), locale: LocaleType.zh);
     },
     child: Text(
         'show date time picker (Chinese)',

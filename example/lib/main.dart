@@ -10,14 +10,6 @@ class MyApp extends StatelessWidget {
     return new MaterialApp(
       title: 'Flutter Demo',
       theme: new ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or press Run > Flutter Hot Reload in IntelliJ). Notice that the
-        // counter didn't reset back to zero; the application is not restarted.
         primarySwatch: Colors.blue,
       ),
       home: new HomePage(),
@@ -37,11 +29,15 @@ class HomePage extends StatelessWidget {
           children: <Widget>[
             FlatButton(
                 onPressed: () {
-                  DatePicker.showDatePicker(context, showTitleActions: true, onChanged: (date) {
+                  DatePicker.showDatePicker(context,
+                      showTitleActions: true,
+                      minTime: DateTime(2018, 3, 5),
+                      maxTime: DateTime(2019, 6, 7),
+                      theme: DatePickerTheme(), onChanged: (date) {
                     print('change $date');
                   }, onConfirm: (date) {
                     print('confirm $date');
-                  }, currentTime: DateTime(2008, 12, 31, 23, 12, 34), locale: LocaleType.zh);
+                  }, currentTime: DateTime.now(), locale: LocaleType.zh);
                 },
                 child: Text(
                   'show date picker',
