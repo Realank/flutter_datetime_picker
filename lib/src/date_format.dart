@@ -326,11 +326,7 @@ String formatDate(DateTime date, List<String> formats, LocaleType locale) {
 }
 
 String digits(int value, int length) {
-  String ret = '$value';
-  if (ret.length < length) {
-    ret = '0' * (length - ret.length) + ret;
-  }
-  return ret;
+  return '$value'.padLeft(length, "0");
 }
 
 int dayInYear(DateTime date) => date.difference(new DateTime(date.year, 1, 1)).inDays;
