@@ -33,14 +33,18 @@ class HomePage extends StatelessWidget {
                       showTitleActions: true,
                       minTime: DateTime(2018, 3, 5),
                       maxTime: DateTime(2019, 6, 7),
-                      theme: DatePickerTheme(), onChanged: (date) {
+                      theme: DatePickerTheme(
+                          backgroundColor: Colors.blue,
+                          itemStyle: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                          doneStyle: TextStyle(color: Colors.white, fontSize: 16)),
+                      onChanged: (date) {
                     print('change $date');
                   }, onConfirm: (date) {
                     print('confirm $date');
                   }, currentTime: DateTime.now(), locale: LocaleType.zh);
                 },
                 child: Text(
-                  'show date picker',
+                  'show date picker(custom theme &date time range)',
                   style: TextStyle(color: Colors.blue),
                 )),
             FlatButton(
