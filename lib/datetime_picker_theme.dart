@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-class DatePickerThemeData extends Diagnosticable {
+class DatePickerTheme extends Diagnosticable {
   /// Whether null values are replaced with their value in an ancestor text
   /// style (e.g., in a [TextSpan] tree).
   ///
@@ -20,7 +20,7 @@ class DatePickerThemeData extends Diagnosticable {
   final double titleHeight;
   final double itemHeight;
 
-  const DatePickerThemeData({
+  const DatePickerTheme({
     this.inherit,
     this.cancelStyle,
     this.doneStyle,
@@ -34,7 +34,7 @@ class DatePickerThemeData extends Diagnosticable {
 
   /// Creates a copy of this theme data but with the given fields replaced with
   /// the new values.
-  DatePickerThemeData copyWith({
+  DatePickerTheme copyWith({
     TextStyle cancelStyle,
     TextStyle doneStyle,
     TextStyle itemStyle,
@@ -44,7 +44,7 @@ class DatePickerThemeData extends Diagnosticable {
     double pickerTitleHeight,
     double pickerItemHeight,
   }) {
-    return DatePickerThemeData(
+    return DatePickerTheme(
       inherit: inherit,
       cancelStyle: cancelStyle != null ? cancelStyle.merge(this.cancelStyle) : this.cancelStyle,
       doneStyle: doneStyle != null ? doneStyle.merge(this.doneStyle) : this.doneStyle,
@@ -60,18 +60,18 @@ class DatePickerThemeData extends Diagnosticable {
   /// Returns a new theme data that is a combination of this style and the given
   /// [other] style.
   ///
-  /// If the given [other] theme data has its [DatePickerThemeData.inherit] set to true,
+  /// If the given [other] theme data has its [DatePickerTheme.inherit] set to true,
   /// its null properties are replaced with the non-null properties of this text
   /// style. The [other] style _inherits_ the properties of this style. Another
   /// way to think of it is that the "missing" properties of the [other] style
   /// are _filled_ by the properties of this style.
   ///
-  /// If the given [other] theme data has its [DatePickerThemeData.inherit] set to false,
+  /// If the given [other] theme data has its [DatePickerTheme.inherit] set to false,
   /// returns the given [other] style unchanged. The [other] style does not
   /// inherit properties of this style.
   ///
   /// If the given theme data is null, returns this theme data.
-  DatePickerThemeData merge(DatePickerThemeData other) {
+  DatePickerTheme merge(DatePickerTheme other) {
     if (other == null) return this;
     if (!other.inherit) return other;
 
@@ -89,13 +89,13 @@ class DatePickerThemeData extends Diagnosticable {
 }
 
 /// The theme data to apply to descendant [DatePicker] widgets without explicit style.
-class DefaultDatePickerThemeData extends InheritedWidget {
+class DefaultDatePickerTheme extends InheritedWidget {
   /// Creates a default theme data for the given subtree.
   ///
-  /// Consider using [DefaultDatePickerThemeData.merge] to inherit styling information
+  /// Consider using [DefaultDatePickerTheme.merge] to inherit styling information
   /// from the current default theme data for a given [BuildContext].
   ///
-  const DefaultDatePickerThemeData({
+  const DefaultDatePickerTheme({
     Key key,
     @required this.theme,
     @required Widget child,
@@ -107,9 +107,9 @@ class DefaultDatePickerThemeData extends InheritedWidget {
   ///
   /// Returned from [of] when the given [BuildContext] doesn't have an enclosing default theme data.
   ///
-  /// This constructor creates a [DefaultDatePickerThemeData] that lacks a [child], which
+  /// This constructor creates a [DefaultDatePickerTheme] that lacks a [child], which
   /// means the constructed value cannot be incorporated into the tree.
-  const DefaultDatePickerThemeData.fallback() : theme = const DatePickerThemeData();
+  const DefaultDatePickerTheme.fallback() : theme = const DatePickerTheme();
 
   /// Creates a default theme data that overrides the theme datas in scope at
   /// this point in the widget tree.
@@ -123,20 +123,20 @@ class DefaultDatePickerThemeData extends InheritedWidget {
   /// ancestor with the value null, since null here is used to mean "defer to
   /// ancestor". To replace a non-null [maxLines] from an ancestor with the null
   /// value (to remove the restriction on number of lines), manually obtain the
-  /// ambient [DefaultDatePickerThemeData] using [DefaultDatePickerThemeData.of], then create a new
-  /// [DefaultDatePickerThemeData] using the [new DefaultDatePickerThemeData] constructor directly.
+  /// ambient [DefaultDatePickerTheme] using [DefaultDatePickerTheme.of], then create a new
+  /// [DefaultDatePickerTheme] using the [new DefaultDatePickerTheme] constructor directly.
   /// See the source below for an example of how to do this (since that's
   /// essentially what this constructor does).
   static Widget merge({
     Key key,
-    DatePickerThemeData theme,
+    DatePickerTheme theme,
     @required Widget child,
   }) {
     assert(child != null);
     return Builder(
       builder: (BuildContext context) {
-        final DefaultDatePickerThemeData parent = DefaultDatePickerThemeData.of(context);
-        return DefaultDatePickerThemeData(
+        final DefaultDatePickerTheme parent = DefaultDatePickerTheme.of(context);
+        return DefaultDatePickerTheme(
           key: key,
           theme: parent.theme.merge(theme),
           child: child,
@@ -146,24 +146,24 @@ class DefaultDatePickerThemeData extends InheritedWidget {
   }
 
   /// The theme data to apply.
-  final DatePickerThemeData theme;
+  final DatePickerTheme theme;
 
   /// The closest instance of this class that encloses the given context.
   ///
   /// If no such instance exists, returns an instance created by
-  /// [DefaultDatePickerThemeData.fallback], which contains fallback values.
+  /// [DefaultDatePickerTheme.fallback], which contains fallback values.
   ///
   /// Typical usage is as follows:
   ///
   /// ```dart
-  /// DefaultDatePickerThemeData style = DefaultDatePickerThemeData.of(context);
+  /// DefaultDatePickerTheme style = DefaultDatePickerTheme.of(context);
   /// ```
-  static DefaultDatePickerThemeData of(BuildContext context) {
-    return context.inheritFromWidgetOfExactType(DefaultDatePickerThemeData) ?? const DefaultDatePickerThemeData.fallback();
+  static DefaultDatePickerTheme of(BuildContext context) {
+    return context.inheritFromWidgetOfExactType(DefaultDatePickerTheme) ?? const DefaultDatePickerTheme.fallback();
   }
 
   @override
-  bool updateShouldNotify(DefaultDatePickerThemeData oldWidget) {
+  bool updateShouldNotify(DefaultDatePickerTheme oldWidget) {
     return theme != oldWidget.theme;
   }
 

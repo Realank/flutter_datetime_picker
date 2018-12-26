@@ -2,11 +2,11 @@ library flutter_datetime_picker;
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_datetime_picker/datetime_picker_theme_data.dart';
+import 'package:flutter_datetime_picker/datetime_picker_theme.dart';
 import 'package:flutter_datetime_picker/src/date_model.dart';
 import 'package:flutter_datetime_picker/src/i18n_model.dart';
 
-export 'package:flutter_datetime_picker/datetime_picker_theme_data.dart';
+export 'package:flutter_datetime_picker/datetime_picker_theme.dart';
 export 'package:flutter_datetime_picker/src/date_model.dart';
 export 'package:flutter_datetime_picker/src/i18n_model.dart';
 
@@ -26,7 +26,7 @@ class DatePicker {
     DateChangedCallback onConfirm,
     locale: LocaleType.en,
     DateTime currentTime,
-    DatePickerThemeData theme,
+    DatePickerTheme theme,
   }) {
     Navigator.push(
         context,
@@ -52,7 +52,7 @@ class DatePicker {
     DateChangedCallback onConfirm,
     locale: LocaleType.en,
     DateTime currentTime,
-    DatePickerThemeData theme,
+    DatePickerTheme theme,
   }) {
     Navigator.push(
         context,
@@ -78,7 +78,7 @@ class DatePicker {
     DateChangedCallback onConfirm,
     locale: LocaleType.en,
     DateTime currentTime,
-    DatePickerThemeData theme,
+    DatePickerTheme theme,
   }) {
     Navigator.push(
         context,
@@ -102,7 +102,7 @@ class DatePicker {
     DateChangedCallback onConfirm,
     locale: LocaleType.en,
     BasePickerModel pickerModel,
-    DatePickerThemeData theme,
+    DatePickerTheme theme,
   }) {
     Navigator.push(
         context,
@@ -133,7 +133,7 @@ class _DatePickerRoute<T> extends PopupRoute<T> {
   final bool showTitleActions;
   final DateChangedCallback onChanged;
   final DateChangedCallback onConfirm;
-  final DatePickerThemeData theme;
+  final DatePickerTheme theme;
   final LocaleType locale;
   final BasePickerModel pickerModel;
 
@@ -211,7 +211,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
 
   @override
   Widget build(BuildContext context) {
-    DatePickerThemeData theme = DefaultDatePickerThemeData.of(context).theme;
+    DatePickerTheme theme = DefaultDatePickerTheme.of(context).theme;
     if (widget.route.theme != null) {
       theme = widget.route.theme.merge(theme);
     }
@@ -241,7 +241,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
     }
   }
 
-  Widget _renderPickerView(DatePickerThemeData theme) {
+  Widget _renderPickerView(DatePickerTheme theme) {
     Widget itemView = _renderItemView(theme);
     if (widget.route.showTitleActions) {
       return Column(
@@ -254,8 +254,8 @@ class _DatePickerState extends State<_DatePickerComponent> {
     return itemView;
   }
 
-  Widget _renderColumnView(ValueKey key, DatePickerThemeData theme, StringAtIndexCallBack stringAtIndexCB, ScrollController scrollController,
-      int layoutProportion, ValueChanged<int> selectedChangedWhenScrolling, ValueChanged<int> selectedChangedWhenScrollEnd) {
+  Widget _renderColumnView(ValueKey key, DatePickerTheme theme, StringAtIndexCallBack stringAtIndexCB, ScrollController scrollController, int layoutProportion,
+      ValueChanged<int> selectedChangedWhenScrolling, ValueChanged<int> selectedChangedWhenScrollEnd) {
     return Expanded(
       flex: layoutProportion,
       child: Container(
@@ -301,7 +301,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
     );
   }
 
-  Widget _renderItemView(DatePickerThemeData theme) {
+  Widget _renderItemView(DatePickerTheme theme) {
     return Container(
       color: theme?.backgroundColor ?? Colors.white,
       child: Row(
@@ -344,7 +344,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
   }
 
   // Title View
-  Widget _renderTitleActionsView(DatePickerThemeData theme) {
+  Widget _renderTitleActionsView(DatePickerTheme theme) {
     String done = _localeDone();
     String cancel = _localeCancel();
 
@@ -399,7 +399,7 @@ class _BottomPickerLayout extends SingleChildLayoutDelegate {
   final double progress;
   final int itemCount;
   final bool showTitleActions;
-  final DatePickerThemeData theme;
+  final DatePickerTheme theme;
 
   @override
   BoxConstraints getConstraintsForChild(BoxConstraints constraints) {
