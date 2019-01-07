@@ -29,6 +29,9 @@ FlatButton(
         style: TextStyle(color: Colors.blue),
     ));
 ```
+
+## Custom
+If you want to customize your own style of date time picker, there is a class called CommonPickerModel, every type of date time picker is extended from this class, you can refer to other picker model (eg. DatePickerModel), and write your custom one, then pass this model to showPicker method, so that your own date time picker will appear, it’s easy, and will perfectly meet your demand
 ## Getting Started
 
 For help getting started with Flutter, view our online [documentation](https://flutter.io/).
