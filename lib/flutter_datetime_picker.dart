@@ -71,8 +71,6 @@ class DatePicker {
   static void showDateTimePicker(
     BuildContext context, {
     bool showTitleActions: true,
-    DateTime min,
-    DateTime max,
     DateChangedCallback onChanged,
     DateChangedCallback onConfirm,
     locale: LocaleType.en,
