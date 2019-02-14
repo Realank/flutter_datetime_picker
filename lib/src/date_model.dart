@@ -44,7 +44,8 @@ class CommonPickerModel extends BasePickerModel {
 
   LocaleType locale;
 
-  CommonPickerModel({this.currentTime, locale}) : this.locale = locale ?? LocaleType.en;
+  CommonPickerModel({this.currentTime, locale})
+      : this.locale = locale ?? LocaleType.en;
 
   @override
   String leftStringAtIndex(int index) {
@@ -117,7 +118,11 @@ class DatePickerModel extends CommonPickerModel {
   DateTime maxTime;
   DateTime minTime;
 
-  DatePickerModel({DateTime currentTime, DateTime maxTime, DateTime minTime, LocaleType locale})
+  DatePickerModel(
+      {DateTime currentTime,
+      DateTime maxTime,
+      DateTime minTime,
+      LocaleType locale})
       : super(locale: locale) {
     this.maxTime = maxTime ?? DateTime(2049, 12, 31);
     this.minTime = minTime ?? DateTime(1970, 1, 1);
@@ -158,13 +163,17 @@ class DatePickerModel extends CommonPickerModel {
 
   int _maxDayOfCurrentMonth() {
     int dayCount = calcDateCount(currentTime.year, currentTime.month);
-    return currentTime.year == maxTime.year && currentTime.month == maxTime.month
+    return currentTime.year == maxTime.year &&
+            currentTime.month == maxTime.month
         ? maxTime.day
         : dayCount;
   }
 
   int _minDayOfCurrentMonth() {
-    return currentTime.year == minTime.year && currentTime.month == minTime.month ? minTime.day : 1;
+    return currentTime.year == minTime.year &&
+            currentTime.month == minTime.month
+        ? minTime.day
+        : 1;
   }
 
   void _fillMiddleLists() {
@@ -319,7 +328,8 @@ class DatePickerModel extends CommonPickerModel {
 
 //a time picker model
 class TimePickerModel extends CommonPickerModel {
-  TimePickerModel({DateTime currentTime, LocaleType locale}) : super(locale: locale) {
+  TimePickerModel({DateTime currentTime, LocaleType locale})
+      : super(locale: locale) {
     this.currentTime = currentTime ?? DateTime.now();
 
     _currentLeftIndex = this.currentTime.hour;
@@ -366,14 +376,15 @@ class TimePickerModel extends CommonPickerModel {
 
   @override
   DateTime finalTime() {
-    return DateTime(currentTime.year, currentTime.month, currentTime.day, _currentLeftIndex,
-        _currentMiddleIndex, _currentRightIndex);
+    return DateTime(currentTime.year, currentTime.month, currentTime.day,
+        _currentLeftIndex, _currentMiddleIndex, _currentRightIndex);
   }
 }
 
 //a date&time picker model
 class DateTimePickerModel extends CommonPickerModel {
-  DateTimePickerModel({DateTime currentTime, LocaleType locale}) : super(locale: locale) {
+  DateTimePickerModel({DateTime currentTime, LocaleType locale})
+      : super(locale: locale) {
     this.currentTime = currentTime ?? DateTime.now();
     _currentLeftIndex = 0;
     _currentMiddleIndex = this.currentTime.hour;
@@ -407,7 +418,8 @@ class DateTimePickerModel extends CommonPickerModel {
   @override
   DateTime finalTime() {
     DateTime time = currentTime.add(Duration(days: _currentLeftIndex));
-    return DateTime(time.year, time.month, time.day, _currentMiddleIndex, _currentRightIndex);
+    return DateTime(time.year, time.month, time.day, _currentMiddleIndex,
+        _currentRightIndex);
   }
 
   @override

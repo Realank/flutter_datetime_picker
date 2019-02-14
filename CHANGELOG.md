@@ -17,3 +17,4 @@
 ## [1.0.5] - add max/min time limit for Date Picker, add theme
 ## [1.0.6] - add comments
 ## [1.0.7] - fix max/min time for datetime type picker
+## [1.0.8] - add Russian
