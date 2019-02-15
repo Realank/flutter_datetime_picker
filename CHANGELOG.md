@@ -20,3 +20,4 @@
 ## [1.0.8] - add Russian
 ## [1.0.9] - fix readme
 ## [1.1.0] - fix readme
+## [1.1.1] - add 3 more languages

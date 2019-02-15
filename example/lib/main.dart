@@ -35,10 +35,8 @@ class HomePage extends StatelessWidget {
                       maxTime: DateTime(2019, 6, 7),
                       theme: DatePickerTheme(
                           backgroundColor: Colors.blue,
-                          itemStyle: TextStyle(
-                              color: Colors.white, fontWeight: FontWeight.bold),
-                          doneStyle:
-                              TextStyle(color: Colors.white, fontSize: 16)),
+                          itemStyle: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                          doneStyle: TextStyle(color: Colors.white, fontSize: 16)),
                       onChanged: (date) {
                     print('change $date');
                   }, onConfirm: (date) {
@@ -51,8 +49,7 @@ class HomePage extends StatelessWidget {
                 )),
             FlatButton(
                 onPressed: () {
-                  DatePicker.showTimePicker(context, showTitleActions: true,
-                      onChanged: (date) {
+                  DatePicker.showTimePicker(context, showTitleActions: true, onChanged: (date) {
                     print('change $date');
                   }, onConfirm: (date) {
                     print('confirm $date');
@@ -64,14 +61,11 @@ class HomePage extends StatelessWidget {
                 )),
             FlatButton(
                 onPressed: () {
-                  DatePicker.showDateTimePicker(context, showTitleActions: true,
-                      onChanged: (date) {
+                  DatePicker.showDateTimePicker(context, showTitleActions: true, onChanged: (date) {
                     print('change $date');
                   }, onConfirm: (date) {
                     print('confirm $date');
-                  },
-                      currentTime: DateTime(2008, 12, 31, 23, 12, 34),
-                      locale: LocaleType.zh);
+                  }, currentTime: DateTime(2008, 12, 31, 23, 12, 34), locale: LocaleType.zh);
                 },
                 child: Text(
                   'show date time picker (Chinese)',
@@ -79,8 +73,7 @@ class HomePage extends StatelessWidget {
                 )),
             FlatButton(
                 onPressed: () {
-                  DatePicker.showDateTimePicker(context, showTitleActions: true,
-                      onChanged: (date) {
+                  DatePicker.showDateTimePicker(context, showTitleActions: true, onChanged: (date) {
                     print('change $date');
                   }, onConfirm: (date) {
                     print('confirm $date');
@@ -92,14 +85,11 @@ class HomePage extends StatelessWidget {
                 )),
             FlatButton(
                 onPressed: () {
-                  DatePicker.showDateTimePicker(context, showTitleActions: true,
-                      onChanged: (date) {
+                  DatePicker.showDateTimePicker(context, showTitleActions: true, onChanged: (date) {
                     print('change $date');
                   }, onConfirm: (date) {
                     print('confirm $date');
-                  },
-                      currentTime: DateTime(2008, 12, 31, 23, 12, 34),
-                      locale: LocaleType.nl);
+                  }, currentTime: DateTime(2008, 12, 31, 23, 12, 34), locale: LocaleType.nl);
                 },
                 child: Text(
                   'show date time picker (Dutch)',
@@ -107,14 +97,11 @@ class HomePage extends StatelessWidget {
                 )),
             FlatButton(
                 onPressed: () {
-                  DatePicker.showDateTimePicker(context, showTitleActions: true,
-                      onChanged: (date) {
+                  DatePicker.showDateTimePicker(context, showTitleActions: true, onChanged: (date) {
                     print('change $date');
                   }, onConfirm: (date) {
                     print('confirm $date');
-                  },
-                      currentTime: DateTime(2008, 12, 31, 23, 12, 34),
-                      locale: LocaleType.ru);
+                  }, currentTime: DateTime(2008, 12, 31, 23, 12, 34), locale: LocaleType.ru);
                 },
                 child: Text(
                   'show date time picker (Russian)',
