@@ -77,7 +77,10 @@ class HomePage extends StatelessWidget {
                     print('change $date');
                   }, onConfirm: (date) {
                     print('confirm $date');
-                  }, currentTime: DateTime(2008, 12, 31, 23, 12, 34));
+                  }, currentTime: DateTime.now(),
+                    minTime: DateTime.now().subtract(Duration(days: 5, hours:3)),
+                    maxTime: DateTime.now().add(Duration(days: 3, hours:11))
+                  );
                 },
                 child: Text(
                   'show date time picker (English-America)',

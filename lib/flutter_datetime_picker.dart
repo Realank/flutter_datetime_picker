@@ -81,6 +81,8 @@ class DatePicker {
     DateChangedCallback onConfirm,
     locale: LocaleType.en,
     DateTime currentTime,
+        DateTime minTime,
+        DateTime maxTime,
     DatePickerTheme theme,
   }) {
     Navigator.push(
@@ -94,7 +96,7 @@ class DatePicker {
             barrierLabel:
                 MaterialLocalizations.of(context).modalBarrierDismissLabel,
             pickerModel:
-                DateTimePickerModel(currentTime: currentTime, locale: locale)));
+                DateTimePickerModel(currentTime: currentTime, locale: locale, minTime: minTime, maxTime: maxTime)));
   }
 
   ///

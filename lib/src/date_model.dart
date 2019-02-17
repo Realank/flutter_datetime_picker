@@ -383,24 +383,134 @@ class TimePickerModel extends CommonPickerModel {
 
 //a date&time picker model
 class DateTimePickerModel extends CommonPickerModel {
-  DateTimePickerModel({DateTime currentTime, LocaleType locale})
+  DateTime maxTime;
+  DateTime minTime;
+
+  DateTimePickerModel({DateTime currentTime, LocaleType locale, DateTime minTime, DateTime maxTime})
       : super(locale: locale) {
-    this.currentTime = currentTime ?? DateTime.now();
-    _currentLeftIndex = 0;
-    _currentMiddleIndex = this.currentTime.hour;
-    _currentRightIndex = this.currentTime.minute;
+
+    this.maxTime = maxTime ?? DateTime(2049, 12, 31);
+    this.minTime = minTime ?? DateTime(1970, 1, 1);
+
+    currentTime = currentTime ?? DateTime.now();
+    if (currentTime != null) {
+      if (currentTime.compareTo(this.maxTime) > 0) {
+        currentTime = this.maxTime;
+      } else if (currentTime.compareTo(this.minTime) < 0) {
+        currentTime = this.minTime;
+      }
+    }
+    this.currentTime = currentTime;
+
+    _fillLeftLists();
+    _fillMiddleLists();
+    _fillRightLists();
+    int minHour = _minHourOfCurrentDay();
+    int minMinute = _minMinuteOfCurrentHour();
+    _currentLeftIndex = this.currentTime.day - this.minTime.day;
+    _currentMiddleIndex = this.currentTime.hour - minHour;
+    _currentRightIndex = this.currentTime.minute - minMinute;
+  }
+
+  void _fillLeftLists(){
+    this.leftList = List.generate(maxTime.day - minTime.day + 1, (int index) {
+      DateTime newTime = minTime.add(Duration(days: index));
+      return '${formatDate(newTime, [ymdw], locale)}';
+    });
+  }
+
+  int _maxHourOfCurrentDay() {
+    return currentTime.day == maxTime.day ? maxTime.hour : 23;
+  }
+  int _minHourOfCurrentDay() {
+    return currentTime.day == minTime.day ? minTime.hour : 0;
+  }
+
+  int _maxMinuteOfCurrentHour(){
+    if (currentTime.day == maxTime.day && currentTime.hour == maxTime.hour)
+      return maxTime.minute;
+    return 59;
+  }
+
+  int _minMinuteOfCurrentHour(){
+    if (currentTime.day == minTime.day && currentTime.hour == minTime.hour)
+      return minTime.minute;
+    return 0;
+  }
+
+  void _fillMiddleLists(){
+    int minHour = _minHourOfCurrentDay();
+    int maxHour = _maxHourOfCurrentDay();
+    this.middleList = List.generate(maxHour - minHour + 1, (int index) {
+      return '${digits(minHour + index, 2)}';
+    });
+  }
+
+  void _fillRightLists(){
+    int maxMinute = _maxMinuteOfCurrentHour();
+    int minMinute = _minMinuteOfCurrentHour();
+    this.rightList = List.generate(maxMinute - minMinute + 1, (int index) {
+      return '${digits(minMinute + index, 2)}';
+    });
   }
 
   @override
+  void setLeftIndex(int index) {
+    super.setLeftIndex(index);
+    DateTime newTime = currentTime.add(Duration(days: index + minTime.day -currentTime.day));
+    if (newTime.isAfter(maxTime)) {
+      currentTime = maxTime;
+    } else if (newTime.isBefore(minTime)) {
+      currentTime = minTime;
+    } else {
+      currentTime = newTime;
+    }
+    _fillMiddleLists();
+    _fillRightLists();
+    int minHour = _minHourOfCurrentDay();
+    int minMinute = _minMinuteOfCurrentHour();
+    _currentMiddleIndex = currentTime.hour - minHour;
+    _currentRightIndex = currentTime.minute - minMinute;
+  }
+
+  @override
+  void setMiddleIndex(int index){
+    super.setMiddleIndex(index);
+    int minHour = _minHourOfCurrentDay();
+    DateTime newTime = currentTime.add(Duration(hours: index + minHour - currentTime.hour));
+    if (newTime.isAfter(maxTime)) {
+      currentTime = maxTime;
+    } else if (newTime.isBefore(minTime)) {
+      currentTime = minTime;
+    } else {
+      currentTime = newTime;
+    }
+    _fillRightLists();
+    int minMinute = _minMinuteOfCurrentHour();
+    _currentRightIndex = currentTime.minute - minMinute;
+  }
+
+  @override
+  void setRightIndex(int index) {
+    super.setRightIndex(index);
+    int minMinute = _minMinuteOfCurrentHour();
+    currentTime = currentTime.add(Duration(minutes: index + minMinute - currentTime.minute));
+  }
+
+
+  @override
   String leftStringAtIndex(int index) {
-    DateTime time = currentTime.add(Duration(days: index));
-    return formatDate(time, [ymdw], locale);
+    if (index >= 0 && index < leftList.length) {
+      return leftList[index];
+    } else {
+      return null;
+    }
   }
 
   @override
   String middleStringAtIndex(int index) {
-    if (index >= 0 && index < 24) {
-      return digits(index, 2);
+    if (index >= 0 && index < middleList.length) {
+      return middleList[index];
     } else {
       return null;
     }
@@ -408,8 +518,8 @@ class DateTimePickerModel extends CommonPickerModel {
 
   @override
   String rightStringAtIndex(int index) {
-    if (index >= 0 && index < 60) {
-      return digits(index, 2);
+    if (index >= 0 && index < rightList.length) {
+      return rightList[index];
     } else {
       return null;
     }
@@ -417,9 +527,13 @@ class DateTimePickerModel extends CommonPickerModel {
 
   @override
   DateTime finalTime() {
-    DateTime time = currentTime.add(Duration(days: _currentLeftIndex));
-    return DateTime(time.year, time.month, time.day, _currentMiddleIndex,
-        _currentRightIndex);
+    int minHour = _minHourOfCurrentDay();
+    int minMinute = _minMinuteOfCurrentHour();
+    return currentTime.add(Duration(
+        days: minTime.day + _currentLeftIndex - currentTime.day,
+        hours: minHour + _currentMiddleIndex - currentTime.hour,
+        minutes: minMinute + _currentRightIndex - currentTime.minute
+    ));
   }
 
   @override
