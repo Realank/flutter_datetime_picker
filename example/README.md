@@ -1,6 +1,6 @@
 # example
 
-A new Flutter application.
+A demo for flutter_datetime_picker
 
 ## Getting Started
 
