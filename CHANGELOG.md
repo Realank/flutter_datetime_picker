@@ -21,3 +21,4 @@
 ## [1.0.9] - fix readme
 ## [1.1.0] - fix readme
 ## [1.1.1] - add 3 more languages
+## [1.1.2] - add Portuguese

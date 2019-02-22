@@ -5,13 +5,15 @@
 A flutter date time picker inspired by [flutter-cupertino-date-picker](https://github.com/wuzhendev/flutter-cupertino-date-picker)
 
 you can choose date / time / date&time in multiple languages:
-- English
-- Dutch
-- Chinese
-- Russian
-- Italian
-- French
-- Spanish
+
+- English(en)
+- Dutch(nl)
+- Chinese(zh)
+- Russian(ru)
+- Italian(it)
+- French(fr)
+- Spanish(es)
+- Portuguese(pt)
 
 and you can also custom your own picker content
 
