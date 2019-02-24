@@ -242,7 +242,7 @@ String formatDate(DateTime date, List<String> formats, LocaleType locale) {
       } else if (locale == LocaleType.nl) {
         return formatDate(date, [D, ' ', dd, ' ', M, ' ', yyyy], locale);
       } else {
-        return formatDate(date, [D, ' ', M, ' ', dd, ',', yyyy], locale);
+        return formatDate(date, [D, ' ', M, ' ', dd, ', ', yyyy], locale);
       }
     }
   }
