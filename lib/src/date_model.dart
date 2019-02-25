@@ -181,14 +181,8 @@ class DatePickerModel extends CommonPickerModel {
     int minMonth = _minMonthOfCurrentYear();
     int maxMonth = _maxMonthOfCurrentYear();
 
-    List monthStrings = i18nObjInLocale(locale)['monthLong'];
-    
     this.middleList = List.generate(maxMonth - minMonth + 1, (int index) {
-      if (locale == LocaleType.zh) {
-        return '${minMonth + index}${_localeMonth()}';
-      } else {
-        return monthStrings[minMonth + index - 1];
-      }
+      return '${_localeMonth(minMonth + index)}';
     });
   }
 
@@ -312,11 +306,12 @@ class DatePickerModel extends CommonPickerModel {
     }
   }
 
-  String _localeMonth() {
+  String _localeMonth(int month) {
     if (locale == LocaleType.zh) {
-      return '月';
+      return '$month月';
     } else {
-      return '';
+      List monthStrings = i18nObjInLocale(locale)['monthLong'];
+      return monthStrings[month - 1];
     }
   }
 

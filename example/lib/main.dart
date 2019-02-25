@@ -43,7 +43,7 @@ class HomePage extends StatelessWidget {
                     print('change $date');
                   }, onConfirm: (date) {
                     print('confirm $date');
-                  }, currentTime: DateTime.now(), locale: LocaleType.zh);
+                  }, currentTime: DateTime.now(), locale: LocaleType.ru);
                 },
                 child: Text(
                   'show date picker(custom theme &date time range)',
