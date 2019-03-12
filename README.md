@@ -14,6 +14,8 @@ you can choose date / time / date&time in multiple languages:
 - French(fr)
 - Spanish(es)
 - Portuguese(pt)
+- Korean(ko)
+- Arabic(ar)
 
 and you can also custom your own picker content
 

@@ -23,3 +23,4 @@
 ## [1.1.1] - add 3 more languages
 ## [1.1.2] - add Portuguese
 ## [1.1.3] - update date picker format
+## [1.1.4] - add 2 more languages
