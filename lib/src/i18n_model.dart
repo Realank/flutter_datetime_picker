@@ -7,6 +7,7 @@ enum LocaleType {
   fr,
   es,
   pt,
+  ko,
 }
 final _i18nModel = {
   'en': {
@@ -308,6 +309,42 @@ final _i18nModel = {
     'am': 'AM',
     'pm': 'PM'
   },
+  'ko': {
+    'cancel': '취소',
+    'done': '완료',
+    'today': '오늘',
+    'monthShort': [
+      '1월',
+      '2월',
+      '3월',
+      '4월',
+      '5월',
+      '6월',
+      '7월',
+      '8월',
+      '9월',
+      '10월',
+      '11월',
+      '12월'
+    ],
+    'monthLong': [
+      '1월',
+      '2월',
+      '3월',
+      '4월',
+      '5월',
+      '6월',
+      '7월',
+      '8월',
+      '9월',
+      '10월',
+      '11월',
+      '12월'
+    ],
+    'day': ['월', '화', '수', '목', '금', '토', '일'],
+    'am': '오전',
+    'pm': '오후'
+  },
 };
 //get international object
 Map<String, dynamic> i18nObjInLocale(LocaleType type) {
@@ -326,6 +363,8 @@ Map<String, dynamic> i18nObjInLocale(LocaleType type) {
       return _i18nModel['es'];
     case LocaleType.pt:
       return _i18nModel['pt'];
+    case LocaleType.ko:
+      return _i18nModel['ko'];
     default:
       return _i18nModel['en'];
   }
