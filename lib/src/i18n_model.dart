@@ -1,4 +1,4 @@
-enum LocaleType { en, zh, nl, ru, it, fr, es, pt, ko, ar, tr }
+enum LocaleType { en,tr, zh, nl, ru, it, fr, es, pt, ko, ar }
 final _i18nModel = {
   'en': {
     //default
@@ -36,6 +36,42 @@ final _i18nModel = {
     'day': ['Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun'],
     'am': 'AM',
     'pm': 'PM'
+  },
+  'tr': {
+    'cancel': 'Vazgeç',
+    'done': 'Tamam',
+    'today': 'Bugün',
+    'monthShort': [
+      'Ocak',
+      'Şubat',
+      'Mart',
+      'Nisan',
+      'Mayıs',
+      'Haziran',
+      'Temmuz',
+      'Ağustos',
+      'Eylül',
+      'Ekim',
+      'Kasım',
+      'Aralık'
+    ],
+    'monthLong': [
+      'Ocak',
+      'Şubat',
+      'Mart',
+      'Nisan',
+      'Mayıs',
+      'Haziran',
+      'Temmuz',
+      'Ağustos',
+      'Eylül',
+      'Ekim',
+      'Kasım',
+      'Aralık'
+    ],
+    'day': ['Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi', 'Pazar'],
+    'am': 'ÖÖ',
+    'pm': 'ÖS'
   },
   'zh': {
     //Chinese
@@ -139,7 +175,7 @@ final _i18nModel = {
     ],
     'monthLong': [
       'Январь',
-      'Февраль',
+      'Декабрь',
       'Март',
       'Апрель',
       'Май',
@@ -379,43 +415,6 @@ final _i18nModel = {
     'am': 'ص',
     'pm': 'م'
   },
-  'tr': {
-    //default
-    'cancel': 'İptal',
-    'done': 'Tamam',
-    'today': 'Bugün',
-    'monthShort': [
-      'Oca',
-      'Şub',
-      'Mar',
-      'Nis',
-      'May',
-      'Haz',
-      'Tem',
-      'Ağu',
-      'Eyl',
-      'Eki',
-      'Kas',
-      'Ara'
-    ],
-    'monthLong': [
-      'Ocak',
-      'Şubat',
-      'Mart',
-      'Nisan',
-      'Mayıs',
-      'Haziran',
-      'Temmuz',
-      'Ağustos',
-      'Eylül',
-      'Ekim',
-      'Kasım',
-      'Aralık'
-    ],
-    'day': ['Pzt', 'Sal', 'Çarş', 'Perş', 'Cum', 'Ctes', 'Paz'],
-    'am': 'ÖÖ',
-    'pm': 'ÖS'
-  },
 };
 //get international object
 Map<String, dynamic> i18nObjInLocale(LocaleType type) {
@@ -424,6 +423,8 @@ Map<String, dynamic> i18nObjInLocale(LocaleType type) {
       return _i18nModel['zh'];
     case LocaleType.nl:
       return _i18nModel['nl'];
+    case LocaleType.tr:
+      return _i18nModel['tr'];
     case LocaleType.ru:
       return _i18nModel['ru'];
     case LocaleType.it:
@@ -438,8 +439,6 @@ Map<String, dynamic> i18nObjInLocale(LocaleType type) {
       return _i18nModel['ko'];
     case LocaleType.ar:
       return _i18nModel['ar'];
-    case LocaleType.tr:
-      return _i18nModel['tr'];
     default:
       return _i18nModel['en'];
   }
