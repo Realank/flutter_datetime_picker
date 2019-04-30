@@ -149,7 +149,7 @@ class DatePickerModel extends CommonPickerModel {
 
   void _fillLeftLists() {
     this.leftList = List.generate(maxTime.year - minTime.year + 1, (int index) {
-      print('LEFT LIST... ${minTime.year + index}${_localeYear()}');
+      // print('LEFT LIST... ${minTime.year + index}${_localeYear()}');
       return '${minTime.year + index}${_localeYear()}';
     });
   }
@@ -301,6 +301,8 @@ class DatePickerModel extends CommonPickerModel {
   String _localeYear() {
     if (locale == LocaleType.zh) {
       return '年';
+    } else if (locale == LocaleType.ko) {
+      return '년';
     } else {
       return '';
     }
@@ -309,6 +311,8 @@ class DatePickerModel extends CommonPickerModel {
   String _localeMonth(int month) {
     if (locale == LocaleType.zh) {
       return '$month月';
+    } else if (locale == LocaleType.ko) {
+      return '$month월';
     } else {
       List monthStrings = i18nObjInLocale(locale)['monthLong'];
       return monthStrings[month - 1];
@@ -318,6 +322,8 @@ class DatePickerModel extends CommonPickerModel {
   String _localeDay() {
     if (locale == LocaleType.zh) {
       return '日';
+    } else if (locale == LocaleType.ko) {
+      return '일';
     } else {
       return '';
     }

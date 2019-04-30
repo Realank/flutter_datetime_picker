@@ -1,7 +1,7 @@
-enum LocaleType { en, zh, nl, ru, it, fr, es, pt, ko, ar, de }
+enum LocaleType { en, zh, nl, ru, it, fr, es, pt, ko, ar, tr, jp, de }
+
 final _i18nModel = {
   'en': {
-    //default
     'cancel': 'Cancel',
     'done': 'Done',
     'today': 'Today',
@@ -139,7 +139,7 @@ final _i18nModel = {
     ],
     'monthLong': [
       'Январь',
-      'Декабрь',
+      'Февраль',
       'Март',
       'Апрель',
       'Май',
@@ -379,6 +379,79 @@ final _i18nModel = {
     'am': 'ص',
     'pm': 'م'
   },
+  'tr': {
+    'cancel': 'İptal',
+    'done': 'Tamam',
+    'today': 'Bugün',
+    'monthShort': [
+      'Oca',
+      'Şub',
+      'Mar',
+      'Nis',
+      'May',
+      'Haz',
+      'Tem',
+      'Ağu',
+      'Eyl',
+      'Eki',
+      'Kas',
+      'Ara'
+    ],
+    'monthLong': [
+      'Ocak',
+      'Şubat',
+      'Mart',
+      'Nisan',
+      'Mayıs',
+      'Haziran',
+      'Temmuz',
+      'Ağustos',
+      'Eylül',
+      'Ekim',
+      'Kasım',
+      'Aralık'
+    ],
+    'day': ['Pzt', 'Sal', 'Çarş', 'Perş', 'Cum', 'Ctes', 'Paz'],
+    'am': 'ÖÖ',
+    'pm': 'ÖS'
+  },
+  'jp': {
+    //Japanese
+    'cancel': 'キャンセル',
+    'done': '決定する',
+    'today': '今日',
+    'monthShort': [
+      '一月',
+      '二月',
+      '三月',
+      '四月',
+      '五月',
+      '六月',
+      '七月',
+      '八月',
+      '九月',
+      '十月',
+      '十一月',
+      '十二月'
+    ],
+    'monthLong': [
+      '一月',
+      '二月',
+      '三月',
+      '四月',
+      '五月',
+      '六月',
+      '七月',
+      '八月',
+      '九月',
+      '十月',
+      '十一月',
+      '十二月'
+    ],
+    'day': ['月曜日', '火曜日', '水曜日', '木曜日', '金曜日', '土曜日', '日曜日'],
+    'am': '朝',
+    'pm': '午後'
+  },
   'de': {
     //German
     'cancel': 'Abbrechen',
@@ -438,6 +511,10 @@ Map<String, dynamic> i18nObjInLocale(LocaleType type) {
       return _i18nModel['ko'];
     case LocaleType.ar:
       return _i18nModel['ar'];
+    case LocaleType.tr:
+      return _i18nModel['tr'];
+    case LocaleType.jp:
+      return _i18nModel['jp'];
     case LocaleType.de:
       return _i18nModel['de'];
     default:
