@@ -1,4 +1,4 @@
-enum LocaleType { en, zh, nl, ru, it, fr, es, pt, ko, ar }
+enum LocaleType { en, zh, nl, ru, it, fr, es, pt, ko, ar, de }
 final _i18nModel = {
   'en': {
     //default
@@ -379,6 +379,43 @@ final _i18nModel = {
     'am': 'ص',
     'pm': 'م'
   },
+  'de': {
+    //German
+    'cancel': 'Abbrechen',
+    'done': 'OK',
+    'today': 'Heute',
+    'monthShort': [
+      'Jan',
+      'Feb',
+      'Mrz',
+      'Apr',
+      'Mai',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Okt',
+      'Nov',
+      'Dez'
+    ],
+    'monthLong': [
+      'Januar',
+      'Februar',
+      'März',
+      'April',
+      'Mai',
+      'Juni',
+      'Juli',
+      'August',
+      'September',
+      'Oktober',
+      'November',
+      'Dezember'
+    ],
+    'day': ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'],
+    'am': 'AM',
+    'pm': 'PM'
+  },
 };
 //get international object
 Map<String, dynamic> i18nObjInLocale(LocaleType type) {
@@ -401,6 +438,8 @@ Map<String, dynamic> i18nObjInLocale(LocaleType type) {
       return _i18nModel['ko'];
     case LocaleType.ar:
       return _i18nModel['ar'];
+    case LocaleType.de:
+      return _i18nModel['de'];
     default:
       return _i18nModel['en'];
   }
