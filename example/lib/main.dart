@@ -120,6 +120,21 @@ class HomePage extends StatelessWidget {
                   'show date time picker (Russian)',
                   style: TextStyle(color: Colors.blue),
                 )),
+            FlatButton(
+                onPressed: () {
+                  DatePicker.showDateTimePicker(context, showTitleActions: true,
+                      onChanged: (date) {
+                        print('change $date');
+                      }, onConfirm: (date) {
+                        print('confirm $date');
+                      },
+                      currentTime: DateTime(2019, 12, 31, 23, 12, 34),
+                      locale: LocaleType.de);
+                },
+                child: Text(
+                  'show date time picker (German)',
+                  style: TextStyle(color: Colors.blue),
+                )),
           ],
         ),
       ),
