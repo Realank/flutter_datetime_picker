@@ -1,4 +1,4 @@
-enum LocaleType { en, zh, nl, ru, it, fr, es, pt, ko, ar, tr, jp, de }
+enum LocaleType { en, fa ,zh, nl, ru, it, fr, es, pt, ko, ar, tr, jp, de }
 
 final _i18nModel = {
   'en': {
@@ -36,6 +36,50 @@ final _i18nModel = {
     'day': ['Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun'],
     'am': 'AM',
     'pm': 'PM'
+  },
+  'fa': {
+    'cancel': 'لغو',
+    'done': 'تایید',
+    'today': 'امروز',
+    'monthShort': [
+      'فروردین',
+      'اردیبهشت',
+      'خرداد',
+      'تیر',
+      'مرداد',
+      'شهریور',
+      'مهر',
+      'آبان',
+      'آذر',
+      'دی',
+      'بهمن',
+      'اسفند'
+    ],
+    'monthLong': [
+      'فروردین',
+      'اردیبهشت',
+      'خرداد',
+      'تیر',
+      'مرداد',
+      'شهریور',
+      'مهر',
+      'آبان',
+      'آذر',
+      'دی',
+      'بهمن',
+      'اسفند'
+    ],
+    'day': [
+      'دوشنبه',
+      'سه شنبه',
+      'چهارشنبه',
+      'پنج شنبه',
+      'جمعه',
+      'شنبه',
+      'یکشنبه'
+    ],
+    'am': 'صبح',
+    'pm': 'عصر'
   },
   'zh': {
     //Chinese
@@ -493,6 +537,8 @@ final _i18nModel = {
 //get international object
 Map<String, dynamic> i18nObjInLocale(LocaleType type) {
   switch (type) {
+    case LocaleType.fa:
+      return _i18nModel['fa'];
     case LocaleType.zh:
       return _i18nModel['zh'];
     case LocaleType.nl:
@@ -520,4 +566,4 @@ Map<String, dynamic> i18nObjInLocale(LocaleType type) {
     default:
       return _i18nModel['en'];
   }
-}
+}-
