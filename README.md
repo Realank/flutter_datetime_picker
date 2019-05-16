@@ -13,6 +13,7 @@ you can choose date / time / date&time in multiple languages:
 - Italian(it)
 - French(fr)
 - Spanish(es)
+- Polish (pl)
 - Portuguese(pt)
 - Korean(ko)
 - Arabic(ar)
