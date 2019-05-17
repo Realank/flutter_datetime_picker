@@ -1,4 +1,4 @@
-enum LocaleType { en, fa ,zh, nl, ru, it, fr, es, pt, ko, ar, tr, jp, de }
+enum LocaleType { en, fa ,zh, nl, ru, it, fr, es, pl, pt, ko, ar, tr, jp, de }
 
 final _i18nModel = {
   'en': {
@@ -307,6 +307,42 @@ final _i18nModel = {
     'am': 'AM',
     'pm': 'PM'
   },
+  'pl': {
+    'cancel': 'Anuluj',
+    'done': 'Gotowe',
+    'today': 'Dziś',
+    'monthShort': [
+      'Sty',
+      'Lut',
+      'Mar',
+      'Kwi',
+      'Maj',
+      'Cze',
+      'Lip',
+      'Sie',
+      'Wrz',
+      'Paź',
+      'Lis',
+      'Gru'
+    ],
+    'monthLong': [
+      'Styczeń',
+      'Luty',
+      'Marzec',
+      'Kwiecień',
+      'Maj',
+      'Czerwiec',
+      'Lipiec',
+      'Sierpień',
+      'Wrzesień',
+      'Październik',
+      'Listopad',
+      'Grudzień'
+    ],
+    'day': ['Pn', 'Wt', 'Śr', 'Cz', 'Pt', 'Sb', 'Nd'],
+    'am': 'AM',
+    'pm': 'PM'
+  },
   'pt': {
     'cancel': 'Cancelar',
     'done': 'Confirmar',
@@ -551,6 +587,8 @@ Map<String, dynamic> i18nObjInLocale(LocaleType type) {
       return _i18nModel['fr'];
     case LocaleType.es:
       return _i18nModel['es'];
+    case LocaleType.pl:
+      return _i18nModel['pl'];
     case LocaleType.pt:
       return _i18nModel['pt'];
     case LocaleType.ko:
