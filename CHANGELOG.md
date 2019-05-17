@@ -29,4 +29,5 @@
 ## [1.1.7] - update something
 ## [1.1.8] - update something
 ## [1.1.9] - add German
-## [1.2.09] - add support for time zone
+## [1.2.0] - add support for time zone
+## [1.2.1] - add more languages
