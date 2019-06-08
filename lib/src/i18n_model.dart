@@ -15,7 +15,8 @@ enum LocaleType {
   jp,
   de,
   da,
-  mn
+  mn,
+  bn
 }
 
 final _i18nModel = {
@@ -660,6 +661,51 @@ final _i18nModel = {
     'am': 'AM',
     'pm': 'PM'
   },
+  'bn': {
+//Bengali
+    'cancel': 'বাতিল',
+    'done': 'সম্পন্ন',
+    'today': 'আজ',
+    'monthShort': [
+      "জানু",
+      "ফেব্",
+      "মার্চ",
+      "এপ্রিল",
+      "মে",
+      "জুন",
+      "জুলাই",
+      "অগাস্ট",
+      "সেপ্ট",
+      "অক্ট",
+      "নভেম্",
+      "ডিসেম্"
+    ],
+    'monthLong': [
+      "জানুয়ারী",
+      "ফেব্রুয়ারি",
+      "মার্চ",
+      "এপ্রিল",
+      "মে",
+      "জুন",
+      "জুলাই",
+      "অগাস্ট",
+      "সেপ্টেম্বর",
+      "অক্টোবর",
+      "নভেম্বর",
+      "ডিসেম্বর"
+    ],
+    'day': [
+      "রবিবার",
+      "সোমবার",
+      "মঙ্গলবার",
+      "বুধবার",
+      "বৃহস্পতিবার",
+      "শুক্রবার",
+      "শনিবার",
+    ],
+    'am': 'AM',
+    'pm': 'PM'
+  },
 };
 //get international object
 Map<String, dynamic> i18nObjInLocale(LocaleType type) {
@@ -696,6 +742,8 @@ Map<String, dynamic> i18nObjInLocale(LocaleType type) {
       return _i18nModel['da'];
     case LocaleType.mn:
       return _i18nModel['mn'];
+    case LocaleType.bn:
+      return _i18nModel['bn'];
     default:
       return _i18nModel['en'];
   }
