@@ -19,6 +19,7 @@ class DatePicker {
   ///
   static void showDatePicker(
     BuildContext context, {
+    String title = '',
     bool showTitleActions: true,
     DateTime minTime,
     DateTime maxTime,
@@ -31,6 +32,7 @@ class DatePicker {
     Navigator.push(
         context,
         new _DatePickerRoute(
+            title: title,
             showTitleActions: showTitleActions,
             onChanged: onChanged,
             onConfirm: onConfirm,
@@ -50,6 +52,7 @@ class DatePicker {
   ///
   static void showTimePicker(
     BuildContext context, {
+    String title = '',
     bool showTitleActions: true,
     DateChangedCallback onChanged,
     DateChangedCallback onConfirm,
@@ -60,6 +63,7 @@ class DatePicker {
     Navigator.push(
         context,
         new _DatePickerRoute(
+            title: title,
             showTitleActions: showTitleActions,
             onChanged: onChanged,
             onConfirm: onConfirm,
@@ -76,6 +80,7 @@ class DatePicker {
   ///
   static void showDateTimePicker(
     BuildContext context, {
+    String title = '',
     bool showTitleActions: true,
     DateChangedCallback onChanged,
     DateChangedCallback onConfirm,
@@ -86,6 +91,7 @@ class DatePicker {
     Navigator.push(
         context,
         new _DatePickerRoute(
+            title: title,
             showTitleActions: showTitleActions,
             onChanged: onChanged,
             onConfirm: onConfirm,
@@ -102,6 +108,7 @@ class DatePicker {
   ///
   static void showPicker(
     BuildContext context, {
+    String title = '',
     bool showTitleActions: true,
     DateChangedCallback onChanged,
     DateChangedCallback onConfirm,
@@ -112,6 +119,7 @@ class DatePicker {
     Navigator.push(
         context,
         new _DatePickerRoute(
+            title: title,
             showTitleActions: showTitleActions,
             onChanged: onChanged,
             onConfirm: onConfirm,
@@ -125,6 +133,7 @@ class DatePicker {
 
 class _DatePickerRoute<T> extends PopupRoute<T> {
   _DatePickerRoute({
+    this.title,
     this.showTitleActions,
     this.onChanged,
     this.onConfirm,
@@ -137,6 +146,7 @@ class _DatePickerRoute<T> extends PopupRoute<T> {
         this.theme = theme ?? DatePickerTheme(),
         super(settings: settings);
 
+  final String title;
   final bool showTitleActions;
   final DateChangedCallback onChanged;
   final DateChangedCallback onConfirm;
@@ -242,7 +252,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
               child: new GestureDetector(
                 child: Material(
                   color: Colors.transparent,
-                  child: _renderPickerView(theme),
+                  child: _renderPickerView(theme, widget.route.title),
                 ),
               ),
             ),
@@ -258,12 +268,12 @@ class _DatePickerState extends State<_DatePickerComponent> {
     }
   }
 
-  Widget _renderPickerView(DatePickerTheme theme) {
+  Widget _renderPickerView(DatePickerTheme theme, String title) {
     Widget itemView = _renderItemView(theme);
     if (widget.route.showTitleActions) {
       return Column(
         children: <Widget>[
-          _renderTitleActionsView(theme),
+          _renderTitleActionsView(theme, title),
           itemView,
         ],
       );
@@ -381,7 +391,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
   }
 
   // Title View
-  Widget _renderTitleActionsView(DatePickerTheme theme) {
+  Widget _renderTitleActionsView(DatePickerTheme theme, String title) {
     String done = _localeDone();
     String cancel = _localeCancel();
 
@@ -390,6 +400,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
       decoration: BoxDecoration(color: theme.backgroundColor ?? Colors.white),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           Container(
             height: theme.titleHeight,
@@ -401,6 +412,15 @@ class _DatePickerState extends State<_DatePickerComponent> {
                 style: theme.cancelStyle,
               ),
               onPressed: () => Navigator.pop(context),
+            ),
+          ),
+          Container(
+            height: theme.titleHeight,
+            alignment: Alignment.center,
+            child: Text(
+              '$title',
+              textAlign: TextAlign.center,
+              style: theme.itemStyle,
             ),
           ),
           Container(
