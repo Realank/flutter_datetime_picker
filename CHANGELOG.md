@@ -31,3 +31,4 @@
 ## [1.1.9] - add German
 ## [1.2.0] - add support for time zone
 ## [1.2.1] - add more languages
+## [1.2.2] - add customize example
