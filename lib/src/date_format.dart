@@ -223,7 +223,9 @@ const String Z = 'Z';
 String formatDate(DateTime date, List<String> formats, LocaleType locale) {
   if (formats.first == ymdw) {
     final now = DateTime.now();
-    if (date.year == now.year && date.month == now.month && date.day == now.day) {
+    if (date.year == now.year &&
+        date.month == now.month &&
+        date.day == now.day) {
       //today
       return i18nObjInLocale(locale)['today'];
     } else if (date.year == now.year) {
@@ -295,7 +297,9 @@ String formatDate(DateTime date, List<String> formats, LocaleType locale) {
     } else if (format == h) {
       sb.write(date.hour % 12);
     } else if (format == am) {
-      sb.write(date.hour < 12 ? i18nObjInLocale(locale)['am'] : i18nObjInLocale(locale)['pm']);
+      sb.write(date.hour < 12
+          ? i18nObjInLocale(locale)['am']
+          : i18nObjInLocale(locale)['pm']);
     } else if (format == nn) {
       sb.write(digits(date.minute, 2));
     } else if (format == n) {
@@ -340,4 +344,5 @@ String digits(int value, int length) {
   return '$value'.padLeft(length, "0");
 }
 
-int dayInYear(DateTime date) => date.difference(new DateTime(date.year, 1, 1)).inDays;
+int dayInYear(DateTime date) =>
+    date.difference(new DateTime(date.year, 1, 1)).inDays;
