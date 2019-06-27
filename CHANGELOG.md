@@ -32,3 +32,4 @@
 ## [1.2.0] - add support for time zone
 ## [1.2.1] - add more languages
 ## [1.2.2] - add customize example
+## [1.2.3] - fix confirm pop issue
