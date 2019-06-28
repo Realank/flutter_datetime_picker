@@ -16,7 +16,8 @@ enum LocaleType {
   de,
   da,
   mn,
-  bn
+  bn,
+  vi
 }
 
 final _i18nModel = {
@@ -706,6 +707,42 @@ final _i18nModel = {
     'am': 'AM',
     'pm': 'PM'
   },
+  'vi': {
+    'cancel': 'Hủy bỏ',
+    'done': 'Xong',
+    'today': 'Hôm nay',
+    'monthShort': [
+      'Thg1',
+      'Thg2',
+      'Thg3',
+      'Thg4',
+      'Thg5',
+      'Thg6',
+      'Thg7',
+      'Thg8',
+      'Thg9',
+      'Thg10',
+      'Thg11',
+      'Thg12'
+    ],
+    'monthLong': [
+      'Tháng 1',
+      'Tháng 2',
+      'Tháng 3',
+      'Tháng 4',
+      'Tháng 5',
+      'Tháng 6',
+      'Tháng 7',
+      'Tháng 8',
+      'Tháng 9',
+      'Tháng 10',
+      'Tháng 11',
+      'Tháng 12'
+    ],
+    'day': ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'],
+    'am': 'SA',
+    'pm': 'CH'
+  },
 };
 //get international object
 Map<String, dynamic> i18nObjInLocale(LocaleType type) {
@@ -744,6 +781,8 @@ Map<String, dynamic> i18nObjInLocale(LocaleType type) {
       return _i18nModel['mn'];
     case LocaleType.bn:
       return _i18nModel['bn'];
+    case LocaleType.vi:
+      return _i18nModel['vi'];
     default:
       return _i18nModel['en'];
   }
