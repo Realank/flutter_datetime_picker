@@ -128,6 +128,9 @@ class HomePage extends StatelessWidget {
             FlatButton(
                 onPressed: () {
                   DatePicker.showTimePicker(context, showTitleActions: true,
+                      theme: DatePickerTheme(
+                        showRight: false
+                      ),
                       onChanged: (date) {
                     print('change $date in time zone ' +
                         date.timeZoneOffset.inHours.toString());
