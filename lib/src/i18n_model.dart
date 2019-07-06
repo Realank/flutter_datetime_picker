@@ -16,7 +16,8 @@ enum LocaleType {
   de,
   da,
   mn,
-  bn
+  bn,
+  hy
 }
 
 final _i18nModel = {
@@ -706,6 +707,43 @@ final _i18nModel = {
     'am': 'AM',
     'pm': 'PM'
   },
+  'hy': {
+//Armenian
+    'cancel': 'Չեղարկել',
+    'done': 'հաստատել',
+    'today': 'Այսօր',
+    'monthShort': [
+      'Հնվ',
+      'Փետ',
+      'Մար',
+      'Ապր',
+      'Մայ',
+      'Հուն',
+      'Հուլ',
+      'Օգոս',
+      'Սեպ',
+      'Հոկ',
+      'Նոյ',
+      'Դեկ'
+    ],
+    'monthLong': [
+      'Հունվար',
+      'Փետրվար',
+      'Մարտ',
+      'Ապրիլ',
+      'Մայիս',
+      'Հունիս',
+      'Հուլիս',
+      'Օգոստոս',
+      'Սեպտեմբեր',
+      'Հոկտեմբեր',
+      'Նոյեմբեր',
+      'Դեկտեմբեր'
+    ],
+    'day': ['Երկ', 'Երք', 'Չրք', 'Հնգ', 'Ուր', 'Շբթ', 'Կիր'],
+    'am': 'AM',
+    'pm': 'PM'
+  },
 };
 //get international object
 Map<String, dynamic> i18nObjInLocale(LocaleType type) {
@@ -744,6 +782,8 @@ Map<String, dynamic> i18nObjInLocale(LocaleType type) {
       return _i18nModel['mn'];
     case LocaleType.bn:
       return _i18nModel['bn'];
+    case LocaleType.hy:
+      return _i18nModel['hy'];
     default:
       return _i18nModel['en'];
   }
