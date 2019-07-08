@@ -23,6 +23,8 @@ you can choose date / time / date&time in multiple languages:
 - German(de)
 - Danish(da)
 - Bengali(bn)
+- Vietnamese(vi)
+- Armenian(hy)
 
 and you can also custom your own picker content
 
