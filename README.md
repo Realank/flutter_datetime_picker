@@ -25,6 +25,8 @@ you can choose date / time / date&time in multiple languages:
 - Bengali(bn)
 - Vietnamese(vi)
 - Armenian(hy)
+- Indonesian(id)
+- Bulgarian(bg)
 
 and you can also custom your own picker content
 

@@ -35,3 +35,4 @@
 ## [1.2.3] - fix confirm pop issue
 ## [1.2.4] - fix format
 ## [1.2.5] - add more languages
+## [1.2.6] - add more languages
