@@ -323,7 +323,7 @@ final _i18nModel = {
       'Août',
       'Septembre',
       'Octobre',
-      'November',
+      'Novembre',
       'Décembre'
     ],
     'day': ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'],
