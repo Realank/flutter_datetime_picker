@@ -17,7 +17,7 @@ class DatePicker {
   ///
   /// Display date picker bottom sheet.
   ///
-  static void showDatePicker(
+  static Future showDatePicker(
     BuildContext context, {
     bool showTitleActions: true,
     DateTime minTime,
@@ -28,7 +28,7 @@ class DatePicker {
     DateTime currentTime,
     DatePickerTheme theme,
   }) {
-    Navigator.push(
+    return Navigator.push(
         context,
         new _DatePickerRoute(
             showTitleActions: showTitleActions,
@@ -48,7 +48,7 @@ class DatePicker {
   ///
   /// Display time picker bottom sheet.
   ///
-  static void showTimePicker(
+  static Future showTimePicker(
     BuildContext context, {
     bool showTitleActions: true,
     DateChangedCallback onChanged,
@@ -57,7 +57,7 @@ class DatePicker {
     DateTime currentTime,
     DatePickerTheme theme,
   }) {
-    Navigator.push(
+    return Navigator.push(
         context,
         new _DatePickerRoute(
             showTitleActions: showTitleActions,
@@ -74,7 +74,7 @@ class DatePicker {
   ///
   /// Display date&time picker bottom sheet.
   ///
-  static void showDateTimePicker(
+  static Future showDateTimePicker(
     BuildContext context, {
     bool showTitleActions: true,
     DateChangedCallback onChanged,
@@ -83,7 +83,7 @@ class DatePicker {
     DateTime currentTime,
     DatePickerTheme theme,
   }) {
-    Navigator.push(
+    return Navigator.push(
         context,
         new _DatePickerRoute(
             showTitleActions: showTitleActions,
@@ -100,7 +100,7 @@ class DatePicker {
   ///
   /// Display date picker bottom sheet witch custom picker model.
   ///
-  static void showPicker(
+  static Future showPicker(
     BuildContext context, {
     bool showTitleActions: true,
     DateChangedCallback onChanged,
@@ -109,7 +109,7 @@ class DatePicker {
     BasePickerModel pickerModel,
     DatePickerTheme theme,
   }) {
-    Navigator.push(
+    return Navigator.push(
         context,
         new _DatePickerRoute(
             showTitleActions: showTitleActions,
