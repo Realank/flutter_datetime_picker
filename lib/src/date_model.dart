@@ -361,7 +361,9 @@ class DatePickerModel extends CommonPickerModel {
 
 //a time picker model
 class TimePickerModel extends CommonPickerModel {
-  TimePickerModel({DateTime currentTime, LocaleType locale})
+  bool showSecondsColumn;
+
+  TimePickerModel({DateTime currentTime, LocaleType locale, this.showSecondsColumn : true})
       : super(locale: locale) {
     this.currentTime = currentTime ?? DateTime.now();
 
@@ -404,7 +406,18 @@ class TimePickerModel extends CommonPickerModel {
 
   @override
   String rightDivider() {
-    return ":";
+    if (showSecondsColumn)
+      return ":";
+    else
+      return "";
+  }
+
+  @override
+  List<int> layoutProportions(){
+    if (showSecondsColumn)
+      return [1,1,1];
+    else
+      return [1,1,0];
   }
 
   @override
