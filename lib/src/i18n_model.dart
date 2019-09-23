@@ -939,6 +939,8 @@ Map<String, dynamic> i18nObjInLocale(LocaleType type) {
       return _i18nModel['id'];
     case LocaleType.bg:
       return _i18nModel['bg'];
+    case LocaleType.eu:
+      return _i18nModel['eu'];
     default:
       return _i18nModel['en'];
   }
