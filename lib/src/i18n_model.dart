@@ -20,7 +20,8 @@ enum LocaleType {
   vi,
   hy,
   id,
-  bg
+  bg,
+  eu
 }
 
 final _i18nModel = {
@@ -855,6 +856,43 @@ final _i18nModel = {
     'am': 'AM',
     'pm': 'PM'
   },
+  'eu': {
+    // basque
+    'cancel': 'Ezeztau',
+    'done': 'Onartu',
+    'today': 'Gaur',
+    'monthShort': [
+      'urt.',
+      'ots.',
+      'mar.',
+      'api.',
+      'mai.',
+      'eka.',
+      'uzt.',
+      'abu.',
+      'ira.',
+      'urr.',
+      'aza.',
+      'abe.'
+    ],
+    'monthLong': [
+      'urtarrila',
+      'otsaila',
+      'martxoa',
+      'apirila',
+      'maiatza',
+      'ekaina',
+      'uztaila',
+      'abuztua',
+      'iraila',
+      'urria',
+      'azaroa',
+      'abendua'
+    ],
+    'day': ['al.', 'ar.', 'az.', 'og.', 'or.', 'lr.', 'ig.'],
+    'am': 'AM',
+    'pm': 'PM'
+  },
 };
 //get international object
 Map<String, dynamic> i18nObjInLocale(LocaleType type) {
@@ -901,6 +939,8 @@ Map<String, dynamic> i18nObjInLocale(LocaleType type) {
       return _i18nModel['id'];
     case LocaleType.bg:
       return _i18nModel['bg'];
+    case LocaleType.eu:
+      return _i18nModel['eu'];
     default:
       return _i18nModel['en'];
   }

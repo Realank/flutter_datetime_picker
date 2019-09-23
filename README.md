@@ -8,6 +8,7 @@ you can choose date / time / date&time in multiple languages:
 
 - Arabic(ar)
 - Armenian(hy)
+- Basque(eu)
 - Bengali(bn)
 - Bulgarian(bg)
 - Chinese(zh)
