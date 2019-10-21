@@ -1,6 +1,7 @@
 import 'package:flutter_datetime_picker/src/date_format.dart';
 import 'package:flutter_datetime_picker/src/i18n_model.dart';
 import 'datetime_util.dart';
+import 'dart:math';
 
 //interface for picker data model
 abstract class BasePickerModel {
@@ -44,8 +45,7 @@ class CommonPickerModel extends BasePickerModel {
 
   LocaleType locale;
 
-  CommonPickerModel({this.currentTime, locale})
-      : this.locale = locale ?? LocaleType.en;
+  CommonPickerModel({this.currentTime, locale}) : this.locale = locale ?? LocaleType.en;
 
   @override
   String leftStringAtIndex(int index) {
@@ -118,11 +118,7 @@ class DatePickerModel extends CommonPickerModel {
   DateTime maxTime;
   DateTime minTime;
 
-  DatePickerModel(
-      {DateTime currentTime,
-      DateTime maxTime,
-      DateTime minTime,
-      LocaleType locale})
+  DatePickerModel({DateTime currentTime, DateTime maxTime, DateTime minTime, LocaleType locale})
       : super(locale: locale) {
     this.maxTime = maxTime ?? DateTime(2049, 12, 31);
     this.minTime = minTime ?? DateTime(1970, 1, 1);
@@ -164,17 +160,13 @@ class DatePickerModel extends CommonPickerModel {
 
   int _maxDayOfCurrentMonth() {
     int dayCount = calcDateCount(currentTime.year, currentTime.month);
-    return currentTime.year == maxTime.year &&
-            currentTime.month == maxTime.month
+    return currentTime.year == maxTime.year && currentTime.month == maxTime.month
         ? maxTime.day
         : dayCount;
   }
 
   int _minDayOfCurrentMonth() {
-    return currentTime.year == minTime.year &&
-            currentTime.month == minTime.month
-        ? minTime.day
-        : 1;
+    return currentTime.year == minTime.year && currentTime.month == minTime.month ? minTime.day : 1;
   }
 
   void _fillMiddleLists() {
@@ -361,8 +353,7 @@ class DatePickerModel extends CommonPickerModel {
 
 //a time picker model
 class TimePickerModel extends CommonPickerModel {
-  TimePickerModel({DateTime currentTime, LocaleType locale})
-      : super(locale: locale) {
+  TimePickerModel({DateTime currentTime, LocaleType locale}) : super(locale: locale) {
     this.currentTime = currentTime ?? DateTime.now();
 
     _currentLeftIndex = this.currentTime.hour;
@@ -410,55 +401,161 @@ class TimePickerModel extends CommonPickerModel {
   @override
   DateTime finalTime() {
     return currentTime.isUtc
-        ? DateTime.utc(currentTime.year, currentTime.month, currentTime.day,
-            _currentLeftIndex, _currentMiddleIndex, _currentRightIndex)
-        : DateTime(currentTime.year, currentTime.month, currentTime.day,
-            _currentLeftIndex, _currentMiddleIndex, _currentRightIndex);
+        ? DateTime.utc(currentTime.year, currentTime.month, currentTime.day, _currentLeftIndex,
+            _currentMiddleIndex, _currentRightIndex)
+        : DateTime(currentTime.year, currentTime.month, currentTime.day, _currentLeftIndex,
+            _currentMiddleIndex, _currentRightIndex);
   }
 }
 
 //a date&time picker model
 class DateTimePickerModel extends CommonPickerModel {
-  DateTimePickerModel({DateTime currentTime, LocaleType locale})
+  DateTime maxTime;
+  DateTime minTime;
+  DateTimePickerModel({DateTime currentTime, DateTime maxTime, DateTime minTime, LocaleType locale})
       : super(locale: locale) {
-    this.currentTime = currentTime ?? DateTime.now();
+    if (currentTime != null) {
+      this.currentTime = currentTime;
+      if (currentTime.isBefore(maxTime)) {
+        this.maxTime = maxTime;
+      }
+      if (currentTime.isAfter(minTime)) {
+        this.minTime = minTime;
+      }
+    } else {
+      var now = DateTime.now();
+      if (this.minTime != null && this.minTime.isAfter(now)) {
+        this.currentTime = this.minTime;
+      } else if (this.maxTime != null && this.maxTime.isBefore(now)) {
+        this.currentTime = this.maxTime;
+      } else {
+        this.currentTime = now;
+      }
+    }
+
+    if (this.minTime != null && this.maxTime != null && this.maxTime.isBefore(this.minTime)) {
+      // invalid
+      this.minTime = null;
+      this.maxTime = null;
+    }
+
     _currentLeftIndex = 0;
     _currentMiddleIndex = this.currentTime.hour;
     _currentRightIndex = this.currentTime.minute;
   }
 
+  bool isAtSameDay(DateTime day1, DateTime day2) {
+    return day1 != null &&
+        day2 != null &&
+        day1.difference(day2).inDays == 0 &&
+        day1.day == day2.day;
+  }
+
+  @override
+  void setLeftIndex(int index) {
+    // TODO: implement setLeftIndex
+    super.setLeftIndex(index);
+
+    DateTime time = currentTime.add(Duration(days: index));
+    if (isAtSameDay(minTime, time)) {
+      var index = min(24 - minTime.hour - 1, _currentMiddleIndex);
+      this.setMiddleIndex(index);
+    } else if (isAtSameDay(maxTime, time)) {
+      var index = min(maxTime.hour, _currentMiddleIndex);
+      this.setMiddleIndex(index);
+    }
+  }
+
+  @override
+  void setMiddleIndex(int index) {
+    // TODO: implement setMiddleIndex
+    super.setMiddleIndex(index);
+    DateTime time = currentTime.add(Duration(days: _currentLeftIndex));
+    if (isAtSameDay(minTime, time) && index == 0) {
+      var maxIndex = 60 - minTime.minute - 1;
+      if (_currentRightIndex > maxIndex) {
+        _currentRightIndex = maxIndex;
+      }
+    } else if (isAtSameDay(maxTime, time) && _currentMiddleIndex == maxTime.hour) {
+      var maxIndex = maxTime.minute;
+      if (_currentRightIndex > maxIndex) {
+        _currentRightIndex = maxIndex;
+      }
+    }
+  }
+
   @override
   String leftStringAtIndex(int index) {
     DateTime time = currentTime.add(Duration(days: index));
+    if (minTime != null && time.isBefore(minTime) && !isAtSameDay(minTime, time)) {
+      return null;
+    } else if (maxTime != null && time.isAfter(maxTime) && !isAtSameDay(maxTime, time)) {
+      return null;
+    }
     return formatDate(time, [ymdw], locale);
   }
 
   @override
   String middleStringAtIndex(int index) {
     if (index >= 0 && index < 24) {
+      DateTime time = currentTime.add(Duration(days: _currentLeftIndex));
+      if (isAtSameDay(minTime, time)) {
+        if (index >= 0 && index < 24 - minTime.hour) {
+          return digits(minTime.hour + index, 2);
+        } else {
+          return null;
+        }
+      } else if (isAtSameDay(maxTime, time)) {
+        if (index >= 0 && index <= maxTime.hour) {
+          return digits(index, 2);
+        } else {
+          return null;
+        }
+      }
       return digits(index, 2);
-    } else {
-      return null;
     }
+
+    return null;
   }
 
   @override
   String rightStringAtIndex(int index) {
     if (index >= 0 && index < 60) {
+      DateTime time = currentTime.add(Duration(days: _currentLeftIndex));
+      if (isAtSameDay(minTime, time) && _currentMiddleIndex == 0) {
+        if (index >= 0 && index < 60 - minTime.minute) {
+          return digits(minTime.minute + index, 2);
+        } else {
+          return null;
+        }
+      } else if (isAtSameDay(maxTime, time) && _currentMiddleIndex >= maxTime.hour) {
+        if (index >= 0 && index <= maxTime.minute) {
+          return digits(index, 2);
+        } else {
+          return null;
+        }
+      }
       return digits(index, 2);
-    } else {
-      return null;
     }
+
+    return null;
   }
 
   @override
   DateTime finalTime() {
     DateTime time = currentTime.add(Duration(days: _currentLeftIndex));
+    var hour = _currentMiddleIndex;
+    var minute = _currentRightIndex;
+    if (isAtSameDay(minTime, time)) {
+      hour += minTime.hour;
+      if (minTime.hour == hour) {
+        minute += minTime.minute;
+      }
+    }
+
     return currentTime.isUtc
-        ? DateTime.utc(time.year, time.month, time.day, _currentMiddleIndex,
-            _currentRightIndex)
-        : DateTime(time.year, time.month, time.day, _currentMiddleIndex,
-            _currentRightIndex);
+        ? DateTime.utc(time.year, time.month, time.day, hour, minute)
+        : DateTime(time.year, time.month, time.day, hour, minute);
   }
 
   @override

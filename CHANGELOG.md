@@ -36,3 +36,4 @@
 ## [1.2.4] - fix format
 ## [1.2.5] - add more languages
 ## [1.2.6] - add more languages
+## [1.2.7] - add max/min time for date time picker

@@ -36,13 +36,9 @@ class DatePicker {
             onConfirm: onConfirm,
             locale: locale,
             theme: theme,
-            barrierLabel:
-                MaterialLocalizations.of(context).modalBarrierDismissLabel,
+            barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
             pickerModel: DatePickerModel(
-                currentTime: currentTime,
-                maxTime: maxTime,
-                minTime: minTime,
-                locale: locale)));
+                currentTime: currentTime, maxTime: maxTime, minTime: minTime, locale: locale)));
   }
 
   ///
@@ -65,10 +61,8 @@ class DatePicker {
             onConfirm: onConfirm,
             locale: locale,
             theme: theme,
-            barrierLabel:
-                MaterialLocalizations.of(context).modalBarrierDismissLabel,
-            pickerModel:
-                TimePickerModel(currentTime: currentTime, locale: locale)));
+            barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
+            pickerModel: TimePickerModel(currentTime: currentTime, locale: locale)));
   }
 
   ///
@@ -77,6 +71,8 @@ class DatePicker {
   static Future showDateTimePicker(
     BuildContext context, {
     bool showTitleActions: true,
+    DateTime minTime,
+    DateTime maxTime,
     DateChangedCallback onChanged,
     DateChangedCallback onConfirm,
     locale: LocaleType.en,
@@ -91,10 +87,9 @@ class DatePicker {
             onConfirm: onConfirm,
             locale: locale,
             theme: theme,
-            barrierLabel:
-                MaterialLocalizations.of(context).modalBarrierDismissLabel,
-            pickerModel:
-                DateTimePickerModel(currentTime: currentTime, locale: locale)));
+            barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
+            pickerModel: DateTimePickerModel(
+                currentTime: currentTime, minTime: minTime, maxTime: maxTime, locale: locale)));
   }
 
   ///
@@ -117,8 +112,7 @@ class DatePicker {
             onConfirm: onConfirm,
             locale: locale,
             theme: theme,
-            barrierLabel:
-                MaterialLocalizations.of(context).modalBarrierDismissLabel,
+            barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
             pickerModel: pickerModel));
   }
 }
@@ -161,14 +155,13 @@ class _DatePickerRoute<T> extends PopupRoute<T> {
   @override
   AnimationController createAnimationController() {
     assert(_animationController == null);
-    _animationController =
-        BottomSheet.createAnimationController(navigator.overlay);
+    _animationController = BottomSheet.createAnimationController(navigator.overlay);
     return _animationController;
   }
 
   @override
-  Widget buildPage(BuildContext context, Animation<double> animation,
-      Animation<double> secondaryAnimation) {
+  Widget buildPage(
+      BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
     Widget bottomSheet = new MediaQuery.removePadding(
       context: context,
       removeTop: true,
@@ -189,11 +182,7 @@ class _DatePickerRoute<T> extends PopupRoute<T> {
 
 class _DatePickerComponent extends StatefulWidget {
   _DatePickerComponent(
-      {Key key,
-      @required this.route,
-      this.onChanged,
-      this.locale,
-      this.pickerModel});
+      {Key key, @required this.route, this.onChanged, this.locale, this.pickerModel});
 
   final DateChangedCallback onChanged;
 
@@ -219,12 +208,12 @@ class _DatePickerState extends State<_DatePickerComponent> {
   }
 
   void refreshScrollOffset() {
-    leftScrollCtrl = new FixedExtentScrollController(
-        initialItem: widget.pickerModel.currentLeftIndex());
-    middleScrollCtrl = new FixedExtentScrollController(
-        initialItem: widget.pickerModel.currentMiddleIndex());
-    rightScrollCtrl = new FixedExtentScrollController(
-        initialItem: widget.pickerModel.currentRightIndex());
+    leftScrollCtrl =
+        new FixedExtentScrollController(initialItem: widget.pickerModel.currentLeftIndex());
+    middleScrollCtrl =
+        new FixedExtentScrollController(initialItem: widget.pickerModel.currentMiddleIndex());
+    rightScrollCtrl =
+        new FixedExtentScrollController(initialItem: widget.pickerModel.currentRightIndex());
   }
 
   @override
@@ -236,8 +225,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
         builder: (BuildContext context, Widget child) {
           return new ClipRect(
             child: new CustomSingleChildLayout(
-              delegate: new _BottomPickerLayout(
-                  widget.route.animation.value, theme,
+              delegate: new _BottomPickerLayout(widget.route.animation.value, theme,
                   showTitleActions: widget.route.showTitleActions),
               child: new GestureDetector(
                 child: Material(
@@ -284,8 +272,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
       child: Container(
           padding: EdgeInsets.all(8.0),
           height: theme.containerHeight,
-          decoration:
-              BoxDecoration(color: theme.backgroundColor ?? Colors.white),
+          decoration: BoxDecoration(color: theme.backgroundColor ?? Colors.white),
           child: NotificationListener(
               onNotification: (ScrollNotification notification) {
                 if (notification.depth == 0 &&
@@ -366,8 +353,8 @@ class _DatePickerState extends State<_DatePickerComponent> {
             style: theme.itemStyle,
           ),
           _renderColumnView(
-              ValueKey(widget.pickerModel.currentMiddleIndex() +
-                  widget.pickerModel.currentLeftIndex()),
+              ValueKey(
+                  widget.pickerModel.currentMiddleIndex() + widget.pickerModel.currentLeftIndex()),
               theme,
               widget.pickerModel.rightStringAtIndex,
               rightScrollCtrl,
@@ -435,8 +422,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
 }
 
 class _BottomPickerLayout extends SingleChildLayoutDelegate {
-  _BottomPickerLayout(this.progress, this.theme,
-      {this.itemCount, this.showTitleActions});
+  _BottomPickerLayout(this.progress, this.theme, {this.itemCount, this.showTitleActions});
 
   final double progress;
   final int itemCount;
