@@ -595,7 +595,7 @@ final _i18nModel = {
   'jp': {
     //Japanese
     'cancel': 'キャンセル',
-    'done': '決定する',
+    'done': '完了',
     'today': '今日',
     'monthShort': [
       '1月',
