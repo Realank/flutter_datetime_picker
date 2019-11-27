@@ -17,7 +17,7 @@ class DatePicker {
   ///
   /// Display date picker bottom sheet.
   ///
-  static Future showDatePicker(
+  static Future<DateTime> showDatePicker(
     BuildContext context, {
     bool showTitleActions: true,
     DateTime minTime,
@@ -27,8 +27,8 @@ class DatePicker {
     locale: LocaleType.en,
     DateTime currentTime,
     DatePickerTheme theme,
-  }) {
-    return Navigator.push(
+  }) async {
+    return await Navigator.push(
         context,
         new _DatePickerRoute(
             showTitleActions: showTitleActions,
@@ -48,7 +48,7 @@ class DatePicker {
   ///
   /// Display time picker bottom sheet.
   ///
-  static Future showTimePicker(
+  static Future<DateTime> showTimePicker(
     BuildContext context, {
     bool showTitleActions: true,
     DateChangedCallback onChanged,
@@ -56,8 +56,8 @@ class DatePicker {
     locale: LocaleType.en,
     DateTime currentTime,
     DatePickerTheme theme,
-  }) {
-    return Navigator.push(
+  }) async {
+    return await Navigator.push(
         context,
         new _DatePickerRoute(
             showTitleActions: showTitleActions,
@@ -74,7 +74,7 @@ class DatePicker {
   ///
   /// Display date&time picker bottom sheet.
   ///
-  static Future showDateTimePicker(
+  static Future<DateTime> showDateTimePicker(
     BuildContext context, {
     bool showTitleActions: true,
     DateTime minTime,
@@ -84,8 +84,8 @@ class DatePicker {
     locale: LocaleType.en,
     DateTime currentTime,
     DatePickerTheme theme,
-  }) {
-    return Navigator.push(
+  }) async {
+    return await Navigator.push(
         context,
         new _DatePickerRoute(
             showTitleActions: showTitleActions,
@@ -105,7 +105,7 @@ class DatePicker {
   ///
   /// Display date picker bottom sheet witch custom picker model.
   ///
-  static Future showPicker(
+  static Future<DateTime> showPicker(
     BuildContext context, {
     bool showTitleActions: true,
     DateChangedCallback onChanged,
@@ -113,8 +113,8 @@ class DatePicker {
     locale: LocaleType.en,
     BasePickerModel pickerModel,
     DatePickerTheme theme,
-  }) {
-    return Navigator.push(
+  }) async {
+    return await Navigator.push(
         context,
         new _DatePickerRoute(
             showTitleActions: showTitleActions,
@@ -418,7 +418,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
                 style: theme.doneStyle,
               ),
               onPressed: () {
-                Navigator.pop(context);
+                Navigator.pop(context, widget.pickerModel.finalTime());
                 if (widget.route.onConfirm != null) {
                   widget.route.onConfirm(widget.pickerModel.finalTime());
                 }
