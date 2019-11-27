@@ -324,7 +324,7 @@ class DatePickerModel extends CommonPickerModel {
   }
 
   String _localeYear() {
-    if (locale == LocaleType.zh) {
+    if (locale == LocaleType.zh || locale == LocaleType.jp) {
       return '年';
     } else if (locale == LocaleType.ko) {
       return '년';
@@ -334,7 +334,7 @@ class DatePickerModel extends CommonPickerModel {
   }
 
   String _localeMonth(int month) {
-    if (locale == LocaleType.zh) {
+    if (locale == LocaleType.zh || locale == LocaleType.jp) {
       return '$month月';
     } else if (locale == LocaleType.ko) {
       return '$month월';
@@ -345,7 +345,7 @@ class DatePickerModel extends CommonPickerModel {
   }
 
   String _localeDay() {
-    if (locale == LocaleType.zh) {
+    if (locale == LocaleType.zh || locale == LocaleType.jp) {
       return '日';
     } else if (locale == LocaleType.ko) {
       return '일';
