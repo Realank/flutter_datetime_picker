@@ -2,6 +2,7 @@ library flutter_datetime_picker;
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'dart:async';
 import 'package:flutter_datetime_picker/src/datetime_picker_theme.dart';
 import 'package:flutter_datetime_picker/src/date_model.dart';
 import 'package:flutter_datetime_picker/src/i18n_model.dart';
@@ -51,6 +52,7 @@ class DatePicker {
   static Future<DateTime> showTimePicker(
     BuildContext context, {
     bool showTitleActions: true,
+    bool showSecondsColumn : true,
     DateChangedCallback onChanged,
     DateChangedCallback onConfirm,
     locale: LocaleType.en,
@@ -68,7 +70,7 @@ class DatePicker {
             barrierLabel:
                 MaterialLocalizations.of(context).modalBarrierDismissLabel,
             pickerModel:
-                TimePickerModel(currentTime: currentTime, locale: locale)));
+                TimePickerModel(currentTime: currentTime, locale: locale, showSecondsColumn: showSecondsColumn)));
   }
 
   ///
@@ -336,50 +338,62 @@ class _DatePickerState extends State<_DatePickerComponent> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          _renderColumnView(
-              ValueKey(widget.pickerModel.currentLeftIndex()),
-              theme,
-              widget.pickerModel.leftStringAtIndex,
-              leftScrollCtrl,
-              widget.pickerModel.layoutProportions()[0], (index) {
-            widget.pickerModel.setLeftIndex(index);
-          }, (index) {
-            setState(() {
-              refreshScrollOffset();
-              _notifyDateChanged();
-            });
-          }),
+          Container(
+            child: widget.pickerModel.layoutProportions()[0] > 0
+                ? _renderColumnView(
+                    ValueKey(widget.pickerModel.currentLeftIndex()),
+                    theme,
+                    widget.pickerModel.leftStringAtIndex,
+                    leftScrollCtrl,
+                    widget.pickerModel.layoutProportions()[0], (index) {
+                    widget.pickerModel.setLeftIndex(index);
+                  }, (index) {
+                    setState(() {
+                      refreshScrollOffset();
+                      _notifyDateChanged();
+                    });
+                  })
+                : null,
+          ),
           Text(
             widget.pickerModel.leftDivider(),
             style: theme.itemStyle,
           ),
-          _renderColumnView(
-              ValueKey(widget.pickerModel.currentLeftIndex()),
-              theme,
-              widget.pickerModel.middleStringAtIndex,
-              middleScrollCtrl,
-              widget.pickerModel.layoutProportions()[1], (index) {
-            widget.pickerModel.setMiddleIndex(index);
-          }, (index) {
-            setState(() {
-              refreshScrollOffset();
-              _notifyDateChanged();
-            });
-          }),
+          Container(
+            child: widget.pickerModel.layoutProportions()[1] > 0
+                ? _renderColumnView(
+                    ValueKey(widget.pickerModel.currentLeftIndex()),
+                    theme,
+                    widget.pickerModel.middleStringAtIndex,
+                    middleScrollCtrl,
+                    widget.pickerModel.layoutProportions()[1], (index) {
+                    widget.pickerModel.setMiddleIndex(index);
+                  }, (index) {
+                    setState(() {
+                      refreshScrollOffset();
+                      _notifyDateChanged();
+                    });
+                  })
+                : null,
+          ),
           Text(
             widget.pickerModel.rightDivider(),
             style: theme.itemStyle,
           ),
-          _renderColumnView(
-              ValueKey(widget.pickerModel.currentMiddleIndex() +
-                  widget.pickerModel.currentLeftIndex()),
-              theme,
-              widget.pickerModel.rightStringAtIndex,
-              rightScrollCtrl,
-              widget.pickerModel.layoutProportions()[2], (index) {
-            widget.pickerModel.setRightIndex(index);
-            _notifyDateChanged();
-          }, null),
+          Container(
+            child: widget.pickerModel.layoutProportions()[2] > 0
+                ? _renderColumnView(
+                    ValueKey(widget.pickerModel.currentMiddleIndex() +
+                        widget.pickerModel.currentLeftIndex()),
+                    theme,
+                    widget.pickerModel.rightStringAtIndex,
+                    rightScrollCtrl,
+                    widget.pickerModel.layoutProportions()[2], (index) {
+                    widget.pickerModel.setRightIndex(index);
+                    _notifyDateChanged();
+                  }, null)
+                : null,
+          ),
         ],
       ),
     );
