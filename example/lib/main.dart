@@ -109,12 +109,12 @@ class HomePage extends StatelessWidget {
                       minTime: DateTime(2018, 3, 5),
                       maxTime: DateTime(2019, 6, 7),
                       theme: DatePickerTheme(
-                          backgroundColor: Colors.blue,
-                          itemStyle: TextStyle(
-                              color: Colors.white, fontWeight: FontWeight.bold),
-                          doneStyle:
-                              TextStyle(color: Colors.white, fontSize: 16)),
-                      onChanged: (date) {
+                        backgroundColor: Colors.blue,
+                        headerColor: Colors.green,
+                        itemStyle: TextStyle(
+                            color: Colors.white, fontWeight: FontWeight.bold),
+                        doneStyle: TextStyle(color: Colors.white, fontSize: 16),
+                      ), onChanged: (date) {
                     print('change $date in time zone ' +
                         date.timeZoneOffset.inHours.toString());
                   }, onConfirm: (date) {

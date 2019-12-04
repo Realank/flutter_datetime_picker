@@ -43,7 +43,10 @@ class DatePicker {
                 currentTime: currentTime,
                 maxTime: maxTime,
                 minTime: minTime,
-                locale: locale)));
+                locale: locale,
+            ),
+        )
+    );
   }
 
   ///
@@ -200,7 +203,8 @@ class _DatePickerComponent extends StatefulWidget {
       @required this.route,
       this.onChanged,
       this.locale,
-      this.pickerModel});
+      this.pickerModel,
+      });
 
   final DateChangedCallback onChanged;
 
@@ -245,7 +249,8 @@ class _DatePickerState extends State<_DatePickerComponent> {
             child: new CustomSingleChildLayout(
               delegate: new _BottomPickerLayout(
                   widget.route.animation.value, theme,
-                  showTitleActions: widget.route.showTitleActions),
+                  showTitleActions: widget.route.showTitleActions,
+              ),
               child: new GestureDetector(
                 child: Material(
                   color: Colors.transparent,
@@ -384,7 +389,8 @@ class _DatePickerState extends State<_DatePickerComponent> {
             child: widget.pickerModel.layoutProportions()[2] > 0
                 ? _renderColumnView(
                     ValueKey(widget.pickerModel.currentMiddleIndex() +
-                        widget.pickerModel.currentLeftIndex()),
+                        widget.pickerModel.currentLeftIndex(),
+                    ),
                     theme,
                     widget.pickerModel.rightStringAtIndex,
                     rightScrollCtrl,
@@ -406,7 +412,9 @@ class _DatePickerState extends State<_DatePickerComponent> {
 
     return Container(
       height: theme.titleHeight,
-      decoration: BoxDecoration(color: theme.backgroundColor ?? Colors.white),
+      decoration: BoxDecoration(
+        color: theme.headerColor ?? theme.backgroundColor ?? Colors.white,
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
