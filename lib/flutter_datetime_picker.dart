@@ -391,7 +391,9 @@ class _DatePickerState extends State<_DatePickerComponent> {
 
     return Container(
       height: theme.titleHeight,
-      decoration: BoxDecoration(color: theme.backgroundColor ?? Colors.white),
+      decoration: BoxDecoration(
+        color: theme.headerColor ?? theme.backgroundColor ?? Colors.white,
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
