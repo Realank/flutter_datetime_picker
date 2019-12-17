@@ -98,6 +98,7 @@ class HomePage extends StatelessWidget {
                       minTime: DateTime(2018, 3, 5),
                       maxTime: DateTime(2019, 6, 7),
                       theme: DatePickerTheme(
+                          headerColor: Colors.orange,
                           backgroundColor: Colors.blue,
                           itemStyle: TextStyle(
                               color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),
