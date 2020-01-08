@@ -10,6 +10,7 @@ enum LocaleType {
   pl,
   pt,
   ko,
+  kk,
   ar,
   tr,
   az,
@@ -475,6 +476,42 @@ final _i18nModel = {
     'day': ['월', '화', '수', '목', '금', '토', '일'],
     'am': '오전',
     'pm': '오후'
+  },
+  'kk': {
+    'cancel': 'Жою',
+    'done': 'Дайын',
+    'today': 'бүгін',
+    'monthShort': [
+      'Қаң',
+      'Ақп',
+      'Нау',
+      'Сәу',
+      'Мам',
+      'Мау',
+      'Шіл',
+      'Там',
+      'Қыр',
+      'Қаз',
+      'Қар',
+      'Жел'
+    ],
+    'monthLong': [
+      'Қаңтар',
+      'Ақпан',
+      'Наурыз',
+      'Сәуір',
+      'Мамыр',
+      'Маусым',
+      'Шілде',
+      'Тамыз',
+      'Қыркүйек',
+      'Қазан',
+      'Қараша',
+      'Желтоқсан'
+    ],
+    'day': ['Дү', 'Сй', 'Ср', 'Бе', 'Жм', 'Сн', 'Же'],
+    'am': 'AM',
+    'pm': 'PM'
   },
   'ar': {
     'cancel': 'إنهاء',
@@ -954,6 +991,8 @@ Map<String, dynamic> i18nObjInLocale(LocaleType type) {
       return _i18nModel['pt'];
     case LocaleType.ko:
       return _i18nModel['ko'];
+    case LocaleType.kk:
+      return _i18nModel['kk'];
     case LocaleType.ar:
       return _i18nModel['ar'];
     case LocaleType.tr:
