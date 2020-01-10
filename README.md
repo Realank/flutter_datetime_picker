@@ -21,6 +21,7 @@ you can choose date / time / date&time in multiple languages:
 - Indonesian(id)
 - Italian(it)
 - Japanese(jp)
+- Kazakh(kk)
 - Korean(ko)
 - Persian(fa)
 - Polish (pl)

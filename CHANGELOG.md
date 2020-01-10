@@ -40,3 +40,4 @@
 ## [1.2.8] - fix bug
 ## [1.3.0] - fix many bugs
 ## [1.3.1] - add header color
+## [1.3.2] - add more languages
