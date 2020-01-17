@@ -913,7 +913,7 @@ final _i18nModel = {
     'pm': 'PM'
   },
   'th': {
-    //Chinese
+    //thai
     'cancel': 'ยกเลิก',
     'done': 'ตกลง',
     'today': 'วันนี้',
