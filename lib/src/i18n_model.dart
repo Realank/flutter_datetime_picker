@@ -913,9 +913,10 @@ final _i18nModel = {
     'pm': 'PM'
   },
   'th': {
+    //Chinese
     'cancel': 'ยกเลิก',
     'done': 'ตกลง',
-    'today': 'วันนีั้',
+    'today': 'วันนี้',
     'monthShort': [
       'ม.ค',
       'ก.พ',
