@@ -12,6 +12,7 @@ you can choose date / time / date&time in multiple languages:
 - Basque(eu)
 - Bengali(bn)
 - Bulgarian(bg)
+- Catalan(cat)
 - Chinese(zh)
 - Danish(da)
 - Dutch(nl)
@@ -28,6 +29,7 @@ you can choose date / time / date&time in multiple languages:
 - Portuguese(pt)
 - Russian(ru)
 - Spanish(es)
+- Thai(th)
 - Turkish(tr)
 - Vietnamese(vi)
 
