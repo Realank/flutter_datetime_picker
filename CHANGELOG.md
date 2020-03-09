@@ -42,3 +42,4 @@
 ## [1.3.1] - add header color
 ## [1.3.2] - add more languages
 ## [1.3.4] - add more languages
+## [1.3.5] - add 12 hour time picker with AM/PM
