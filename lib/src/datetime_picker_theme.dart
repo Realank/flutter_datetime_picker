@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-class DatePickerTheme extends Diagnosticable {
+class DatePickerTheme with DiagnosticableMixin {
   final TextStyle cancelStyle;
   final TextStyle doneStyle;
   final TextStyle itemStyle;
