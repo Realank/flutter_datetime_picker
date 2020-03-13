@@ -43,3 +43,4 @@
 ## [1.3.2] - add more languages
 ## [1.3.4] - add more languages
 ## [1.3.5] - add 12 hour time picker with AM/PM
+## [1.3.6] - fix error with Diagnosticable in newer Flutter versions
