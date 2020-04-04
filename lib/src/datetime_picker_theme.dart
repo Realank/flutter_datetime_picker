@@ -1,7 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-class DatePickerTheme extends Diagnosticable {
+// Migrate DiagnosticableMixin to Diagnosticable until
+// https://github.com/flutter/flutter/pull/51495 makes it into stable (v1.15.21)
+class DatePickerTheme with DiagnosticableMixin {
   final TextStyle cancelStyle;
   final TextStyle doneStyle;
   final TextStyle itemStyle;
