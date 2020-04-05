@@ -12,6 +12,7 @@ export 'package:flutter_datetime_picker/src/date_model.dart';
 export 'package:flutter_datetime_picker/src/i18n_model.dart';
 
 typedef DateChangedCallback(DateTime time);
+typedef DateCancelledCallback();
 typedef String StringAtIndexCallBack(int index);
 
 class DatePicker {
@@ -25,6 +26,7 @@ class DatePicker {
     DateTime maxTime,
     DateChangedCallback onChanged,
     DateChangedCallback onConfirm,
+    DateCancelledCallback onCancel,
     locale: LocaleType.en,
     DateTime currentTime,
     DatePickerTheme theme,
@@ -35,6 +37,7 @@ class DatePicker {
             showTitleActions: showTitleActions,
             onChanged: onChanged,
             onConfirm: onConfirm,
+            onCancel: onCancel,
             locale: locale,
             theme: theme,
             barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
@@ -51,6 +54,7 @@ class DatePicker {
     bool showSecondsColumn: true,
     DateChangedCallback onChanged,
     DateChangedCallback onConfirm,
+    DateCancelledCallback onCancel,
     locale: LocaleType.en,
     DateTime currentTime,
     DatePickerTheme theme,
@@ -61,6 +65,7 @@ class DatePicker {
             showTitleActions: showTitleActions,
             onChanged: onChanged,
             onConfirm: onConfirm,
+            onCancel: onCancel,
             locale: locale,
             theme: theme,
             barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
@@ -76,6 +81,7 @@ class DatePicker {
     bool showTitleActions: true,
     DateChangedCallback onChanged,
     DateChangedCallback onConfirm,
+    DateCancelledCallback onCancel,
     locale: LocaleType.en,
     DateTime currentTime,
     DatePickerTheme theme,
@@ -86,6 +92,7 @@ class DatePicker {
             showTitleActions: showTitleActions,
             onChanged: onChanged,
             onConfirm: onConfirm,
+            onCancel: onCancel,
             locale: locale,
             theme: theme,
             barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
@@ -102,6 +109,7 @@ class DatePicker {
     DateTime maxTime,
     DateChangedCallback onChanged,
     DateChangedCallback onConfirm,
+    DateCancelledCallback onCancel,
     locale: LocaleType.en,
     DateTime currentTime,
     DatePickerTheme theme,
@@ -112,6 +120,7 @@ class DatePicker {
             showTitleActions: showTitleActions,
             onChanged: onChanged,
             onConfirm: onConfirm,
+            onCancel: onCancel,
             locale: locale,
             theme: theme,
             barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
@@ -127,6 +136,7 @@ class DatePicker {
     bool showTitleActions: true,
     DateChangedCallback onChanged,
     DateChangedCallback onConfirm,
+    DateCancelledCallback onCancel,
     locale: LocaleType.en,
     BasePickerModel pickerModel,
     DatePickerTheme theme,
@@ -137,6 +147,7 @@ class DatePicker {
             showTitleActions: showTitleActions,
             onChanged: onChanged,
             onConfirm: onConfirm,
+            onCancel: onCancel,
             locale: locale,
             theme: theme,
             barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
@@ -149,6 +160,7 @@ class _DatePickerRoute<T> extends PopupRoute<T> {
     this.showTitleActions,
     this.onChanged,
     this.onConfirm,
+    this.onCancel,
     theme,
     this.barrierLabel,
     this.locale,
@@ -161,6 +173,7 @@ class _DatePickerRoute<T> extends PopupRoute<T> {
   final bool showTitleActions;
   final DateChangedCallback onChanged;
   final DateChangedCallback onConfirm;
+  final DateCancelledCallback onCancel;
   final DatePickerTheme theme;
   final LocaleType locale;
   final BasePickerModel pickerModel;
@@ -430,7 +443,12 @@ class _DatePickerState extends State<_DatePickerComponent> {
                 '$cancel',
                 style: theme.cancelStyle,
               ),
-              onPressed: () => Navigator.pop(context),
+              onPressed: () {
+                Navigator.pop(context);
+                if (widget.route.onCancel != null) {
+                  widget.route.onCancel();
+                }
+              },
             ),
           ),
           Container(
