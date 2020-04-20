@@ -27,7 +27,8 @@ enum LocaleType {
   cat,
   th,
   si,
-  no
+  no,
+  sq
 }
 
 final _i18nModel = {
@@ -1024,6 +1025,42 @@ final _i18nModel = {
     'am': '',
     'pm': ''
   },
+  'sq': {
+    'cancel': 'Anulo',
+    'done': 'Perfundo',
+    'today': 'Sot',
+    'monthShort': [
+      'Jan',
+      'Shk',
+      'Mar',
+      'Pri',
+      'Maj',
+      'Qer',
+      'Kor',
+      'Gus',
+      'Sht',
+      'Tet',
+      'Nen',
+      'Dhj'
+    ],
+    'monthLong': [
+      'Janar',
+      'Shkurt',
+      'Mars',
+      'Prill',
+      'Maj',
+      'Qershor',
+      'Korrik',
+      'Gusht',
+      'Shtator',
+      'Tetor',
+      'Nentor',
+      'Dhjetor'
+    ],
+    'day': ['Hen', 'Mar', 'Mer', 'Enj', 'Pre', 'Sht', 'Die'],
+    'am': 'PD',
+    'pm': 'MD'
+  }
 };
 //get international object
 Map<String, dynamic> i18nObjInLocale(LocaleType type) {
@@ -1084,6 +1121,8 @@ Map<String, dynamic> i18nObjInLocale(LocaleType type) {
       return _i18nModel['si'];
     case LocaleType.no:
       return _i18nModel['no'];
+    case LocaleType.sq:
+      return _i18nModel['sq'];
     default:
       return _i18nModel['en'];
   }
