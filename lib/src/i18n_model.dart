@@ -28,7 +28,8 @@ enum LocaleType {
   th,
   si,
   no,
-  sq
+  sq,
+  sv
 }
 
 final _i18nModel = {
@@ -109,6 +110,9 @@ final _i18nModel = {
     'done': 'تایید',
     'today': 'امروز',
     'monthShort': [
+      'دی',
+      'بهمن',
+      'اسفند',
       'فروردین',
       'اردیبهشت',
       'خرداد',
@@ -118,11 +122,11 @@ final _i18nModel = {
       'مهر',
       'آبان',
       'آذر',
-      'دی',
-      'بهمن',
-      'اسفند'
     ],
     'monthLong': [
+      'دی',
+      'بهمن',
+      'اسفند',
       'فروردین',
       'اردیبهشت',
       'خرداد',
@@ -132,9 +136,6 @@ final _i18nModel = {
       'مهر',
       'آبان',
       'آذر',
-      'دی',
-      'بهمن',
-      'اسفند'
     ],
     'day': ['دوشنبه', 'سه شنبه', 'چهارشنبه', 'پنج شنبه', 'جمعه', 'شنبه', 'یکشنبه'],
     'am': 'صبح',
@@ -1060,6 +1061,42 @@ final _i18nModel = {
     'day': ['Hen', 'Mar', 'Mer', 'Enj', 'Pre', 'Sht', 'Die'],
     'am': 'PD',
     'pm': 'MD'
+  },
+  'sv': {
+    'cancel': 'Avbryt',
+    'done': 'Klar',
+    'today': 'I dag',
+    'monthShort': [
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'Maj',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Okt',
+      'Nov',
+      'Dec'
+    ],
+    'monthLong': [
+      'Januari',
+      'Februari',
+      'Mars',
+      'April',
+      'Maj',
+      'Juni',
+      'Juli',
+      'Augusti',
+      'September',
+      'Oktober',
+      'November',
+      'December'
+    ],
+    'day': ['Mån', 'Tis', 'Ons', 'Tor', 'Fre', 'Lör', 'Sön'],
+    'am': 'AM',
+    'pm': 'PM'
   }
 };
 //get international object
@@ -1123,6 +1160,8 @@ Map<String, dynamic> i18nObjInLocale(LocaleType type) {
       return _i18nModel['no'];
     case LocaleType.sq:
       return _i18nModel['sq'];
+    case LocaleType.sv:
+      return _i18nModel['sv'];
     default:
       return _i18nModel['en'];
   }

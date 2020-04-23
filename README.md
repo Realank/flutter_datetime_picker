@@ -30,6 +30,7 @@ you can choose date / time / date&time in multiple languages:
 - Portuguese(pt)
 - Russian(ru)
 - Spanish(es)
+- Swedish(sv)
 - Thai(th)
 - Turkish(tr)
 - Vietnamese(vi)
