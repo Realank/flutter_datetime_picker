@@ -31,3 +31,18 @@
 ## [1.1.9] - add German
 ## [1.2.0] - add support for time zone
 ## [1.2.1] - add more languages
+## [1.2.2] - add customize example
+## [1.2.3] - fix confirm pop issue
+## [1.2.4] - fix format
+## [1.2.5] - add more languages
+## [1.2.6] - add more languages
+## [1.2.7] - add max/min time for date time picker
+## [1.2.8] - fix bug
+## [1.3.0] - fix many bugs
+## [1.3.1] - add header color
+## [1.3.2] - add more languages
+## [1.3.4] - add more languages
+## [1.3.5] - add 12 hour time picker with AM/PM
+## [1.3.6] - fix error with Diagnosticable in newer Flutter versions
+## [1.3.7] - fix some issues
+## [1.3.8] - add Swedish language and fix issues
