@@ -107,6 +107,7 @@ class DatePicker {
     bool showTitleActions: true,
     DateTime minTime,
     DateTime maxTime,
+    int minScale,
     DateChangedCallback onChanged,
     DateChangedCallback onConfirm,
     DateCancelledCallback onCancel,
@@ -125,7 +126,7 @@ class DatePicker {
             theme: theme,
             barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
             pickerModel: DateTimePickerModel(
-                currentTime: currentTime, minTime: minTime, maxTime: maxTime, locale: locale)));
+                currentTime: currentTime, minTime: minTime, maxTime: maxTime, minScale: minScale, locale: locale)));
   }
 
   ///
