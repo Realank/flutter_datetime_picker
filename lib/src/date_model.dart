@@ -626,9 +626,10 @@ class DateTimePickerModel extends CommonPickerModel {
     if (newIndex >= 0 && newIndex < 60) {
       DateTime time = currentTime.add(Duration(days: _currentLeftIndex));
       if (isAtSameDay(minTime, time) && _currentMiddleIndex == 0) {
-        var currMin = (minTime.minute-(minTime.minute% this.minScale)); //rounded %5
-        if (newIndex >= 0 && newIndex < 60 - currMin) {
-          return digits( currMin + newIndex, 2);
+        var currMin = (minTime.minute-(minTime.minute%this.minScale)); //rounded minScale
+        newIndex=newIndex+currMin;
+        if (newIndex > currMin && newIndex < 60 ) {
+          return digits(newIndex, 2);
         } else {
           return null;
         }
