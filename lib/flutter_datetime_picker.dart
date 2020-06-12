@@ -430,6 +430,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
       height: theme.titleHeight,
       decoration: theme.headerDecoration ?? theme.headerDecoration,
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Container(
@@ -449,6 +450,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
               },
             ),
           ),
+          theme.title ?? theme.title,
           Container(
             height: theme.titleHeight,
             child: CupertinoButton(

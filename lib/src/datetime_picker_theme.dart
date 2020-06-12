@@ -11,6 +11,7 @@ class DatePickerTheme with DiagnosticableMixin {
   final Color headerColor;
   final Color itemViewBgColor;
   final BoxDecoration headerDecoration;
+  final Widget title;
 
   final double containerHeight;
   final double titleHeight;
@@ -23,6 +24,7 @@ class DatePickerTheme with DiagnosticableMixin {
     this.backgroundColor = Colors.white,
     this.itemViewBgColor = Colors.white,
     this.headerDecoration = const BoxDecoration(color: Colors.white),
+    this.title = const Text(''),
     this.headerColor,
     this.containerHeight = 210.0,
     this.titleHeight = 44.0,
