@@ -45,6 +45,32 @@ class DatePicker {
                 currentTime: currentTime, maxTime: maxTime, minTime: minTime, locale: locale)));
   }
 
+  static Future<DateTime> showYearMonthPicker(
+    BuildContext context, {
+    bool showTitleActions: true,
+    DateTime minTime,
+    DateTime maxTime,
+    DateChangedCallback onChanged,
+    DateChangedCallback onConfirm,
+    DateCancelledCallback onCancel,
+    locale: LocaleType.en,
+    DateTime currentTime,
+    DatePickerTheme theme,
+  }) async {
+    return await Navigator.push(
+        context,
+        new _DatePickerRoute(
+            showTitleActions: showTitleActions,
+            onChanged: onChanged,
+            onConfirm: onConfirm,
+            onCancel: onCancel,
+            locale: locale,
+            theme: theme,
+            barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
+            pickerModel: YearMonthModel(
+                currentTime: currentTime, maxTime: maxTime, minTime: minTime, locale: locale)));
+  }
+
   ///
   /// Display time picker bottom sheet.
   ///
