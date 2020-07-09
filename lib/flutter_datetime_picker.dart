@@ -270,8 +270,11 @@ class _DatePickerState extends State<_DatePickerComponent> {
               delegate: _BottomPickerLayout(widget.route.animation.value, theme,
                   showTitleActions: widget.route.showTitleActions, bottomPadding: bottomPadding),
               child: GestureDetector(
-                child: Material(
-                  color: theme.backgroundColor ?? Colors.white,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: theme.backgroundColor ?? Colors.white,
+                    gradient: theme.backgroundGradient,
+                  ),
                   child: _renderPickerView(theme),
                 ),
               ),
@@ -356,7 +359,10 @@ class _DatePickerState extends State<_DatePickerComponent> {
 
   Widget _renderItemView(DatePickerTheme theme) {
     return Container(
-      color: theme.backgroundColor ?? Colors.white,
+      decoration: BoxDecoration(
+        color: theme.backgroundColor ?? Colors.white,
+        gradient: theme.backgroundGradient,
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
@@ -430,6 +436,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
       height: theme.titleHeight,
       decoration: BoxDecoration(
         color: theme.headerColor ?? theme.backgroundColor ?? Colors.white,
+        gradient: theme.headerGradient
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
