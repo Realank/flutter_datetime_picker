@@ -317,7 +317,9 @@ class _DatePickerState extends State<_DatePickerComponent> {
       child: Container(
           padding: EdgeInsets.all(8.0),
           height: theme.containerHeight,
-          decoration: BoxDecoration(color: theme.backgroundColor ?? Colors.white),
+          decoration: BoxDecoration(
+            color: theme.backgroundGradient == null ? theme.backgroundColor ?? Colors.white : Colors.transparent,
+          ),
           child: NotificationListener(
               onNotification: (ScrollNotification notification) {
                 if (notification.depth == 0 &&
@@ -332,7 +334,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
               },
               child: CupertinoPicker.builder(
                   key: key,
-                  backgroundColor: theme.backgroundColor ?? Colors.white,
+                  backgroundColor: theme.backgroundGradient == null ? theme.backgroundColor ?? Colors.white : null,
                   scrollController: scrollController,
                   itemExtent: theme.itemHeight,
                   onSelectedItemChanged: (int index) {
