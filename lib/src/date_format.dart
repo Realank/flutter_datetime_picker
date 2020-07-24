@@ -243,6 +243,8 @@ String formatDate(DateTime date, List<String> formats, LocaleType locale) {
         return formatDate(date, [mm, '月', dd, '日', D], locale);
       } else if (locale == LocaleType.si) {
         return formatDate(date, [D, ', ', dd, '. ', M, '.'], locale);
+      } else if (locale == LocaleType.gr) {
+        return formatDate(date, [D, ' ', dd, ' ', M], locale);
       } else {
         return formatDate(date, [D, ' ', M, ' ', dd], locale);
       }
@@ -261,6 +263,8 @@ String formatDate(DateTime date, List<String> formats, LocaleType locale) {
         return formatDate(date, [yyyy, '年', mm, '月', dd, '日', D], locale);
       } else if (locale == LocaleType.si) {
         return formatDate(date, [D, ', ', dd, '. ', M, '. ', yyyy], locale);
+      } else if (locale == LocaleType.gr) {
+        return formatDate(date, [D, ' ', dd, ' ', M, ' ', yyyy], locale);
       } else {
         return formatDate(date, [D, ' ', M, ' ', dd, ', ', yyyy], locale);
       }
