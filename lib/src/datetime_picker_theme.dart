@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 
 // Migrate DiagnosticableMixin to Diagnosticable until
 // https://github.com/flutter/flutter/pull/51495 makes it into stable (v1.15.21)
-class DatePickerTheme with DiagnosticableMixin {
+class DatePickerTheme with Diagnosticable {
   final TextStyle cancelStyle;
   final TextStyle doneStyle;
   final TextStyle itemStyle;
   final Color backgroundColor;
   final Color headerColor;
+  final Gradient headerGradient;
+  final Gradient backgroundGradient;
 
   final double containerHeight;
   final double titleHeight;
@@ -19,7 +21,9 @@ class DatePickerTheme with DiagnosticableMixin {
     this.doneStyle = const TextStyle(color: Colors.blue, fontSize: 16),
     this.itemStyle = const TextStyle(color: Color(0xFF000046), fontSize: 18),
     this.backgroundColor = Colors.white,
+    this.backgroundGradient,
     this.headerColor,
+    this.headerGradient,
     this.containerHeight = 210.0,
     this.titleHeight = 44.0,
     this.itemHeight = 36.0,

@@ -270,8 +270,11 @@ class _DatePickerState extends State<_DatePickerComponent> {
               delegate: _BottomPickerLayout(widget.route.animation.value, theme,
                   showTitleActions: widget.route.showTitleActions, bottomPadding: bottomPadding),
               child: GestureDetector(
-                child: Material(
-                  color: theme.backgroundColor ?? Colors.white,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: theme.backgroundColor ?? Colors.white,
+                    gradient: theme.backgroundGradient,
+                  ),
                   child: _renderPickerView(theme),
                 ),
               ),
@@ -314,7 +317,9 @@ class _DatePickerState extends State<_DatePickerComponent> {
       child: Container(
           padding: EdgeInsets.all(8.0),
           height: theme.containerHeight,
-          decoration: BoxDecoration(color: theme.backgroundColor ?? Colors.white),
+          decoration: BoxDecoration(
+            color: theme.backgroundGradient == null ? theme.backgroundColor ?? Colors.white : Colors.transparent,
+          ),
           child: NotificationListener(
               onNotification: (ScrollNotification notification) {
                 if (notification.depth == 0 &&
@@ -329,7 +334,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
               },
               child: CupertinoPicker.builder(
                   key: key,
-                  backgroundColor: theme.backgroundColor ?? Colors.white,
+                  backgroundColor: theme.backgroundGradient == null ? theme.backgroundColor ?? Colors.white : null,
                   scrollController: scrollController,
                   itemExtent: theme.itemHeight,
                   onSelectedItemChanged: (int index) {
@@ -356,7 +361,10 @@ class _DatePickerState extends State<_DatePickerComponent> {
 
   Widget _renderItemView(DatePickerTheme theme) {
     return Container(
-      color: theme.backgroundColor ?? Colors.white,
+      decoration: BoxDecoration(
+        color: theme.backgroundColor ?? Colors.white,
+        gradient: theme.backgroundGradient,
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
@@ -430,6 +438,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
       height: theme.titleHeight,
       decoration: BoxDecoration(
         color: theme.headerColor ?? theme.backgroundColor ?? Colors.white,
+        gradient: theme.headerGradient
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
