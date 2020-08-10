@@ -46,3 +46,4 @@
 ## [1.3.6] - fix error with Diagnosticable in newer Flutter versions
 ## [1.3.7] - fix some issues
 ## [1.3.8] - add Swedish language and fix issues
+## [1.4.0] - support flutter 1.2.0
