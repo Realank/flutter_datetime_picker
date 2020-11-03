@@ -47,3 +47,4 @@
 ## [1.3.7] - fix some issues
 ## [1.3.8] - add Swedish language and fix issues
 ## [1.4.0] - support flutter 1.2.0
+## [1.4.1] - remove shadowThemeOnly
