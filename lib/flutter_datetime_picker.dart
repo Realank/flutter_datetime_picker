@@ -22,6 +22,7 @@ class DatePicker {
   static Future<DateTime> showDatePicker(
     BuildContext context, {
     bool showTitleActions: true,
+    bool showDay,
     DateTime minTime,
     DateTime maxTime,
     DateChangedCallback onChanged,
@@ -35,6 +36,7 @@ class DatePicker {
         context,
         new _DatePickerRoute(
             showTitleActions: showTitleActions,
+            showDay: showDay,
             onChanged: onChanged,
             onConfirm: onConfirm,
             onCancel: onCancel,
@@ -158,6 +160,7 @@ class DatePicker {
 class _DatePickerRoute<T> extends PopupRoute<T> {
   _DatePickerRoute({
     this.showTitleActions,
+    showDay,
     this.onChanged,
     this.onConfirm,
     this.onCancel,
@@ -168,9 +171,11 @@ class _DatePickerRoute<T> extends PopupRoute<T> {
     pickerModel,
   })  : this.pickerModel = pickerModel ?? DatePickerModel(),
         this.theme = theme ?? DatePickerTheme(),
+        this.showDay = showDay ?? true,
         super(settings: settings);
 
   final bool showTitleActions;
+  final bool showDay;
   final DateChangedCallback onChanged;
   final DateChangedCallback onConfirm;
   final DateCancelledCallback onCancel;
@@ -398,10 +403,12 @@ class _DatePickerState extends State<_DatePickerComponent> {
                   })
                 : null,
           ),
+          (widget.route.showDay) ?
           Text(
             widget.pickerModel.rightDivider(),
             style: theme.itemStyle,
-          ),
+          ) : Container(),
+          (widget.route.showDay) ?
           Container(
             child: widget.pickerModel.layoutProportions()[2] > 0
                 ? _renderColumnView(
@@ -415,7 +422,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
                     _notifyDateChanged();
                   }, null)
                 : null,
-          ),
+          ) : Container(),
         ],
       ),
     );
