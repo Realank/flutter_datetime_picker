@@ -45,6 +45,32 @@ class DatePicker {
                 currentTime: currentTime, maxTime: maxTime, minTime: minTime, locale: locale)));
   }
 
+  static Future<DateTime> showYearMonthPicker(
+    BuildContext context, {
+    bool showTitleActions: true,
+    DateTime minTime,
+    DateTime maxTime,
+    DateChangedCallback onChanged,
+    DateChangedCallback onConfirm,
+    DateCancelledCallback onCancel,
+    locale: LocaleType.en,
+    DateTime currentTime,
+    DatePickerTheme theme,
+  }) async {
+    return await Navigator.push(
+        context,
+        new _DatePickerRoute(
+            showTitleActions: showTitleActions,
+            onChanged: onChanged,
+            onConfirm: onConfirm,
+            onCancel: onCancel,
+            locale: locale,
+            theme: theme,
+            barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
+            pickerModel: YearMonthModel(
+                currentTime: currentTime, maxTime: maxTime, minTime: minTime, locale: locale)));
+  }
+
   ///
   /// Display time picker bottom sheet.
   ///
@@ -356,7 +382,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
 
   Widget _renderItemView(DatePickerTheme theme) {
     return Container(
-      color: theme.backgroundColor ?? Colors.white,
+      color: theme.itemViewBgColor,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
@@ -428,10 +454,9 @@ class _DatePickerState extends State<_DatePickerComponent> {
 
     return Container(
       height: theme.titleHeight,
-      decoration: BoxDecoration(
-        color: theme.headerColor ?? theme.backgroundColor ?? Colors.white,
-      ),
+      decoration: theme.headerDecoration ?? theme.headerDecoration,
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Container(
@@ -451,6 +476,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
               },
             ),
           ),
+          theme.title ?? theme.title,
           Container(
             height: theme.titleHeight,
             child: CupertinoButton(
