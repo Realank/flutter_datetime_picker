@@ -959,7 +959,7 @@ final _i18nModel = {
       'Setembre',
       'Octubre',
       'Novembre',
-      'Decembre'
+      'Desembre'
     ],
     'day': ['Dl', 'Dt', 'Dc', 'Dj', 'Dv', 'Ds', 'Dg'],
     'am': 'AM',
