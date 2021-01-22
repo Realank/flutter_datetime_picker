@@ -283,10 +283,12 @@ String formatDate(DateTime date, List<String> formats, LocaleType locale) {
     } else if (format == m) {
       sb.write(date.month);
     } else if (format == MM) {
-      String monthLong = i18nObjInLocale(locale)['monthLong'][date.month - 1];
+      final monthLong =
+          i18nObjInLocaleLookup(locale, 'monthLong', date.month - 1);
       sb.write(monthLong);
     } else if (format == M) {
-      String monthShort = i18nObjInLocale(locale)['monthShort'][date.month - 1];
+      final monthShort =
+          i18nObjInLocaleLookup(locale, 'monthShort', date.month - 1);
       sb.write(monthShort);
     } else if (format == dd) {
       sb.write(digits(date.day, 2));
@@ -299,7 +301,7 @@ String formatDate(DateTime date, List<String> formats, LocaleType locale) {
     } else if (format == WW) {
       sb.write(digits((dayInYear(date) + 7) ~/ 7, 2));
     } else if (format == D) {
-      String day = i18nObjInLocale(locale)['day'][date.weekday - 1];
+      String day = i18nObjInLocaleLookup(locale, 'day', date.weekday - 1);
       if (locale == LocaleType.ko) {
         day = "($day)";
       }
