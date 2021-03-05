@@ -457,9 +457,9 @@ class Time12hPickerModel extends CommonPickerModel {
   @override
   String rightStringAtIndex(int index) {
     if (index == 0) {
-      return "AM";
+      return  i18nObjInLocale(this.locale)["am"];
     } else if (index == 1) {
-      return "PM";
+      return i18nObjInLocale(this.locale)["pm"];
     } else {
       return null;
     }
