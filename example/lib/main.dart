@@ -91,7 +91,7 @@ class HomePage extends StatelessWidget {
       body: Center(
         child: Column(
           children: <Widget>[
-            FlatButton(
+            TextButton(
                 onPressed: () {
                   DatePicker.showDatePicker(context,
                       showTitleActions: true,
@@ -113,7 +113,7 @@ class HomePage extends StatelessWidget {
                   'show date picker(custom theme &date time range)',
                   style: TextStyle(color: Colors.blue),
                 )),
-            FlatButton(
+            TextButton(
                 onPressed: () {
                   DatePicker.showTimePicker(context, showTitleActions: true, onChanged: (date) {
                     print('change $date in time zone ' + date.timeZoneOffset.inHours.toString());
@@ -125,7 +125,7 @@ class HomePage extends StatelessWidget {
                   'show time picker',
                   style: TextStyle(color: Colors.blue),
                 )),
-            FlatButton(
+            TextButton(
                 onPressed: () {
                   DatePicker.showTime12hPicker(context, showTitleActions: true, onChanged: (date) {
                     print('change $date in time zone ' + date.timeZoneOffset.inHours.toString());
@@ -137,7 +137,7 @@ class HomePage extends StatelessWidget {
                   'show 12H time picker with AM/PM',
                   style: TextStyle(color: Colors.blue),
                 )),
-            FlatButton(
+            TextButton(
                 onPressed: () {
                   DatePicker.showDateTimePicker(context,
                       showTitleActions: true,
@@ -152,7 +152,7 @@ class HomePage extends StatelessWidget {
                   'show date time picker (Chinese)',
                   style: TextStyle(color: Colors.blue),
                 )),
-            FlatButton(
+            TextButton(
                 onPressed: () {
                   DatePicker.showDateTimePicker(context, showTitleActions: true, onChanged: (date) {
                     print('change $date in time zone ' + date.timeZoneOffset.inHours.toString());
@@ -164,7 +164,7 @@ class HomePage extends StatelessWidget {
                   'show date time picker (English-America)',
                   style: TextStyle(color: Colors.blue),
                 )),
-            FlatButton(
+            TextButton(
                 onPressed: () {
                   DatePicker.showDateTimePicker(context, showTitleActions: true, onChanged: (date) {
                     print('change $date in time zone ' + date.timeZoneOffset.inHours.toString());
@@ -176,7 +176,7 @@ class HomePage extends StatelessWidget {
                   'show date time picker (Dutch)',
                   style: TextStyle(color: Colors.blue),
                 )),
-            FlatButton(
+            TextButton(
                 onPressed: () {
                   DatePicker.showDateTimePicker(context, showTitleActions: true, onChanged: (date) {
                     print('change $date in time zone ' + date.timeZoneOffset.inHours.toString());
@@ -188,7 +188,7 @@ class HomePage extends StatelessWidget {
                   'show date time picker (Russian)',
                   style: TextStyle(color: Colors.blue),
                 )),
-            FlatButton(
+            TextButton(
                 onPressed: () {
                   DatePicker.showDateTimePicker(context, showTitleActions: true, onChanged: (date) {
                     print('change $date in time zone ' + date.timeZoneOffset.inHours.toString());
@@ -200,7 +200,7 @@ class HomePage extends StatelessWidget {
                   'show date time picker in UTC (German)',
                   style: TextStyle(color: Colors.blue),
                 )),
-            FlatButton(
+            TextButton(
                 onPressed: () {
                   DatePicker.showPicker(context, showTitleActions: true, onChanged: (date) {
                     print('change $date in time zone ' + date.timeZoneOffset.inHours.toString());

@@ -57,7 +57,7 @@ International:
 ## Usage
 
 ```
-FlatButton(
+TextButton(
     onPressed: () {
         DatePicker.showDatePicker(context,
                               showTitleActions: true,
