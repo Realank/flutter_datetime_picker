@@ -19,7 +19,7 @@ class DatePicker {
   ///
   /// Display date picker bottom sheet.
   ///
-  static Future<DateTime> showDatePicker(
+  static Future<DateTime?> showDatePicker(
     BuildContext context, {
     bool showTitleActions: true,
     DateTime? minTime,
@@ -55,7 +55,7 @@ class DatePicker {
   ///
   /// Display time picker bottom sheet.
   ///
-  static Future<DateTime> showTimePicker(
+  static Future<DateTime?> showTimePicker(
     BuildContext context, {
     bool showTitleActions: true,
     bool showSecondsColumn: true,
@@ -89,7 +89,7 @@ class DatePicker {
   ///
   /// Display time picker bottom sheet with AM/PM.
   ///
-  static Future<DateTime> showTime12hPicker(
+  static Future<DateTime?> showTime12hPicker(
     BuildContext context, {
     bool showTitleActions: true,
     DateChangedCallback? onChanged,
@@ -121,7 +121,7 @@ class DatePicker {
   ///
   /// Display date&time picker bottom sheet.
   ///
-  static Future<DateTime> showDateTimePicker(
+  static Future<DateTime?> showDateTimePicker(
     BuildContext context, {
     bool showTitleActions: true,
     DateTime? minTime,
@@ -157,7 +157,7 @@ class DatePicker {
   ///
   /// Display date picker bottom sheet witch custom picker model.
   ///
-  static Future<DateTime> showPicker(
+  static Future<DateTime?> showPicker(
     BuildContext context, {
     bool showTitleActions: true,
     DateChangedCallback? onChanged,
