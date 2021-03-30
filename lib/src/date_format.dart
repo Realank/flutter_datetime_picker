@@ -220,14 +220,14 @@ const String am = 'am';
 const String z = 'z';
 const String Z = 'Z';
 
-String formatDate(DateTime date, List<String> formats, LocaleType locale) {
+String? formatDate(DateTime date, List<String> formats, LocaleType locale) {
   if (formats.first == ymdw) {
     final now = DateTime.now();
     if (date.year == now.year &&
         date.month == now.month &&
         date.day == now.day) {
       //today
-      return i18nObjInLocale(locale)['today'];
+      return i18nObjInLocale(locale)!['today'] as String?;
     } else if (date.year == now.year) {
       if (locale == LocaleType.zh) {
         return formatDate(date, [mm, '月', dd, '日 ', D], locale);
@@ -316,8 +316,8 @@ String formatDate(DateTime date, List<String> formats, LocaleType locale) {
       sb.write(date.hour % 12);
     } else if (format == am) {
       sb.write(date.hour < 12
-          ? i18nObjInLocale(locale)['am']
-          : i18nObjInLocale(locale)['pm']);
+          ? i18nObjInLocale(locale)!['am']
+          : i18nObjInLocale(locale)!['pm']);
     } else if (format == nn) {
       sb.write(digits(date.minute, 2));
     } else if (format == n) {

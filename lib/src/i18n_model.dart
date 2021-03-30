@@ -1307,12 +1307,12 @@ final _i18nModel = <LocaleType, Map<String, Object>>{
 };
 
 /// Get international object for [localeType]
-Map<String, Object> i18nObjInLocale(LocaleType localeType) =>
-    _i18nModel[localeType] ?? _i18nModel[LocaleType.en];
+Map<String, Object>? i18nObjInLocale(LocaleType? localeType) =>
+    _i18nModel[localeType!] ?? _i18nModel[LocaleType.en];
 
 /// Get international lookup for a [localeType], [key] and [index].
 String i18nObjInLocaleLookup(LocaleType localeType, String key, int index) {
-  final i18n = i18nObjInLocale(localeType);
+  final i18n = i18nObjInLocale(localeType)!;
   final i18nKey = i18n[key] as List<String>;
   return i18nKey[index];
 }
