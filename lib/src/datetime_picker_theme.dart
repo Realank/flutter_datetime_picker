@@ -19,7 +19,7 @@ class DatePickerTheme with DiagnosticableTreeMixin {
     this.doneStyle = const TextStyle(color: Colors.blue, fontSize: 16),
     this.itemStyle = const TextStyle(color: Color(0xFF000046), fontSize: 18),
     this.backgroundColor = Colors.white,
-    this.headerColor,
+    required this.headerColor,
     this.containerHeight = 210.0,
     this.titleHeight = 44.0,
     this.itemHeight = 36.0,

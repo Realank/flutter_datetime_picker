@@ -76,20 +76,7 @@ final _i18nModel = <LocaleType, Map<String, Object>>{
     'cancel': 'Cancel',
     'done': 'Done',
     'today': 'Today',
-    'monthShort': [
-      'Jan',
-      'Feb',
-      'Mar',
-      'Apr',
-      'May',
-      'Jun',
-      'Jul',
-      'Aug',
-      'Sep',
-      'Oct',
-      'Nov',
-      'Dec'
-    ],
+    'monthShort': ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
     'monthLong': [
       'January',
       'February',
@@ -176,15 +163,7 @@ final _i18nModel = <LocaleType, Map<String, Object>>{
       'آبان',
       'آذر',
     ],
-    'day': [
-      'دوشنبه',
-      'سه شنبه',
-      'چهارشنبه',
-      'پنج شنبه',
-      'جمعه',
-      'شنبه',
-      'یکشنبه'
-    ],
+    'day': ['دوشنبه', 'سه شنبه', 'چهارشنبه', 'پنج شنبه', 'جمعه', 'شنبه', 'یکشنبه'],
     'am': 'صبح',
     'pm': 'عصر'
   },
@@ -193,34 +172,8 @@ final _i18nModel = <LocaleType, Map<String, Object>>{
     'cancel': '取消',
     'done': '确定',
     'today': '今天',
-    'monthShort': [
-      '一月',
-      '二月',
-      '三月',
-      '四月',
-      '五月',
-      '六月',
-      '七月',
-      '八月',
-      '九月',
-      '十月',
-      '十一月',
-      '十二月'
-    ],
-    'monthLong': [
-      '一月',
-      '二月',
-      '三月',
-      '四月',
-      '五月',
-      '六月',
-      '七月',
-      '八月',
-      '九月',
-      '十月',
-      '十一月',
-      '十二月'
-    ],
+    'monthShort': ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
+    'monthLong': ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
     'day': ['星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期日'],
     'am': '上午',
     'pm': '下午'
@@ -230,34 +183,8 @@ final _i18nModel = <LocaleType, Map<String, Object>>{
     'cancel': '取消',
     'done': '確定',
     'today': '今天',
-    'monthShort': [
-      '一月',
-      '二月',
-      '三月',
-      '四月',
-      '五月',
-      '六月',
-      '七月',
-      '八月',
-      '九月',
-      '十月',
-      '十一月',
-      '十二月'
-    ],
-    'monthLong': [
-      '一月',
-      '二月',
-      '三月',
-      '四月',
-      '五月',
-      '六月',
-      '七月',
-      '八月',
-      '九月',
-      '十月',
-      '十一月',
-      '十二月'
-    ],
+    'monthShort': ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
+    'monthLong': ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
     'day': ['星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期日'],
     'am': '上午',
     'pm': '下午'
@@ -311,20 +238,7 @@ final _i18nModel = <LocaleType, Map<String, Object>>{
     'cancel': 'Отмена',
     'done': 'Готово',
     'today': 'Сегодня',
-    'monthShort': [
-      'Янв',
-      'Фев',
-      'Март',
-      'Апр',
-      'Май',
-      'Июнь',
-      'Июль',
-      'Авг',
-      'Сен',
-      'Окт',
-      'Ноя',
-      'Дек'
-    ],
+    'monthShort': ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек'],
     'monthLong': [
       'Январь',
       'Февраль',
@@ -347,20 +261,7 @@ final _i18nModel = <LocaleType, Map<String, Object>>{
     'cancel': 'Annulla',
     'done': 'Conferma',
     'today': 'Oggi',
-    'monthShort': [
-      'Gen',
-      'Feb',
-      'Mar',
-      'Apr',
-      'Mag',
-      'Giu',
-      'Lug',
-      'Ago',
-      'Set',
-      'Ott',
-      'Nov',
-      'Dic'
-    ],
+    'monthShort': ['Gen', 'Feb', 'Mar', 'Apr', 'Mag', 'Giu', 'Lug', 'Ago', 'Set', 'Ott', 'Nov', 'Dic'],
     'monthLong': [
       'Gennaio',
       'Febbraio',
@@ -383,20 +284,7 @@ final _i18nModel = <LocaleType, Map<String, Object>>{
     'cancel': 'Annuler',
     'done': 'Confirmer',
     'today': "Aujourd'hui",
-    'monthShort': [
-      'Jan',
-      'Fév',
-      'Mar',
-      'Avr',
-      'Mai',
-      'Juin',
-      'Juil',
-      'Aoû',
-      'Sep',
-      'Oct',
-      'Nov',
-      'Déc'
-    ],
+    'monthShort': ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Aoû', 'Sep', 'Oct', 'Nov', 'Déc'],
     'monthLong': [
       'Janvier',
       'Février',
@@ -419,20 +307,7 @@ final _i18nModel = <LocaleType, Map<String, Object>>{
     'cancel': 'Άκυρο',
     'done': 'Επιβεβαίωση',
     'today': 'Σήμερα',
-    'monthShort': [
-      'Ιαν',
-      'Φεβρ',
-      'Μάρτ',
-      'Απρ',
-      'Μάι',
-      'Ιούν',
-      'Ιούλ',
-      'Αύγ',
-      'Σεπτ',
-      'Οκτ',
-      'Νοέμβρ',
-      'Δεκ'
-    ],
+    'monthShort': ['Ιαν', 'Φεβρ', 'Μάρτ', 'Απρ', 'Μάι', 'Ιούν', 'Ιούλ', 'Αύγ', 'Σεπτ', 'Οκτ', 'Νοέμβρ', 'Δεκ'],
     'monthLong': [
       'Ιανουάριος',
       'Φεβρουάριος',
@@ -455,20 +330,7 @@ final _i18nModel = <LocaleType, Map<String, Object>>{
     'cancel': 'Cancelar',
     'done': 'Confirmar',
     'today': 'Hoy',
-    'monthShort': [
-      'Ene',
-      'Feb',
-      'Mar',
-      'Abr',
-      'May',
-      'Jun',
-      'Jul',
-      'Ago',
-      'Sep',
-      'Oct',
-      'Nov',
-      'Dic'
-    ],
+    'monthShort': ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
     'monthLong': [
       'Enero',
       'Febrero',
@@ -491,20 +353,7 @@ final _i18nModel = <LocaleType, Map<String, Object>>{
     'cancel': 'Anuluj',
     'done': 'Gotowe',
     'today': 'Dziś',
-    'monthShort': [
-      'Sty',
-      'Lut',
-      'Mar',
-      'Kwi',
-      'Maj',
-      'Cze',
-      'Lip',
-      'Sie',
-      'Wrz',
-      'Paź',
-      'Lis',
-      'Gru'
-    ],
+    'monthShort': ['Sty', 'Lut', 'Mar', 'Kwi', 'Maj', 'Cze', 'Lip', 'Sie', 'Wrz', 'Paź', 'Lis', 'Gru'],
     'monthLong': [
       'Styczeń',
       'Luty',
@@ -527,20 +376,7 @@ final _i18nModel = <LocaleType, Map<String, Object>>{
     'cancel': 'Cancelar',
     'done': 'Confirmar',
     'today': 'Hoje',
-    'monthShort': [
-      'Jan',
-      'Fev',
-      'Mar',
-      'Abr',
-      'Mai',
-      'Jun',
-      'Jul',
-      'Ago',
-      'Set',
-      'Out',
-      'Nov',
-      'Dez'
-    ],
+    'monthShort': ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
     'monthLong': [
       'Janeiro',
       'Fevereiro',
@@ -563,34 +399,8 @@ final _i18nModel = <LocaleType, Map<String, Object>>{
     'cancel': '취소',
     'done': '완료',
     'today': '오늘',
-    'monthShort': [
-      '1월',
-      '2월',
-      '3월',
-      '4월',
-      '5월',
-      '6월',
-      '7월',
-      '8월',
-      '9월',
-      '10월',
-      '11월',
-      '12월'
-    ],
-    'monthLong': [
-      '1월',
-      '2월',
-      '3월',
-      '4월',
-      '5월',
-      '6월',
-      '7월',
-      '8월',
-      '9월',
-      '10월',
-      '11월',
-      '12월'
-    ],
+    'monthShort': ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+    'monthLong': ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
     'day': ['월', '화', '수', '목', '금', '토', '일'],
     'am': '오전',
     'pm': '오후'
@@ -599,20 +409,7 @@ final _i18nModel = <LocaleType, Map<String, Object>>{
     'cancel': 'Жою',
     'done': 'Дайын',
     'today': 'бүгін',
-    'monthShort': [
-      'Қаң',
-      'Ақп',
-      'Нау',
-      'Сәу',
-      'Мам',
-      'Мау',
-      'Шіл',
-      'Там',
-      'Қыр',
-      'Қаз',
-      'Қар',
-      'Жел'
-    ],
+    'monthShort': ['Қаң', 'Ақп', 'Нау', 'Сәу', 'Мам', 'Мау', 'Шіл', 'Там', 'Қыр', 'Қаз', 'Қар', 'Жел'],
     'monthLong': [
       'Қаңтар',
       'Ақпан',
@@ -663,15 +460,7 @@ final _i18nModel = <LocaleType, Map<String, Object>>{
       'نوفمبر',
       'ديسمبر'
     ],
-    'day': [
-      'الإثنين',
-      'الثلاثاء',
-      'الأربعاء',
-      'الخميس',
-      'الجمعه',
-      'السبت',
-      'الاحد'
-    ],
+    'day': ['الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعه', 'السبت', 'الاحد'],
     'am': 'ص',
     'pm': 'م'
   },
@@ -679,20 +468,7 @@ final _i18nModel = <LocaleType, Map<String, Object>>{
     'cancel': 'İptal',
     'done': 'Tamam',
     'today': 'Bugün',
-    'monthShort': [
-      'Oca',
-      'Şub',
-      'Mar',
-      'Nis',
-      'May',
-      'Haz',
-      'Tem',
-      'Ağu',
-      'Eyl',
-      'Eki',
-      'Kas',
-      'Ara'
-    ],
+    'monthShort': ['Oca', 'Şub', 'Mar', 'Nis', 'May', 'Haz', 'Tem', 'Ağu', 'Eyl', 'Eki', 'Kas', 'Ara'],
     'monthLong': [
       'Ocak',
       'Şubat',
@@ -715,20 +491,7 @@ final _i18nModel = <LocaleType, Map<String, Object>>{
     'cancel': 'Ləğv et',
     'done': 'Bitdi',
     'today': 'Bugün',
-    'monthShort': [
-      'Yan',
-      'Fev',
-      'Mar',
-      'Apr',
-      'May',
-      'İyn',
-      'İyl',
-      'Avq',
-      'Sen',
-      'Okt',
-      'Noy',
-      'Dek'
-    ],
+    'monthShort': ['Yan', 'Fev', 'Mar', 'Apr', 'May', 'İyn', 'İyl', 'Avq', 'Sen', 'Okt', 'Noy', 'Dek'],
     'monthLong': [
       'Yanvar',
       'Fevral',
@@ -752,34 +515,8 @@ final _i18nModel = <LocaleType, Map<String, Object>>{
     'cancel': 'キャンセル',
     'done': '完了',
     'today': '今日',
-    'monthShort': [
-      '1月',
-      '2月',
-      '3月',
-      '4月',
-      '5月',
-      '6月',
-      '7月',
-      '8月',
-      '9月',
-      '10月',
-      '11月',
-      '12月'
-    ],
-    'monthLong': [
-      '1月',
-      '2月',
-      '3月',
-      '4月',
-      '5月',
-      '6月',
-      '7月',
-      '8月',
-      '9月',
-      '10月',
-      '11月',
-      '12月'
-    ],
+    'monthShort': ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+    'monthLong': ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
     'day': ['月曜日', '火曜日', '水曜日', '木曜日', '金曜日', '土曜日', '日曜日'],
     'am': '午前',
     'pm': '午後'
@@ -789,20 +526,7 @@ final _i18nModel = <LocaleType, Map<String, Object>>{
     'cancel': 'Abbrechen',
     'done': 'OK',
     'today': 'Heute',
-    'monthShort': [
-      'Jan',
-      'Feb',
-      'Mrz',
-      'Apr',
-      'Mai',
-      'Jun',
-      'Jul',
-      'Aug',
-      'Sep',
-      'Okt',
-      'Nov',
-      'Dez'
-    ],
+    'monthShort': ['Jan', 'Feb', 'Mrz', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'],
     'monthLong': [
       'Januar',
       'Februar',
@@ -826,20 +550,7 @@ final _i18nModel = <LocaleType, Map<String, Object>>{
     'cancel': 'Annullér',
     'done': 'OK',
     'today': 'I dag',
-    'monthShort': [
-      'jan',
-      'feb',
-      'mar',
-      'apr',
-      'maj',
-      'juni',
-      'juli',
-      'aug',
-      'sept',
-      'okt',
-      'nov',
-      'dec'
-    ],
+    'monthShort': ['jan', 'feb', 'mar', 'apr', 'maj', 'juni', 'juli', 'aug', 'sept', 'okt', 'nov', 'dec'],
     'monthLong': [
       'januar',
       'februar',
@@ -907,20 +618,7 @@ final _i18nModel = <LocaleType, Map<String, Object>>{
     'cancel': 'Hủy bỏ',
     'done': 'Xong',
     'today': 'Hôm nay',
-    'monthShort': [
-      'Thg1',
-      'Thg2',
-      'Thg3',
-      'Thg4',
-      'Thg5',
-      'Thg6',
-      'Thg7',
-      'Thg8',
-      'Thg9',
-      'Thg10',
-      'Thg11',
-      'Thg12'
-    ],
+    'monthShort': ['Thg1', 'Thg2', 'Thg3', 'Thg4', 'Thg5', 'Thg6', 'Thg7', 'Thg8', 'Thg9', 'Thg10', 'Thg11', 'Thg12'],
     'monthLong': [
       'Tháng 1',
       'Tháng 2',
@@ -944,20 +642,7 @@ final _i18nModel = <LocaleType, Map<String, Object>>{
     'cancel': 'Չեղարկել',
     'done': 'հաստատել',
     'today': 'Այսօր',
-    'monthShort': [
-      'Հնվ',
-      'Փետ',
-      'Մար',
-      'Ապր',
-      'Մայ',
-      'Հուն',
-      'Հուլ',
-      'Օգոս',
-      'Սեպ',
-      'Հոկ',
-      'Նոյ',
-      'Դեկ'
-    ],
+    'monthShort': ['Հնվ', 'Փետ', 'Մար', 'Ապր', 'Մայ', 'Հուն', 'Հուլ', 'Օգոս', 'Սեպ', 'Հոկ', 'Նոյ', 'Դեկ'],
     'monthLong': [
       'Հունվար',
       'Փետրվար',
@@ -980,20 +665,7 @@ final _i18nModel = <LocaleType, Map<String, Object>>{
     'cancel': 'Batal',
     'done': 'Pilih',
     'today': 'Hari Ini',
-    'monthShort': [
-      'Jan',
-      'Feb',
-      'Mar',
-      'Apr',
-      'Mei',
-      'Jun',
-      'Jul',
-      'Agu',
-      'Sep',
-      'Okt',
-      'Nov',
-      'Des'
-    ],
+    'monthShort': ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'],
     'monthLong': [
       'Januari',
       'Februari',
@@ -1016,20 +688,7 @@ final _i18nModel = <LocaleType, Map<String, Object>>{
     'cancel': 'Отказ',
     'done': 'Готово',
     'today': 'Днес',
-    'monthShort': [
-      'Яну',
-      'Фев',
-      'Март',
-      'Апр',
-      'Май',
-      'Юни',
-      'Юли',
-      'Авг',
-      'Сен',
-      'Окт',
-      'Ное',
-      'Дек'
-    ],
+    'monthShort': ['Яну', 'Фев', 'Март', 'Апр', 'Май', 'Юни', 'Юли', 'Авг', 'Сен', 'Окт', 'Ное', 'Дек'],
     'monthLong': [
       'Януари',
       'Февруари',
@@ -1053,20 +712,7 @@ final _i18nModel = <LocaleType, Map<String, Object>>{
     'cancel': 'Ezeztau',
     'done': 'Onartu',
     'today': 'Gaur',
-    'monthShort': [
-      'urt.',
-      'ots.',
-      'mar.',
-      'api.',
-      'mai.',
-      'eka.',
-      'uzt.',
-      'abu.',
-      'ira.',
-      'urr.',
-      'aza.',
-      'abe.'
-    ],
+    'monthShort': ['urt.', 'ots.', 'mar.', 'api.', 'mai.', 'eka.', 'uzt.', 'abu.', 'ira.', 'urr.', 'aza.', 'abe.'],
     'monthLong': [
       'urtarrila',
       'otsaila',
@@ -1090,20 +736,7 @@ final _i18nModel = <LocaleType, Map<String, Object>>{
     'cancel': 'Cancel·la',
     'done': 'Confirmar',
     'today': 'Avui',
-    'monthShort': [
-      'Gen',
-      'Febr',
-      'Març',
-      'Abr',
-      'Maig',
-      'Juny',
-      'Jul',
-      'Ag',
-      'Set',
-      'Oct',
-      'Nov',
-      'Des'
-    ],
+    'monthShort': ['Gen', 'Febr', 'Març', 'Abr', 'Maig', 'Juny', 'Jul', 'Ag', 'Set', 'Oct', 'Nov', 'Des'],
     'monthLong': [
       'Gener',
       'Febrer',
@@ -1127,20 +760,7 @@ final _i18nModel = <LocaleType, Map<String, Object>>{
     'cancel': 'ยกเลิก',
     'done': 'ตกลง',
     'today': 'วันนี้',
-    'monthShort': [
-      'ม.ค',
-      'ก.พ',
-      'มี.ค',
-      'เม.ย',
-      'พ.ค',
-      'มิ.ย',
-      'ก.ค',
-      'ส.ค',
-      'ก.ย',
-      'ต.ค',
-      'พ.ย',
-      'ธ.ค'
-    ],
+    'monthShort': ['ม.ค', 'ก.พ', 'มี.ค', 'เม.ย', 'พ.ค', 'มิ.ย', 'ก.ค', 'ส.ค', 'ก.ย', 'ต.ค', 'พ.ย', 'ธ.ค'],
     'monthLong': [
       'มกราคม',
       'กุมภาพันธ์',
@@ -1164,20 +784,7 @@ final _i18nModel = <LocaleType, Map<String, Object>>{
     'cancel': 'Prekliči',
     'done': 'V redu',
     'today': 'Danes',
-    'monthShort': [
-      'jan',
-      'feb',
-      'mar',
-      'apr',
-      'maj',
-      'jun',
-      'jul',
-      'avg',
-      'sep',
-      'okt',
-      'nov',
-      'dec'
-    ],
+    'monthShort': ['jan', 'feb', 'mar', 'apr', 'maj', 'jun', 'jul', 'avg', 'sep', 'okt', 'nov', 'dec'],
     'monthLong': [
       'januar',
       'februar',
@@ -1200,20 +807,7 @@ final _i18nModel = <LocaleType, Map<String, Object>>{
     'cancel': 'Avbryt',
     'done': 'Ferdig',
     'today': 'Idag',
-    'monthShort': [
-      'Jan',
-      'Feb',
-      'Mar',
-      'Apr',
-      'Mai',
-      'Jun',
-      'Jul',
-      'Aug',
-      'Sep',
-      'Okt',
-      'Nov',
-      'Des'
-    ],
+    'monthShort': ['Jan', 'Feb', 'Mar', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Des'],
     'monthLong': [
       'Januar',
       'Februar',
@@ -1236,20 +830,7 @@ final _i18nModel = <LocaleType, Map<String, Object>>{
     'cancel': 'Anulo',
     'done': 'Perfundo',
     'today': 'Sot',
-    'monthShort': [
-      'Jan',
-      'Shk',
-      'Mar',
-      'Pri',
-      'Maj',
-      'Qer',
-      'Kor',
-      'Gus',
-      'Sht',
-      'Tet',
-      'Nen',
-      'Dhj'
-    ],
+    'monthShort': ['Jan', 'Shk', 'Mar', 'Pri', 'Maj', 'Qer', 'Kor', 'Gus', 'Sht', 'Tet', 'Nen', 'Dhj'],
     'monthLong': [
       'Janar',
       'Shkurt',
@@ -1272,20 +853,7 @@ final _i18nModel = <LocaleType, Map<String, Object>>{
     'cancel': 'Avbryt',
     'done': 'Klar',
     'today': 'I dag',
-    'monthShort': [
-      'Jan',
-      'Feb',
-      'Mar',
-      'Apr',
-      'Maj',
-      'Jun',
-      'Jul',
-      'Aug',
-      'Sep',
-      'Okt',
-      'Nov',
-      'Dec'
-    ],
+    'monthShort': ['Jan', 'Feb', 'Mar', 'Apr', 'Maj', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dec'],
     'monthLong': [
       'Januari',
       'Februari',
@@ -1307,12 +875,11 @@ final _i18nModel = <LocaleType, Map<String, Object>>{
 };
 
 /// Get international object for [localeType]
-Map<String, Object> i18nObjInLocale(LocaleType localeType) =>
-    _i18nModel[localeType] ?? _i18nModel[LocaleType.en];
+Map<String?, Object?>? i18nObjInLocale(LocaleType localeType) => _i18nModel[localeType] ?? _i18nModel[LocaleType.en];
 
 /// Get international lookup for a [localeType], [key] and [index].
 String i18nObjInLocaleLookup(LocaleType localeType, String key, int index) {
-  final i18n = i18nObjInLocale(localeType);
-  final i18nKey = i18n[key] as List<String>;
+  final Map<String?, Object?>? i18n = i18nObjInLocale(localeType);
+  final List<String> i18nKey = i18n![key]! as List<String>;
   return i18nKey[index];
 }

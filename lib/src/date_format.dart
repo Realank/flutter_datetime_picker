@@ -220,14 +220,13 @@ const String am = 'am';
 const String z = 'z';
 const String Z = 'Z';
 
-String formatDate(DateTime date, List<String> formats, LocaleType locale) {
+String? formatDate(DateTime date, List<String> formats, LocaleType locale) {
   if (formats.first == ymdw) {
-    final now = DateTime.now();
-    if (date.year == now.year &&
-        date.month == now.month &&
-        date.day == now.day) {
+    final DateTime now = DateTime.now();
+    if (date.year == now.year && date.month == now.month && date.day == now.day) {
       //today
-      return i18nObjInLocale(locale)['today'];
+      final Map<String?, Object?>? map = i18nObjInLocale(locale);
+      return map!['today'] as String?;
     } else if (date.year == now.year) {
       if (locale == LocaleType.zh) {
         return formatDate(date, [mm, '月', dd, '日 ', D], locale);
@@ -283,12 +282,10 @@ String formatDate(DateTime date, List<String> formats, LocaleType locale) {
     } else if (format == m) {
       sb.write(date.month);
     } else if (format == MM) {
-      final monthLong =
-          i18nObjInLocaleLookup(locale, 'monthLong', date.month - 1);
+      final monthLong = i18nObjInLocaleLookup(locale, 'monthLong', date.month - 1);
       sb.write(monthLong);
     } else if (format == M) {
-      final monthShort =
-          i18nObjInLocaleLookup(locale, 'monthShort', date.month - 1);
+      final monthShort = i18nObjInLocaleLookup(locale, 'monthShort', date.month - 1);
       sb.write(monthShort);
     } else if (format == dd) {
       sb.write(digits(date.day, 2));
@@ -315,9 +312,7 @@ String formatDate(DateTime date, List<String> formats, LocaleType locale) {
     } else if (format == h) {
       sb.write(date.hour % 12);
     } else if (format == am) {
-      sb.write(date.hour < 12
-          ? i18nObjInLocale(locale)['am']
-          : i18nObjInLocale(locale)['pm']);
+      sb.write(date.hour < 12 ? i18nObjInLocale(locale)!['am'] : i18nObjInLocale(locale)!['pm']);
     } else if (format == nn) {
       sb.write(digits(date.minute, 2));
     } else if (format == n) {
@@ -362,5 +357,4 @@ String digits(int value, int length) {
   return '$value'.padLeft(length, "0");
 }
 
-int dayInYear(DateTime date) =>
-    date.difference(new DateTime(date.year, 1, 1)).inDays;
+int dayInYear(DateTime date) => date.difference(new DateTime(date.year, 1, 1)).inDays;
