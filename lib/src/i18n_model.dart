@@ -32,7 +32,8 @@ enum LocaleType {
   sq,
   sv,
   kh,
-  tw
+  tw,
+  fi
 }
 
 final _i18nModel = <LocaleType, Map<String, Object>>{
@@ -1303,7 +1304,44 @@ final _i18nModel = <LocaleType, Map<String, Object>>{
     'day': ['Mån', 'Tis', 'Ons', 'Tor', 'Fre', 'Lör', 'Sön'],
     'am': 'AM',
     'pm': 'PM'
+  },
+  LocaleType.fi: {
+    'cancel': 'Peruuta',
+    'done': 'Valmis',
+    'today': 'Tänään',
+    'monthShort': [
+      'Tammi',
+      'Helmi',
+      'Maalis',
+      'Huhti',
+      'Touko',
+      'Kesä',
+      'Heinä',
+      'Elo',
+      'Syys',
+      'Loka',
+      'Marras',
+      'Joulu'
+    ],
+    'monthLong': [
+      'Tammikuu',
+      'Helmikuu',
+      'Maaliskuu',
+      'Huhtikuu',
+      'Toukokuu',
+      'Kesäkuu',
+      'Heinäkuu',
+      'Elokuu',
+      'Syyskuu',
+      'Lokakuu',
+      'Marraskuu',
+      'Joulukuu'
+    ],
+    'day': ['Ma', 'Ti', 'Ke', 'To', 'Pe', 'La', 'Su'],
+    'am': 'AM',
+    'pm': 'PM'
   }
+
 };
 
 /// Get international object for [localeType]
