@@ -8,7 +8,7 @@ class DatePickerTheme with DiagnosticableTreeMixin {
   final TextStyle doneStyle;
   final TextStyle itemStyle;
   final Color backgroundColor;
-  final Color headerColor;
+  final Color? headerColor;
 
   final double containerHeight;
   final double titleHeight;

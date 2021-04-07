@@ -227,7 +227,7 @@ String formatDate(DateTime date, List<String> formats, LocaleType locale) {
         date.month == now.month &&
         date.day == now.day) {
       //today
-      return i18nObjInLocale(locale)['today'];
+      return i18nObjInLocale(locale)['today'] as String;
     } else if (date.year == now.year) {
       if (locale == LocaleType.zh) {
         return formatDate(date, [mm, '月', dd, '日 ', D], locale);
