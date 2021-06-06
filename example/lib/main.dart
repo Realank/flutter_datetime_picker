@@ -106,6 +106,27 @@ class HomePage extends StatelessWidget {
                 onPressed: () {
                   DatePicker.showDatePicker(context,
                       showTitleActions: true,
+                      maxTime: DateTime.now(),
+                      currentTime: DateTime.now(),
+                      locale: LocaleType.he);
+                },
+                child: Text(
+                  'show date picker (Hebrew)',
+                  style: TextStyle(color: Colors.blue),
+                )),
+            TextButton(
+                onPressed: () {
+                  DatePicker.showTime12hPicker(context,
+                      showTitleActions: true, currentTime: DateTime.now(), locale: LocaleType.he);
+                },
+                child: Text(
+                  'show time picker (Hebrew)',
+                  style: TextStyle(color: Colors.blue),
+                )),
+            TextButton(
+                onPressed: () {
+                  DatePicker.showDatePicker(context,
+                      showTitleActions: true,
                       minTime: DateTime(2018, 3, 5),
                       maxTime: DateTime(2019, 6, 7),
                       theme: DatePickerTheme(
