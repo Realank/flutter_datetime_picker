@@ -263,6 +263,8 @@ class _DatePickerComponent extends StatefulWidget {
 }
 
 class _DatePickerState extends State<_DatePickerComponent> {
+  late FixedExtentScrollController leftScrollCtrl, middleScrollCtrl, rightScrollCtrl;
+
   @override
   void initState() {
     super.initState();
@@ -271,9 +273,9 @@ class _DatePickerState extends State<_DatePickerComponent> {
 
   void refreshScrollOffset() {
 //    print('refreshScrollOffset ${widget.pickerModel.currentRightIndex()}');
-   /* leftScrollCtrl = FixedExtentScrollController(initialItem: widget.pickerModel.currentLeftIndex());
+    leftScrollCtrl = FixedExtentScrollController(initialItem: widget.pickerModel.currentLeftIndex());
     middleScrollCtrl = FixedExtentScrollController(initialItem: widget.pickerModel.currentMiddleIndex());
-    rightScrollCtrl = FixedExtentScrollController(initialItem: widget.pickerModel.currentRightIndex());*/
+    rightScrollCtrl = FixedExtentScrollController(initialItem: widget.pickerModel.currentRightIndex());
   }
 
   @override
@@ -379,6 +381,8 @@ class _DatePickerState extends State<_DatePickerComponent> {
   }
 
   Widget _renderItemView(DatePickerTheme theme) {
+    final int _baseKey = widget.pickerModel.currentLeftIndex() + widget.pickerModel.currentMiddleIndex() + widget.pickerModel.currentRightIndex();
+
     return Container(
       color: theme.backgroundColor,
       child: Row(
@@ -386,14 +390,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
         children: <Widget>[
           Container(
             child: widget.pickerModel.layoutProportions()[0] > 0
-                ? _renderColumnView(
-                    ValueKey(widget.pickerModel.currentLeftIndex()),
-                    theme,
-                    widget.pickerModel.leftStringAtIndex,
-                    FixedExtentScrollController(
-                      initialItem: widget.pickerModel.currentLeftIndex(),
-                    ),
-                    widget.pickerModel.layoutProportions()[0], (index) {
+                ? _renderColumnView(ValueKey(_baseKey), theme, widget.pickerModel.leftStringAtIndex, leftScrollCtrl, widget.pickerModel.layoutProportions()[0], (index) {
                     widget.pickerModel.setLeftIndex(index);
                   }, (index) {
                     setState(() {
@@ -409,14 +406,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
           ),
           Container(
             child: widget.pickerModel.layoutProportions()[1] > 0
-                ? _renderColumnView(
-                    ValueKey(widget.pickerModel.currentLeftIndex()),
-                    theme,
-                    widget.pickerModel.middleStringAtIndex,
-                    FixedExtentScrollController(
-                      initialItem: widget.pickerModel.currentMiddleIndex(),
-                    ),
-                    widget.pickerModel.layoutProportions()[1], (index) {
+                ? _renderColumnView(ValueKey(_baseKey * 100 + 1), theme, widget.pickerModel.middleStringAtIndex, middleScrollCtrl, widget.pickerModel.layoutProportions()[1], (index) {
                     widget.pickerModel.setMiddleIndex(index);
                   }, (index) {
                     setState(() {
@@ -432,14 +422,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
           ),
           Container(
             child: widget.pickerModel.layoutProportions()[2] > 0
-                ? _renderColumnView(
-                    ValueKey(widget.pickerModel.currentMiddleIndex() * 100 + widget.pickerModel.currentLeftIndex()),
-                    theme,
-                    widget.pickerModel.rightStringAtIndex,
-                    FixedExtentScrollController(
-                      initialItem: widget.pickerModel.currentRightIndex(),
-                    ),
-                    widget.pickerModel.layoutProportions()[2], (index) {
+                ? _renderColumnView(ValueKey(_baseKey * 100 + 2), theme, widget.pickerModel.rightStringAtIndex, rightScrollCtrl, widget.pickerModel.layoutProportions()[2], (index) {
                     widget.pickerModel.setRightIndex(index);
                   }, (index) {
                     setState(() {
