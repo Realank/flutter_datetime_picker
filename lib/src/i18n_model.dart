@@ -33,7 +33,8 @@ enum LocaleType {
   sv,
   kh,
   tw,
-  fi
+  fi,
+  ro,
 }
 
 final _i18nModel = <LocaleType, Map<String, Object>>{
@@ -1340,7 +1341,43 @@ final _i18nModel = <LocaleType, Map<String, Object>>{
     'day': ['Ma', 'Ti', 'Ke', 'To', 'Pe', 'La', 'Su'],
     'am': 'AM',
     'pm': 'PM'
-  }
+  },
+  LocaleType.ro: {
+    'cancel': 'Anulare',
+    'done': 'Terminat',
+    'today': 'Astăzi',
+    'monthShort': [
+      'Ian',
+      'Feb',
+      'Mar',
+      'Apr',
+      'Mai',
+      'Iun',
+      'Iul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Noi',
+      'Dec'
+    ],
+    'monthLong': [
+      'Ianuarie',
+      'Februarie',
+      'Martie',
+      'Aprilie',
+      'Mai',
+      'Iunie',
+      'Iulie',
+      'August',
+      'Septembrie',
+      'Octombrie',
+      'Noiembrie',
+      'Decembrie'
+    ],
+    'day': ['Lun', 'Mar', 'Mie', 'Joi', 'Vin', 'Sâm', 'Dum'],
+    'am': 'AM',
+    'pm': 'PM'
+  },
 
 };
 
