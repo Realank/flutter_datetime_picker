@@ -1344,7 +1344,7 @@ final _i18nModel = <LocaleType, Map<String, Object>>{
   },
   LocaleType.uk: {
     'cancel': 'Скасувати',
-    'done': 'ОК',
+    'done': 'Вибрати',
     'today': 'Сьогодні',
     'monthShort': [
       'Січ',
