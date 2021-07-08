@@ -34,7 +34,8 @@ enum LocaleType {
   kh,
   tw,
   fi,
-  uk
+  uk,
+  he
 }
 
 final _i18nModel = <LocaleType, Map<String, Object>>{
@@ -1378,6 +1379,42 @@ final _i18nModel = <LocaleType, Map<String, Object>>{
     'am': 'AM',
     'pm': 'PM'
   },
+  LocaleType.he: {
+    'cancel': 'ביטול',
+    'done': 'סיום',
+    'today': 'היום',
+    'monthShort': [
+      'ינו׳',
+      'פבר׳',
+      'מרץ',
+      'אפר׳',
+      'מאי',
+      'יוני',
+      'יולי',
+      'אוג׳',
+      'ספט׳',
+      'אוק׳',
+      'נוב׳',
+      'דצמ׳'
+    ],
+    'monthLong': [
+      'ינואר',
+      'פברואר',
+      'מרץ',
+      'אפריל',
+      'מאי',
+      'יוני',
+      'יולי',
+      'אוגוסט',
+      'ספטמבר',
+      'אוקטובר',
+      'נובמבר',
+      'דצמבר'
+    ],
+    'day': ['ראשון', 'שני', 'שלישי', 'רביעי', 'חמישי', 'שישי', 'שבת'],
+    'am': 'לפנה״צ',
+    'pm': 'אחה״צ',
+  }
 };
 
 /// Get international object for [localeType]

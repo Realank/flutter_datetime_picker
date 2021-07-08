@@ -3,6 +3,7 @@ library flutter_datetime_picker;
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:flutter_datetime_picker/src/datetime_picker_theme.dart';
 import 'package:flutter_datetime_picker/src/date_model.dart';
 import 'package:flutter_datetime_picker/src/i18n_model.dart';
@@ -398,70 +399,73 @@ class _DatePickerState extends State<_DatePickerComponent> {
   Widget _renderItemView(DatePickerTheme theme) {
     return Container(
       color: theme.backgroundColor,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          Container(
-            child: widget.pickerModel.layoutProportions()[0] > 0
-                ? _renderColumnView(
-                    ValueKey(widget.pickerModel.currentLeftIndex()),
-                    theme,
-                    widget.pickerModel.leftStringAtIndex,
-                    leftScrollCtrl,
-                    widget.pickerModel.layoutProportions()[0], (index) {
-                    widget.pickerModel.setLeftIndex(index);
-                  }, (index) {
-                    setState(() {
-                      refreshScrollOffset();
-                      _notifyDateChanged();
-                    });
-                  })
-                : null,
-          ),
-          Text(
-            widget.pickerModel.leftDivider(),
-            style: theme.itemStyle,
-          ),
-          Container(
-            child: widget.pickerModel.layoutProportions()[1] > 0
-                ? _renderColumnView(
-                    ValueKey(widget.pickerModel.currentLeftIndex()),
-                    theme,
-                    widget.pickerModel.middleStringAtIndex,
-                    middleScrollCtrl,
-                    widget.pickerModel.layoutProportions()[1], (index) {
-                    widget.pickerModel.setMiddleIndex(index);
-                  }, (index) {
-                    setState(() {
-                      refreshScrollOffset();
-                      _notifyDateChanged();
-                    });
-                  })
-                : null,
-          ),
-          Text(
-            widget.pickerModel.rightDivider(),
-            style: theme.itemStyle,
-          ),
-          Container(
-            child: widget.pickerModel.layoutProportions()[2] > 0
-                ? _renderColumnView(
-                    ValueKey(widget.pickerModel.currentMiddleIndex() * 100 +
-                        widget.pickerModel.currentLeftIndex()),
-                    theme,
-                    widget.pickerModel.rightStringAtIndex,
-                    rightScrollCtrl,
-                    widget.pickerModel.layoutProportions()[2], (index) {
-                    widget.pickerModel.setRightIndex(index);
-                  }, (index) {
-                    setState(() {
-                      refreshScrollOffset();
-                      _notifyDateChanged();
-                    });
-                  })
-                : null,
-          ),
-        ],
+      child: Directionality(
+        textDirection: TextDirection.ltr,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Container(
+              child: widget.pickerModel.layoutProportions()[0] > 0
+                  ? _renderColumnView(
+                      ValueKey(widget.pickerModel.currentLeftIndex()),
+                      theme,
+                      widget.pickerModel.leftStringAtIndex,
+                      leftScrollCtrl,
+                      widget.pickerModel.layoutProportions()[0], (index) {
+                      widget.pickerModel.setLeftIndex(index);
+                    }, (index) {
+                      setState(() {
+                        refreshScrollOffset();
+                        _notifyDateChanged();
+                      });
+                    })
+                  : null,
+            ),
+            Text(
+              widget.pickerModel.leftDivider(),
+              style: theme.itemStyle,
+            ),
+            Container(
+              child: widget.pickerModel.layoutProportions()[1] > 0
+                  ? _renderColumnView(
+                      ValueKey(widget.pickerModel.currentLeftIndex()),
+                      theme,
+                      widget.pickerModel.middleStringAtIndex,
+                      middleScrollCtrl,
+                      widget.pickerModel.layoutProportions()[1], (index) {
+                      widget.pickerModel.setMiddleIndex(index);
+                    }, (index) {
+                      setState(() {
+                        refreshScrollOffset();
+                        _notifyDateChanged();
+                      });
+                    })
+                  : null,
+            ),
+            Text(
+              widget.pickerModel.rightDivider(),
+              style: theme.itemStyle,
+            ),
+            Container(
+              child: widget.pickerModel.layoutProportions()[2] > 0
+                  ? _renderColumnView(
+                      ValueKey(widget.pickerModel.currentMiddleIndex() * 100 +
+                          widget.pickerModel.currentLeftIndex()),
+                      theme,
+                      widget.pickerModel.rightStringAtIndex,
+                      rightScrollCtrl,
+                      widget.pickerModel.layoutProportions()[2], (index) {
+                      widget.pickerModel.setRightIndex(index);
+                    }, (index) {
+                      setState(() {
+                        refreshScrollOffset();
+                        _notifyDateChanged();
+                      });
+                    })
+                  : null,
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -483,7 +487,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
             height: theme.titleHeight,
             child: CupertinoButton(
               pressedOpacity: 0.3,
-              padding: EdgeInsets.only(left: 16, top: 0),
+              padding: EdgeInsetsDirectional.only(start: 16, top: 0),
               child: Text(
                 '$cancel',
                 style: theme.cancelStyle,
@@ -500,7 +504,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
             height: theme.titleHeight,
             child: CupertinoButton(
               pressedOpacity: 0.3,
-              padding: EdgeInsets.only(right: 16, top: 0),
+              padding: EdgeInsetsDirectional.only(end: 16, top: 0),
               child: Text(
                 '$done',
                 style: theme.doneStyle,
