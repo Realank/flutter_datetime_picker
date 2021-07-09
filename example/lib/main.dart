@@ -86,6 +86,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: new ThemeData(
         primarySwatch: Colors.blue,
+        fontFamily: 'Varela',
       ),
       home: new HomePage(),
     );
@@ -114,9 +115,9 @@ class HomePage extends StatelessWidget {
                           itemStyle: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
-                              fontSize: 18),
+                              fontSize: 18, fontFamily: 'Varela'),
                           doneStyle:
-                              TextStyle(color: Colors.white, fontSize: 16)),
+                              TextStyle(color: Colors.white, fontSize: 16, fontFamily: 'Varela')),
                       onChanged: (date) {
                     print('change $date in time zone ' +
                         date.timeZoneOffset.inHours.toString());
@@ -126,7 +127,7 @@ class HomePage extends StatelessWidget {
                 },
                 child: Text(
                   'show date picker(custom theme &date time range)',
-                  style: TextStyle(color: Colors.blue),
+                  style: TextStyle(color: Colors.blue, fontFamily: 'Varela'),
                 )),
             TextButton(
                 onPressed: () {
