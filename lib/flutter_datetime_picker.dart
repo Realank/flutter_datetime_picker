@@ -31,10 +31,12 @@ class DatePicker {
     locale: LocaleType.en,
     DateTime? currentTime,
     DatePickerTheme? theme,
+    RouteSettings? settings,
   }) async {
     return await Navigator.push(
       context,
       _DatePickerRoute(
+        settings: settings,
         showTitleActions: showTitleActions,
         onChanged: onChanged,
         onConfirm: onConfirm,
@@ -66,10 +68,12 @@ class DatePicker {
     locale: LocaleType.en,
     DateTime? currentTime,
     DatePickerTheme? theme,
+    RouteSettings? settings,
   }) async {
     return await Navigator.push(
       context,
       _DatePickerRoute(
+        settings: settings,
         showTitleActions: showTitleActions,
         onChanged: onChanged,
         onConfirm: onConfirm,
@@ -99,10 +103,12 @@ class DatePicker {
     locale: LocaleType.en,
     DateTime? currentTime,
     DatePickerTheme? theme,
+    RouteSettings? settings,
   }) async {
     return await Navigator.push(
       context,
       _DatePickerRoute(
+        settings: settings,
         showTitleActions: showTitleActions,
         onChanged: onChanged,
         onConfirm: onConfirm,
@@ -133,10 +139,12 @@ class DatePicker {
     locale: LocaleType.en,
     DateTime? currentTime,
     DatePickerTheme? theme,
+    RouteSettings? settings,
   }) async {
     return await Navigator.push(
       context,
       _DatePickerRoute(
+        settings: settings,
         showTitleActions: showTitleActions,
         onChanged: onChanged,
         onConfirm: onConfirm,
@@ -167,10 +175,12 @@ class DatePicker {
     locale: LocaleType.en,
     BasePickerModel? pickerModel,
     DatePickerTheme? theme,
+    RouteSettings? settings,
   }) async {
     return await Navigator.push(
       context,
       _DatePickerRoute(
+        settings: settings,
         showTitleActions: showTitleActions,
         onChanged: onChanged,
         onConfirm: onConfirm,
