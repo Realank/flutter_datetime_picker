@@ -401,6 +401,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
                 alignment: Alignment.center,
                 child: Text(
                   content,
+                  maxLines: theme.itemMaxLines,
                   style: theme.itemStyle,
                   textAlign: TextAlign.start,
                 ),
