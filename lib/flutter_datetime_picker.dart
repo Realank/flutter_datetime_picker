@@ -185,6 +185,19 @@ class DatePicker {
   }
 }
 
+class _DefaultSelectionOverlay extends StatelessWidget {
+  const _DefaultSelectionOverlay();
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [const Divider(height: 1), const Divider(height: 1)],
+    );
+  }
+}
+
 class _DatePickerRoute<T> extends PopupRoute<T> {
   _DatePickerRoute({
     this.showTitleActions,
@@ -194,6 +207,7 @@ class _DatePickerRoute<T> extends PopupRoute<T> {
     DatePickerTheme? theme,
     this.barrierLabel,
     this.locale,
+    this.selectionOverlay = const _DefaultSelectionOverlay(),
     RouteSettings? settings,
     BasePickerModel? pickerModel,
   })  : this.pickerModel = pickerModel ?? DatePickerModel(),
@@ -207,6 +221,7 @@ class _DatePickerRoute<T> extends PopupRoute<T> {
   final LocaleType? locale;
   final DatePickerTheme theme;
   final BasePickerModel pickerModel;
+  final Widget? selectionOverlay;
 
   @override
   Duration get transitionDuration => const Duration(milliseconds: 200);
@@ -351,7 +366,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
     return Expanded(
       flex: layoutProportion,
       child: Container(
-        padding: EdgeInsets.all(8.0),
+        padding: EdgeInsets.all(0.0),
         height: theme.containerHeight,
         decoration: BoxDecoration(color: theme.backgroundColor),
         child: NotificationListener(
@@ -367,6 +382,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
             return false;
           },
           child: CupertinoPicker.builder(
+            selectionOverlay: widget.route.selectionOverlay,
             key: key,
             backgroundColor: theme.backgroundColor,
             scrollController: scrollController as FixedExtentScrollController,
@@ -385,6 +401,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
                 alignment: Alignment.center,
                 child: Text(
                   content,
+                  maxLines: theme.itemMaxLines,
                   style: theme.itemStyle,
                   textAlign: TextAlign.start,
                 ),
