@@ -34,7 +34,7 @@ class DatePicker {
   }) async {
     return await Navigator.push(
       context,
-      DatePickerRoute(
+      _DatePickerRoute(
         showTitleActions: showTitleActions,
         onChanged: onChanged,
         onConfirm: onConfirm,
@@ -69,7 +69,7 @@ class DatePicker {
   }) async {
     return await Navigator.push(
       context,
-      DatePickerRoute(
+      _DatePickerRoute(
         showTitleActions: showTitleActions,
         onChanged: onChanged,
         onConfirm: onConfirm,
@@ -102,7 +102,7 @@ class DatePicker {
   }) async {
     return await Navigator.push(
       context,
-      DatePickerRoute(
+      _DatePickerRoute(
         showTitleActions: showTitleActions,
         onChanged: onChanged,
         onConfirm: onConfirm,
@@ -136,7 +136,7 @@ class DatePicker {
   }) async {
     return await Navigator.push(
       context,
-      DatePickerRoute(
+      _DatePickerRoute(
         showTitleActions: showTitleActions,
         onChanged: onChanged,
         onConfirm: onConfirm,
@@ -170,7 +170,7 @@ class DatePicker {
   }) async {
     return await Navigator.push(
       context,
-      DatePickerRoute(
+      _DatePickerRoute(
         showTitleActions: showTitleActions,
         onChanged: onChanged,
         onConfirm: onConfirm,
@@ -185,8 +185,8 @@ class DatePicker {
   }
 }
 
-class DatePickerRoute<T> extends PopupRoute<T> {
-  DatePickerRoute({
+class _DatePickerRoute<T> extends PopupRoute<T> {
+  _DatePickerRoute({
     this.showTitleActions,
     this.onChanged,
     this.onConfirm,
@@ -257,7 +257,7 @@ class DatePickerWidget extends StatelessWidget {
     this.locale = LocaleType.en,
     this.pickerModel,
     this.theme,
-  })  : route = DatePickerRoute(
+  })  : route = _DatePickerRoute(
           showTitleActions: showTitleActions,
           onChanged: onChanged,
           onConfirm: onConfirm,
@@ -275,7 +275,7 @@ class DatePickerWidget extends StatelessWidget {
   final LocaleType locale;
   final BasePickerModel? pickerModel;
   final DatePickerTheme? theme;
-  final DatePickerRoute route;
+  final _DatePickerRoute route;
 
   @override
   Widget build(BuildContext context) {
@@ -304,7 +304,7 @@ class DatePickerComponent extends StatelessWidget {
 
   final DateChangedCallback? onChanged;
 
-  final DatePickerRoute route;
+  final _DatePickerRoute route;
 
   final LocaleType? locale;
 
@@ -353,7 +353,7 @@ class _RenderPickerView extends StatelessWidget {
     required this.titleActionsView,
   }) : super(key: key);
 
-  final DatePickerRoute route;
+  final _DatePickerRoute route;
 
   final _ItemView itemView;
   final _TitleActionsView titleActionsView;
@@ -596,7 +596,7 @@ class _TitleActionsView extends StatelessWidget {
     Key? key,
     required this.route,
   }) : super(key: key);
-  final DatePickerRoute route;
+  final _DatePickerRoute route;
 
   @override
   Widget build(BuildContext context) {
