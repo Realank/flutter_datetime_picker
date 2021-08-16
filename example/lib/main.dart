@@ -250,8 +250,38 @@ class HomePage extends StatelessWidget {
                   'show custom time picker,\nyou can custom picker model like this',
                   style: TextStyle(color: Colors.blue),
                 )),
+            TextButton(
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => DatePickerWidgetScreen()));
+                },
+                child: Text(
+                  'show date picker widget',
+                  style: TextStyle(color: Colors.blue),
+                )),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class DatePickerWidgetScreen extends StatefulWidget {
+  const DatePickerWidgetScreen({Key? key}) : super(key: key);
+
+  @override
+  _DatePickerWidgetScreenState createState() => _DatePickerWidgetScreenState();
+}
+
+class _DatePickerWidgetScreenState extends State<DatePickerWidgetScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Date picker widget'),
+      ),
+      body: Center(
+        child: DatePickerWidget(),
       ),
     );
   }
