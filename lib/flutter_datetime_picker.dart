@@ -236,7 +236,7 @@ class _DatePickerRoute<T> extends PopupRoute<T> {
     Widget bottomSheet = MediaQuery.removePadding(
       context: context,
       removeTop: true,
-      child: DatePickerComponent(
+      child: _DatePickerComponent(
         onChanged: onChanged,
         locale: this.locale,
         route: this,
@@ -293,8 +293,8 @@ class DatePickerWidget extends StatelessWidget {
   }
 }
 
-class DatePickerComponent extends StatelessWidget {
-  DatePickerComponent({
+class _DatePickerComponent extends StatelessWidget {
+  _DatePickerComponent({
     Key? key,
     required this.route,
     required this.pickerModel,
