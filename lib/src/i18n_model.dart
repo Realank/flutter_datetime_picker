@@ -35,7 +35,8 @@ enum LocaleType {
   tw,
   fi,
   uk,
-  he
+  he,
+  tk
 }
 
 final _i18nModel = <LocaleType, Map<String, Object>>{
@@ -1414,6 +1415,43 @@ final _i18nModel = <LocaleType, Map<String, Object>>{
     'day': ['ראשון', 'שני', 'שלישי', 'רביעי', 'חמישי', 'שישי', 'שבת'],
     'am': 'לפנה״צ',
     'pm': 'אחה״צ',
+  },
+  
+  LocaleType.tk: {
+    'cancel': 'Ýatyrmak',
+    'done': 'Tassyklamak',
+    'today': 'Bugün',
+    'monthShort': [
+      'Ýan',
+      'Few',
+      'Mart',
+      'Apr',
+      'Maý',
+      'Iýun',
+      'Iýul',
+      'Awg',
+      'Sen',
+      'Okt',
+      'Noý',
+      'Dek'
+    ],
+    'monthLong': [
+      'Ýanwar',
+      'Fewral',
+      'Mart',
+      'Aprel',
+      'Maý',
+      'Iýun',
+      'Iýul',
+      'Awgust',
+      'Sentýabr',
+      'Oktýabr',
+      'Noýabr',
+      'Dekabr'
+    ],
+    'day': ['Duş', 'Siş', 'Çar', 'Pen', 'Anna', 'Şen', 'Ýek'],
+    'am': 'AM',
+    'pm': 'PM'
   }
 };
 
