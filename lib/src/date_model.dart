@@ -590,7 +590,11 @@ class DateTimePickerModel extends CommonPickerModel {
 
   @override
   String middleStringAtIndex(int index) {
-    if (index >= 0 && index < 24) {
+    if (minTime != null && maxTime != null && minTime.year == maxTime.year && minTime.month == maxTime.month && minTime.day == maxTime.day) {
+      if (index >= 0 && (maxTime.hour ?? 0) - (minTime.hour ?? 0) >= index) {
+        return digits(minTime.hour + index, 2);
+      }
+    } else if (index >= 0 && index < 24) {
       DateTime time = currentTime.add(Duration(days: _currentLeftIndex));
       if (isAtSameDay(minTime, time)) {
         if (index >= 0 && index < 24 - minTime.hour) {
@@ -613,6 +617,19 @@ class DateTimePickerModel extends CommonPickerModel {
 
   @override
   String rightStringAtIndex(int index) {
+    if (minTime != null && maxTime != null && minTime.year == maxTime.year && minTime.month == maxTime.month && minTime.day == maxTime.day) {
+      DateTime time = minTime.add(Duration(days: _currentLeftIndex, hours: _currentMiddleIndex));
+      if (time.hour == maxTime.hour) {
+        if (index >= 0) {
+          if (maxTime.minute >= index) {
+            return digits(index, 2);
+          } else {
+            return null;
+          }
+        }
+      }
+    }
+
     if (index >= 0 && index < 60) {
       DateTime time = currentTime.add(Duration(days: _currentLeftIndex));
       if (isAtSameDay(minTime, time) && _currentMiddleIndex == 0) {
