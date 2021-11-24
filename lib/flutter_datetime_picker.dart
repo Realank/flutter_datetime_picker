@@ -241,7 +241,7 @@ class _DatePickerRoute<T> extends PopupRoute<T> {
         locale: this.locale,
         route: this,
         pickerModel: pickerModel,
-        borderRadius: theme.borderRadius,
+        borderRadius: theme.pickerBorderRadius,
       ),
     );
     return InheritedTheme.captureAll(context, bottomSheet);
@@ -314,6 +314,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
               ),
               child: GestureDetector(
                 child: Material(
+                  borderRadius: widget.borderRadius,
                   color: theme.backgroundColor,
                   child: _renderPickerView(theme),
                 ),
@@ -484,7 +485,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
       height: theme.titleHeight,
       decoration: BoxDecoration(
         color: theme.headerColor ?? theme.backgroundColor,
-        borderRadius: theme.borderRadius,
+        borderRadius: theme.headerBorderRadius,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
