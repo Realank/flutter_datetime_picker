@@ -403,11 +403,10 @@ class _DatePickerState extends State<_DatePickerComponent> {
   }
 
   Widget _renderItemView(DatePickerTheme theme) {
-    return Container(
-      decoration: BoxDecoration(
+      return ClipRRect(
+      borderRadius: theme.pickerBorderRadius,
+      child: Container(
         color: theme.backgroundColor,
-        borderRadius: theme.pickerBorderRadius,
-      ),
       child: Directionality(
         textDirection: TextDirection.ltr,
         child: Row(
