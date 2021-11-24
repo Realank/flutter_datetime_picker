@@ -241,6 +241,7 @@ class _DatePickerRoute<T> extends PopupRoute<T> {
         locale: this.locale,
         route: this,
         pickerModel: pickerModel,
+        borderRadius: theme.borderRadius,
       ),
     );
     return InheritedTheme.captureAll(context, bottomSheet);
@@ -254,15 +255,18 @@ class _DatePickerComponent extends StatefulWidget {
     required this.pickerModel,
     this.onChanged,
     this.locale,
+    this.borderRadius,
   }) : super(key: key);
-
-  final DateChangedCallback? onChanged;
 
   final _DatePickerRoute route;
 
+  final BasePickerModel pickerModel;
+
+  final DateChangedCallback? onChanged;
+
   final LocaleType? locale;
 
-  final BasePickerModel pickerModel;
+  final BorderRadius? borderRadius;
 
   @override
   State<StatefulWidget> createState() {
@@ -299,7 +303,8 @@ class _DatePickerState extends State<_DatePickerComponent> {
         animation: widget.route.animation!,
         builder: (BuildContext context, Widget? child) {
           final double bottomPadding = MediaQuery.of(context).padding.bottom;
-          return ClipRect(
+          return ClipRRect(
+            borderRadius: widget.borderRadius,
             child: CustomSingleChildLayout(
               delegate: _BottomPickerLayout(
                 widget.route.animation!.value,
