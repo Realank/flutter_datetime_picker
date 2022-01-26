@@ -31,9 +31,9 @@ class DatePicker {
     locale: LocaleType.en,
     DateTime? currentTime,
     DatePickerTheme? theme,
+    bool useRootNavigator: false,
   }) async {
-    return await Navigator.push(
-      context,
+    return await Navigator.of(context, rootNavigator: useRootNavigator).push(
       _DatePickerRoute(
         showTitleActions: showTitleActions,
         onChanged: onChanged,
@@ -66,9 +66,9 @@ class DatePicker {
     locale: LocaleType.en,
     DateTime? currentTime,
     DatePickerTheme? theme,
+    bool useRootNavigator: false,
   }) async {
-    return await Navigator.push(
-      context,
+    return await Navigator.of(context, rootNavigator: useRootNavigator).push(
       _DatePickerRoute(
         showTitleActions: showTitleActions,
         onChanged: onChanged,
@@ -99,9 +99,9 @@ class DatePicker {
     locale: LocaleType.en,
     DateTime? currentTime,
     DatePickerTheme? theme,
+    bool useRootNavigator: false,
   }) async {
-    return await Navigator.push(
-      context,
+    return await Navigator.of(context, rootNavigator: useRootNavigator).push(
       _DatePickerRoute(
         showTitleActions: showTitleActions,
         onChanged: onChanged,
@@ -133,9 +133,9 @@ class DatePicker {
     locale: LocaleType.en,
     DateTime? currentTime,
     DatePickerTheme? theme,
+    bool useRootNavigator: false,
   }) async {
-    return await Navigator.push(
-      context,
+    return await Navigator.of(context, rootNavigator: useRootNavigator).push(
       _DatePickerRoute(
         showTitleActions: showTitleActions,
         onChanged: onChanged,
@@ -167,9 +167,9 @@ class DatePicker {
     locale: LocaleType.en,
     BasePickerModel? pickerModel,
     DatePickerTheme? theme,
+    bool useRootNavigator: false,
   }) async {
-    return await Navigator.push(
-      context,
+    return await Navigator.of(context, rootNavigator: useRootNavigator).push(
       _DatePickerRoute(
         showTitleActions: showTitleActions,
         onChanged: onChanged,
