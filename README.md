@@ -15,6 +15,7 @@ you can choose date / time / date&time in multiple languages:
 - Bulgarian(bg)
 - Catalan(cat)
 - Chinese(zh)
+- Czech (cs)
 - Danish(da)
 - Dutch(nl)
 - English(en)
