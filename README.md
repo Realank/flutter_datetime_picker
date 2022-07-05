@@ -21,6 +21,7 @@ you can choose date / time / date&time in multiple languages:
 - French(fr)
 - German(de)
 - Hebrew(he)
+- Hungarian(hu)
 - Indonesian(id)
 - Italian(it)
 - Japanese(jp)
