@@ -353,7 +353,12 @@ class _DatePickerState extends State<_DatePickerComponent> {
       child: Container(
         padding: EdgeInsets.all(8.0),
         height: theme.containerHeight,
-        decoration: BoxDecoration(color: theme.backgroundColor),
+        decoration: BoxDecoration(
+          color: theme.backgroundColor,
+          border: Border.symmetric(
+            vertical: BorderSide(),
+          ),
+        ),
         child: NotificationListener(
           onNotification: (ScrollNotification notification) {
             if (notification.depth == 0 &&
@@ -479,6 +484,9 @@ class _DatePickerState extends State<_DatePickerComponent> {
       height: theme.titleHeight,
       decoration: BoxDecoration(
         color: theme.headerColor ?? theme.backgroundColor,
+        border: Border.symmetric(
+          vertical: BorderSide(),
+        ),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
