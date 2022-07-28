@@ -356,7 +356,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
         decoration: BoxDecoration(
           color: theme.backgroundColor,
           border: Border.symmetric(
-            vertical: BorderSide(),
+            horizontal: BorderSide(),
           ),
         ),
         child: NotificationListener(
@@ -477,15 +477,15 @@ class _DatePickerState extends State<_DatePickerComponent> {
 
   // Title View
   Widget _renderTitleActionsView(DatePickerTheme theme) {
-    final done = _localeDone();
-    final cancel = _localeCancel();
+    final done = _localeDone().toUpperCase();
+    final cancel = _localeCancel().toUpperCase();
 
     return Container(
       height: theme.titleHeight,
       decoration: BoxDecoration(
         color: theme.headerColor ?? theme.backgroundColor,
         border: Border.symmetric(
-          vertical: BorderSide(),
+          horizontal: BorderSide(),
         ),
       ),
       child: Row(
