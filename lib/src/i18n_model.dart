@@ -1416,8 +1416,8 @@ final _i18nModel = <LocaleType, Map<String, Object>>{
     'am': 'לפנה״צ',
     'pm': 'אחה״צ',
   },
-  LocaleType.laos: {
-    //lao
+  LocaleType.la: {
+    //laos
     'cancel': 'ຍົກເລີກ',
     'done': 'ຕົກລົງ',
     'today': 'ມື້​ນີ້',
