@@ -1,15 +1,17 @@
 library flutter_datetime_picker;
 
 import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:flutter_datetime_picker/src/datetime_picker_theme.dart';
+import 'package:flutter_datetime_picker/src/date_format.dart';
 import 'package:flutter_datetime_picker/src/date_model.dart';
+import 'package:flutter_datetime_picker/src/datetime_picker_theme.dart';
 import 'package:flutter_datetime_picker/src/i18n_model.dart';
 
-export 'package:flutter_datetime_picker/src/datetime_picker_theme.dart';
 export 'package:flutter_datetime_picker/src/date_model.dart';
+export 'package:flutter_datetime_picker/src/datetime_picker_theme.dart';
 export 'package:flutter_datetime_picker/src/i18n_model.dart';
 
 typedef DateChangedCallback(DateTime time);
@@ -384,7 +386,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
                 height: theme.itemHeight,
                 alignment: Alignment.center,
                 child: Text(
-                  content,
+                  widget.locale == LocaleType.ar ? content.toArabic : content,
                   style: theme.itemStyle,
                   textAlign: TextAlign.start,
                 ),
@@ -487,7 +489,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
             height: theme.titleHeight,
             child: CupertinoButton(
               pressedOpacity: 0.3,
-              padding: EdgeInsetsDirectional.only(start: 16, top: 0),
+              padding: EdgeInsetsDirectional.only(start: 16, top: 0, end: 16),
               child: Text(
                 '$cancel',
                 style: theme.cancelStyle,
@@ -504,7 +506,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
             height: theme.titleHeight,
             child: CupertinoButton(
               pressedOpacity: 0.3,
-              padding: EdgeInsetsDirectional.only(end: 16, top: 0),
+              padding: EdgeInsetsDirectional.only(end: 16, top: 0, start: 16),
               child: Text(
                 '$done',
                 style: theme.doneStyle,
