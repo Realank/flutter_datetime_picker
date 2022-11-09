@@ -158,6 +158,32 @@ class HomePage extends StatelessWidget {
                 )),
             TextButton(
                 onPressed: () {
+                  DatePicker.showDatePicker(context,
+                      showTitleActions: true,
+                      minTime: DateTime(2018, 3, 5),
+                      maxTime: DateTime(2019, 6, 7),
+                      theme: DatePickerTheme(
+                          headerColor: Colors.red,
+                          backgroundColor: Colors.blue,
+                          itemStyle: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18),
+                          doneStyle:
+                              TextStyle(color: Colors.white, fontSize: 16)),
+                      onChanged: (date) {
+                    print('change $date in time zone ' +
+                        date.timeZoneOffset.inHours.toString());
+                  }, onConfirm: (date) {
+                    print('confirm $date');
+                  }, currentTime: DateTime.now(), locale: LocaleType.ar);
+                },
+                child: Text(
+                  'show date picker(arabic case &date time range)',
+                  style: TextStyle(color: Colors.blue),
+                )),
+            TextButton(
+                onPressed: () {
                   DatePicker.showDateTimePicker(context,
                       showTitleActions: true,
                       minTime: DateTime(2020, 5, 5, 20, 50),
