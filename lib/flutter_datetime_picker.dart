@@ -4,6 +4,7 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:flutter_datetime_picker/src/GreeRouteDatePickerModel.dart';
 import 'package:flutter_datetime_picker/src/datetime_picker_theme.dart';
 import 'package:flutter_datetime_picker/src/date_model.dart';
 import 'package:flutter_datetime_picker/src/i18n_model.dart';
@@ -17,107 +18,107 @@ typedef DateCancelledCallback();
 typedef String? StringAtIndexCallBack(int index);
 
 class DatePicker {
-  ///
-  /// Display date picker bottom sheet.
-  ///
-  static Future<DateTime?> showDatePicker(
-    BuildContext context, {
-    bool showTitleActions: true,
-    DateTime? minTime,
-    DateTime? maxTime,
-    DateChangedCallback? onChanged,
-    DateChangedCallback? onConfirm,
-    DateCancelledCallback? onCancel,
-    locale: LocaleType.en,
-    DateTime? currentTime,
-    DatePickerTheme? theme,
-  }) async {
-    return await Navigator.push(
-      context,
-      _DatePickerRoute(
-        showTitleActions: showTitleActions,
-        onChanged: onChanged,
-        onConfirm: onConfirm,
-        onCancel: onCancel,
-        locale: locale,
-        theme: theme,
-        barrierLabel:
-            MaterialLocalizations.of(context).modalBarrierDismissLabel,
-        pickerModel: DatePickerModel(
-          currentTime: currentTime,
-          maxTime: maxTime,
-          minTime: minTime,
-          locale: locale,
-        ),
-      ),
-    );
-  }
-
-  ///
-  /// Display time picker bottom sheet.
-  ///
-  static Future<DateTime?> showTimePicker(
-    BuildContext context, {
-    bool showTitleActions: true,
-    bool showSecondsColumn: true,
-    DateChangedCallback? onChanged,
-    DateChangedCallback? onConfirm,
-    DateCancelledCallback? onCancel,
-    locale: LocaleType.en,
-    DateTime? currentTime,
-    DatePickerTheme? theme,
-  }) async {
-    return await Navigator.push(
-      context,
-      _DatePickerRoute(
-        showTitleActions: showTitleActions,
-        onChanged: onChanged,
-        onConfirm: onConfirm,
-        onCancel: onCancel,
-        locale: locale,
-        theme: theme,
-        barrierLabel:
-            MaterialLocalizations.of(context).modalBarrierDismissLabel,
-        pickerModel: TimePickerModel(
-          currentTime: currentTime,
-          locale: locale,
-          showSecondsColumn: showSecondsColumn,
-        ),
-      ),
-    );
-  }
-
-  ///
-  /// Display time picker bottom sheet with AM/PM.
-  ///
-  static Future<DateTime?> showTime12hPicker(
-    BuildContext context, {
-    bool showTitleActions: true,
-    DateChangedCallback? onChanged,
-    DateChangedCallback? onConfirm,
-    DateCancelledCallback? onCancel,
-    locale: LocaleType.en,
-    DateTime? currentTime,
-    DatePickerTheme? theme,
-  }) async {
-    return await Navigator.push(
-      context,
-      _DatePickerRoute(
-        showTitleActions: showTitleActions,
-        onChanged: onChanged,
-        onConfirm: onConfirm,
-        onCancel: onCancel,
-        locale: locale,
-        theme: theme,
-        barrierLabel:
-            MaterialLocalizations.of(context).modalBarrierDismissLabel,
-        pickerModel: Time12hPickerModel(
-          currentTime: currentTime,
-          locale: locale,
-        ),
-      ),
-    );
-  }
+  // ///
+  // /// Display date picker bottom sheet.
+  // ///
+  // static Future<DateTime?> showDatePicker(
+  //   BuildContext context, {
+  //   bool showTitleActions: true,
+  //   DateTime? minTime,
+  //   DateTime? maxTime,
+  //   DateChangedCallback? onChanged,
+  //   DateChangedCallback? onConfirm,
+  //   DateCancelledCallback? onCancel,
+  //   locale: LocaleType.en,
+  //   DateTime? currentTime,
+  //   DatePickerTheme? theme,
+  // }) async {
+  //   return await Navigator.push(
+  //     context,
+  //     _DatePickerRoute(
+  //       showTitleActions: showTitleActions,
+  //       onChanged: onChanged,
+  //       onConfirm: onConfirm,
+  //       onCancel: onCancel,
+  //       locale: locale,
+  //       theme: theme,
+  //       barrierLabel:
+  //           MaterialLocalizations.of(context).modalBarrierDismissLabel,
+  //       pickerModel: DatePickerModel(
+  //         currentTime: currentTime,
+  //         maxTime: maxTime,
+  //         minTime: minTime,
+  //         locale: locale,
+  //       ),
+  //     ),
+  //   );
+  // }
+  //
+  // ///
+  // /// Display time picker bottom sheet.
+  // ///
+  // static Future<DateTime?> showTimePicker(
+  //   BuildContext context, {
+  //   bool showTitleActions: true,
+  //   bool showSecondsColumn: true,
+  //   DateChangedCallback? onChanged,
+  //   DateChangedCallback? onConfirm,
+  //   DateCancelledCallback? onCancel,
+  //   locale: LocaleType.en,
+  //   DateTime? currentTime,
+  //   DatePickerTheme? theme,
+  // }) async {
+  //   return await Navigator.push(
+  //     context,
+  //     _DatePickerRoute(
+  //       showTitleActions: showTitleActions,
+  //       onChanged: onChanged,
+  //       onConfirm: onConfirm,
+  //       onCancel: onCancel,
+  //       locale: locale,
+  //       theme: theme,
+  //       barrierLabel:
+  //           MaterialLocalizations.of(context).modalBarrierDismissLabel,
+  //       pickerModel: TimePickerModel(
+  //         currentTime: currentTime,
+  //         locale: locale,
+  //         showSecondsColumn: showSecondsColumn,
+  //       ),
+  //     ),
+  //   );
+  // }
+  //
+  // ///
+  // /// Display time picker bottom sheet with AM/PM.
+  // ///
+  // static Future<DateTime?> showTime12hPicker(
+  //   BuildContext context, {
+  //   bool showTitleActions: true,
+  //   DateChangedCallback? onChanged,
+  //   DateChangedCallback? onConfirm,
+  //   DateCancelledCallback? onCancel,
+  //   locale: LocaleType.en,
+  //   DateTime? currentTime,
+  //   DatePickerTheme? theme,
+  // }) async {
+  //   return await Navigator.push(
+  //     context,
+  //     _DatePickerRoute(
+  //       showTitleActions: showTitleActions,
+  //       onChanged: onChanged,
+  //       onConfirm: onConfirm,
+  //       onCancel: onCancel,
+  //       locale: locale,
+  //       theme: theme,
+  //       barrierLabel:
+  //           MaterialLocalizations.of(context).modalBarrierDismissLabel,
+  //       pickerModel: Time12hPickerModel(
+  //         currentTime: currentTime,
+  //         locale: locale,
+  //       ),
+  //     ),
+  //   );
+  // }
 
   ///
   /// Display date&time picker bottom sheet.
@@ -155,19 +156,18 @@ class DatePicker {
     );
   }
 
-  ///
-  /// Display date picker bottom sheet witch custom picker model.
-  ///
-  static Future<DateTime?> showPicker(
-    BuildContext context, {
-    bool showTitleActions: true,
-    DateChangedCallback? onChanged,
-    DateChangedCallback? onConfirm,
-    DateCancelledCallback? onCancel,
-    locale: LocaleType.en,
-    BasePickerModel? pickerModel,
-    DatePickerTheme? theme,
-  }) async {
+  static Future<DateTime?> showGreeRouteDateTimePicker(
+      BuildContext context, {
+        bool showTitleActions: true,
+        DateTime? minTime,
+        DateTime? maxTime,
+        DateChangedCallback? onChanged,
+        DateChangedCallback? onConfirm,
+        DateCancelledCallback? onCancel,
+        locale: LocaleType.en,
+        DateTime? currentTime,
+        DatePickerTheme? theme,
+      }) async {
     return await Navigator.push(
       context,
       _DatePickerRoute(
@@ -178,11 +178,84 @@ class DatePicker {
         locale: locale,
         theme: theme,
         barrierLabel:
-            MaterialLocalizations.of(context).modalBarrierDismissLabel,
-        pickerModel: pickerModel,
+        MaterialLocalizations.of(context).modalBarrierDismissLabel,
+        pickerModel: GreeRouteDatePickerModel(
+          currentTime: currentTime,
+          minTime: minTime,
+          maxTime: maxTime,
+          locale: locale,
+        ),
       ),
     );
   }
+
+
+  //
+  //
+  // ///
+  // /// 格力路径规划时间选择器
+  // ///
+  // static Future<DateTime?> showGreeRouteDatePicker(
+  //     BuildContext context, {
+  //       bool showTitleActions: true,
+  //       DateTime? minTime,
+  //       DateTime? maxTime,
+  //       DateChangedCallback? onChanged,
+  //       DateChangedCallback? onConfirm,
+  //       DateCancelledCallback? onCancel,
+  //       locale: LocaleType.en,
+  //       DateTime? currentTime,
+  //       DatePickerTheme? theme,
+  //     }) async {
+  //   return await Navigator.push(
+  //     context,
+  //     _DatePickerRoute(
+  //       showTitleActions: showTitleActions,
+  //       onChanged: onChanged,
+  //       onConfirm: onConfirm,
+  //       onCancel: onCancel,
+  //       locale: locale,
+  //       theme: theme,
+  //       barrierLabel:
+  //       MaterialLocalizations.of(context).modalBarrierDismissLabel,
+  //       pickerModel: DateTimePickerModel(
+  //         currentTime: currentTime,
+  //         minTime: minTime,
+  //         maxTime: maxTime,
+  //         locale: locale,
+  //       ),
+  //     ),
+  //   );
+  // }
+  //
+  // ///
+  // /// Display date picker bottom sheet witch custom picker model.
+  // ///
+  // static Future<DateTime?> showPicker(
+  //   BuildContext context, {
+  //   bool showTitleActions: true,
+  //   DateChangedCallback? onChanged,
+  //   DateChangedCallback? onConfirm,
+  //   DateCancelledCallback? onCancel,
+  //   locale: LocaleType.en,
+  //   BasePickerModel? pickerModel,
+  //   DatePickerTheme? theme,
+  // }) async {
+  //   return await Navigator.push(
+  //     context,
+  //     _DatePickerRoute(
+  //       showTitleActions: showTitleActions,
+  //       onChanged: onChanged,
+  //       onConfirm: onConfirm,
+  //       onCancel: onCancel,
+  //       locale: locale,
+  //       theme: theme,
+  //       barrierLabel:
+  //           MaterialLocalizations.of(context).modalBarrierDismissLabel,
+  //       pickerModel: pickerModel,
+  //     ),
+  //   );
+  // }
 }
 
 class _DatePickerRoute<T> extends PopupRoute<T> {
@@ -339,6 +412,26 @@ class _DatePickerState extends State<_DatePickerComponent> {
     return itemView;
   }
 
+  /// 上下分割线
+  Widget _buildMagnifierScreen(double itemExtent) {
+    final Color resolvedBorderColor = CupertinoDynamicColor.resolve(Color(0xFFEBEDF5), context);
+    return IgnorePointer(
+      child: Center(
+        child: Container(
+          decoration: BoxDecoration(
+            border: Border(
+              top: BorderSide(width: 0.0, color: resolvedBorderColor),
+              bottom: BorderSide(width: 0.0, color: resolvedBorderColor),
+            ),
+          ),
+          constraints: BoxConstraints.expand(
+            height: itemExtent,
+          ),
+        ),
+      ),
+    );
+  }
+
   Widget _renderColumnView(
     ValueKey key,
     DatePickerTheme theme,
@@ -351,7 +444,6 @@ class _DatePickerState extends State<_DatePickerComponent> {
     return Expanded(
       flex: layoutProportion,
       child: Container(
-        padding: EdgeInsets.all(8.0),
         height: theme.containerHeight,
         decoration: BoxDecoration(color: theme.backgroundColor),
         child: NotificationListener(
@@ -369,6 +461,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
           child: CupertinoPicker.builder(
             key: key,
             backgroundColor: theme.backgroundColor,
+            selectionOverlay: _buildMagnifierScreen(theme.itemHeight),
             scrollController: scrollController as FixedExtentScrollController,
             itemExtent: theme.itemHeight,
             onSelectedItemChanged: (int index) {
