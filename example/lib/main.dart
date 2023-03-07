@@ -142,6 +142,7 @@ class HomePage extends StatelessWidget {
                     showTitleActions: true,
                     minTime: DateTime.now(),
                     maxTime: DateTime.now().add(Duration(days: 1000)),
+                    theme: DatePickerTheme(title: '开始时间'),
                     onChanged: (date) {
                       print('change $date in time zone ' + date.timeZoneOffset.inHours.toString());
                     },
