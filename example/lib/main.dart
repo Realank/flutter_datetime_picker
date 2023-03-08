@@ -140,8 +140,8 @@ class HomePage extends StatelessWidget {
                   DatePicker.showGreeRouteDateTimePicker(
                     context,
                     showTitleActions: true,
-                    minTime: DateTime.now(),
-                    maxTime: DateTime.now().add(Duration(days: 1000)),
+                    minTime: DateTime(2023, 3, 8, 16, 28),
+                    maxTime: DateTime(2023, 3, 9, 2, 2),
                     theme: DatePickerTheme(title: '开始时间'),
                     onChanged: (date) {
                       print('change $date in time zone ' + date.timeZoneOffset.inHours.toString());
