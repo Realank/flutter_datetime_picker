@@ -42,15 +42,19 @@ class GreeRouteDatePickerModel extends DateTimePickerModel {
       }
 
       /// min hour  大于最小 minute
-      if ((minTime?.hour ?? 0) == hour) {
-        return int.parse(minute ?? '0') > (minTime?.minute ?? 0) ? '$minute 分' : null;
+      if ((minTime?.hour ?? 0) == hour && minute != null) {
+        int _minute = int.parse(minute);
+        if (_minute >= (minTime?.minute ?? 0) && _minute <= (maxTime?.minute ?? 0)) {
+          return '$minute 分';
+        }
+        return null;
       }
 
       /// max hour  小于最大 minute
       if ((maxTime?.hour ?? 0) == hour && minute != null) {
-        return int.parse(minute ?? '0') <= (maxTime?.minute ?? 0) ? '$minute 分' : null;
+        print('${int.parse(minute)}    ${maxTime?.minute ?? 0}    ${int.parse(minute) <= (maxTime?.minute ?? 0)}');
+        return int.parse(minute) <= (maxTime?.minute ?? 0) ? '$minute 分' : null;
       }
-      return null;
     }
     return minute == null ? null : '$minute 分';
   }
