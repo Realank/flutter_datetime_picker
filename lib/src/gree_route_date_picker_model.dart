@@ -18,6 +18,7 @@ class GreeRouteDatePickerModel extends DateTimePickerModel {
   @override
   String? middleStringAtIndex(int index) {
     String? hour = super.middleStringAtIndex(index);
+
     /// 修复时间为同一天的显示bug
     if (isAtSameDay(maxTime, minTime)) {
       // hour
@@ -34,13 +35,20 @@ class GreeRouteDatePickerModel extends DateTimePickerModel {
     String? minute = super.rightStringAtIndex(index);
     int hour = finalTime().hour;
 
-    /// 修复时间为同一天的显示bug
+    /// min max 为同一天
     if (isAtSameDay(maxTime, minTime)) {
       if (hour < (maxTime?.hour ?? 0)) {
         return minute == null ? null : '$minute 分';
       }
-      if (int.parse(minute ?? '0') <= (maxTime?.minute ?? 0) && int.parse(minute ?? '0') >= (minTime?.minute ?? 0)) {
-        return minute == null ? null : '$minute 分';
+
+      /// min hour  大于最小 minute
+      if ((minTime?.hour ?? 0) == hour) {
+        return int.parse(minute ?? '0') > (minTime?.minute ?? 0) ? '$minute 分' : null;
+      }
+
+      /// max hour  小于最大 minute
+      if ((maxTime?.hour ?? 0) == hour && minute != null) {
+        return int.parse(minute ?? '0') <= (maxTime?.minute ?? 0) ? '$minute 分' : null;
       }
       return null;
     }
