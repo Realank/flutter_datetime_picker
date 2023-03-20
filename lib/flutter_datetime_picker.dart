@@ -378,7 +378,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
                     style: theme.cancelStyle,
                   ),
                   onPressed: () {
-                    Navigator.pop(context);
+                    Navigator.pop(context, widget.pickerModel.finalTime());
                     if (widget.route.onCancel != null) {
                       widget.route.onCancel!();
                     }

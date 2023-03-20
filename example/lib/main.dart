@@ -150,7 +150,11 @@ class HomePage extends StatelessWidget {
                       print('confirm $date');
                     },
                     locale: LocaleType.zh,
-                  );
+                  ).then((date) {
+
+                    print('当前时间   $date');
+
+                  });
                 },
                 child: Text(
                   '导航 DatePicker',
