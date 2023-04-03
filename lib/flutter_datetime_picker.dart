@@ -156,7 +156,7 @@ class DatePicker {
   }
 
   ///
-  /// Display date picker bottom sheet witch custom picker model.
+  /// Display date picker bottom sheet with custom picker model.
   ///
   static Future<DateTime?> showPicker(
     BuildContext context, {
