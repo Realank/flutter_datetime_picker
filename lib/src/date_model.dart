@@ -376,9 +376,11 @@ class DatePickerModel extends CommonPickerModel {
 class TimePickerModel extends CommonPickerModel {
   bool showSecondsColumn;
 
-  TimePickerModel(
-      {DateTime? currentTime, LocaleType? locale, this.showSecondsColumn: true})
-      : super(locale: locale) {
+  TimePickerModel({
+    DateTime? currentTime,
+    LocaleType? locale,
+    this.showSecondsColumn = true,
+  }) : super(locale: locale) {
     this.currentTime = currentTime ?? DateTime.now();
 
     _currentLeftIndex = this.currentTime.hour;

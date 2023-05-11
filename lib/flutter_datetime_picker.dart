@@ -3,8 +3,8 @@ library flutter_datetime_picker;
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:flutter_datetime_picker/src/datetime_picker_theme.dart';
+import 'package:flutter_datetime_picker/src/datetime_picker_theme.dart'
+    as datetime_picker_theme;
 import 'package:flutter_datetime_picker/src/date_model.dart';
 import 'package:flutter_datetime_picker/src/i18n_model.dart';
 
@@ -22,15 +22,15 @@ class DatePicker {
   ///
   static Future<DateTime?> showDatePicker(
     BuildContext context, {
-    bool showTitleActions: true,
+    bool showTitleActions = true,
     DateTime? minTime,
     DateTime? maxTime,
     DateChangedCallback? onChanged,
     DateChangedCallback? onConfirm,
     DateCancelledCallback? onCancel,
-    locale: LocaleType.en,
+    locale = LocaleType.en,
     DateTime? currentTime,
-    DatePickerTheme? theme,
+    datetime_picker_theme.DatePickerTheme? theme,
   }) async {
     return await Navigator.push(
       context,
@@ -58,14 +58,14 @@ class DatePicker {
   ///
   static Future<DateTime?> showTimePicker(
     BuildContext context, {
-    bool showTitleActions: true,
-    bool showSecondsColumn: true,
+    bool showTitleActions = true,
+    bool showSecondsColumn = true,
     DateChangedCallback? onChanged,
     DateChangedCallback? onConfirm,
     DateCancelledCallback? onCancel,
-    locale: LocaleType.en,
+    locale = LocaleType.en,
     DateTime? currentTime,
-    DatePickerTheme? theme,
+    datetime_picker_theme.DatePickerTheme? theme,
   }) async {
     return await Navigator.push(
       context,
@@ -92,13 +92,13 @@ class DatePicker {
   ///
   static Future<DateTime?> showTime12hPicker(
     BuildContext context, {
-    bool showTitleActions: true,
+    bool showTitleActions = true,
     DateChangedCallback? onChanged,
     DateChangedCallback? onConfirm,
     DateCancelledCallback? onCancel,
-    locale: LocaleType.en,
+    locale = LocaleType.en,
     DateTime? currentTime,
-    DatePickerTheme? theme,
+    datetime_picker_theme.DatePickerTheme? theme,
   }) async {
     return await Navigator.push(
       context,
@@ -124,15 +124,15 @@ class DatePicker {
   ///
   static Future<DateTime?> showDateTimePicker(
     BuildContext context, {
-    bool showTitleActions: true,
+    bool showTitleActions = true,
     DateTime? minTime,
     DateTime? maxTime,
     DateChangedCallback? onChanged,
     DateChangedCallback? onConfirm,
     DateCancelledCallback? onCancel,
-    locale: LocaleType.en,
+    locale = LocaleType.en,
     DateTime? currentTime,
-    DatePickerTheme? theme,
+    datetime_picker_theme.DatePickerTheme? theme,
   }) async {
     return await Navigator.push(
       context,
@@ -160,13 +160,13 @@ class DatePicker {
   ///
   static Future<DateTime?> showPicker(
     BuildContext context, {
-    bool showTitleActions: true,
+    bool showTitleActions = true,
     DateChangedCallback? onChanged,
     DateChangedCallback? onConfirm,
     DateCancelledCallback? onCancel,
-    locale: LocaleType.en,
+    locale = LocaleType.en,
     BasePickerModel? pickerModel,
-    DatePickerTheme? theme,
+    datetime_picker_theme.DatePickerTheme? theme,
   }) async {
     return await Navigator.push(
       context,
@@ -191,13 +191,13 @@ class _DatePickerRoute<T> extends PopupRoute<T> {
     this.onChanged,
     this.onConfirm,
     this.onCancel,
-    DatePickerTheme? theme,
+    datetime_picker_theme.DatePickerTheme? theme,
     this.barrierLabel,
     this.locale,
     RouteSettings? settings,
     BasePickerModel? pickerModel,
   })  : this.pickerModel = pickerModel ?? DatePickerModel(),
-        this.theme = theme ?? DatePickerTheme(),
+        this.theme = theme ?? datetime_picker_theme.DatePickerTheme(),
         super(settings: settings);
 
   final bool? showTitleActions;
@@ -205,7 +205,7 @@ class _DatePickerRoute<T> extends PopupRoute<T> {
   final DateChangedCallback? onConfirm;
   final DateCancelledCallback? onCancel;
   final LocaleType? locale;
-  final DatePickerTheme theme;
+  final datetime_picker_theme.DatePickerTheme theme;
   final BasePickerModel pickerModel;
 
   @override
@@ -293,7 +293,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
 
   @override
   Widget build(BuildContext context) {
-    DatePickerTheme theme = widget.route.theme;
+    datetime_picker_theme.DatePickerTheme theme = widget.route.theme;
     return GestureDetector(
       child: AnimatedBuilder(
         animation: widget.route.animation!,
@@ -326,7 +326,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
     }
   }
 
-  Widget _renderPickerView(DatePickerTheme theme) {
+  Widget _renderPickerView(datetime_picker_theme.DatePickerTheme theme) {
     Widget itemView = _renderItemView(theme);
     if (widget.route.showTitleActions == true) {
       return Column(
@@ -341,7 +341,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
 
   Widget _renderColumnView(
     ValueKey key,
-    DatePickerTheme theme,
+    datetime_picker_theme.DatePickerTheme theme,
     StringAtIndexCallBack stringAtIndexCB,
     ScrollController scrollController,
     int layoutProportion,
@@ -396,7 +396,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
     );
   }
 
-  Widget _renderItemView(DatePickerTheme theme) {
+  Widget _renderItemView(datetime_picker_theme.DatePickerTheme theme) {
     return Container(
       color: theme.backgroundColor,
       child: Directionality(
@@ -471,7 +471,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
   }
 
   // Title View
-  Widget _renderTitleActionsView(DatePickerTheme theme) {
+  Widget _renderTitleActionsView(datetime_picker_theme.DatePickerTheme theme) {
     final done = _localeDone();
     final cancel = _localeCancel();
 
@@ -535,15 +535,13 @@ class _BottomPickerLayout extends SingleChildLayoutDelegate {
   _BottomPickerLayout(
     this.progress,
     this.theme, {
-    this.itemCount,
     this.showTitleActions,
     this.bottomPadding = 0,
   });
 
   final double progress;
-  final int? itemCount;
   final bool? showTitleActions;
-  final DatePickerTheme theme;
+  final datetime_picker_theme.DatePickerTheme theme;
   final double bottomPadding;
 
   @override
