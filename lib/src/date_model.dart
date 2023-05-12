@@ -547,7 +547,7 @@ class TimePickerModel extends CommonPickerModel {
     if (showSecondsColumn)
       return ":";
     else
-      return "";
+      return "::";
   }
 
   //todo: runa ??
@@ -556,7 +556,11 @@ class TimePickerModel extends CommonPickerModel {
     if (showSecondsColumn)
       return [1, 1, 1 ,1];
     else
+<<<<<<< HEAD
       return [1, 1, 1, 0];
+=======
+      return [1, 1, 1, 1];
+>>>>>>> 194c776 (Working on adding additional column)
   }
 
   @override

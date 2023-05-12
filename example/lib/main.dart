@@ -11,9 +11,21 @@ class CustomPicker extends CommonPickerModel {
   CustomPicker({DateTime? currentTime, LocaleType? locale})
       : super(locale: locale) {
     this.currentTime = currentTime ?? DateTime.now();
+    //ADD:Runa
+    this.setveryLeftIndex(this.currentTime.day);
     this.setLeftIndex(this.currentTime.hour);
     this.setMiddleIndex(this.currentTime.minute);
     this.setRightIndex(this.currentTime.second);
+  }
+
+  //ADD:Runa
+  @override
+  String? veryLeftStringAtIndex(int index) {
+    if (index >= 0 && index < 24) {
+      return this.digits(index, 2);
+    } else {
+      return null;
+    }
   }
 
   @override
@@ -44,18 +56,23 @@ class CustomPicker extends CommonPickerModel {
   }
 
   @override
-  String leftDivider() {
+  String veryLeftDivider() {
     return "|";
+  }
+
+  @override
+  String leftDivider() {
+    return ":";
   }
 
   @override
   String rightDivider() {
-    return "|";
+    return "-";
   }
 
   @override
   List<int> layoutProportions() {
-    return [1, 2, 1];
+    return [1, 2,1];
   }
 
   @override
@@ -65,6 +82,8 @@ class CustomPicker extends CommonPickerModel {
             currentTime.year,
             currentTime.month,
             currentTime.day,
+        currentTime.hour,
+            this.currentveryLeftIndex(),
             this.currentLeftIndex(),
             this.currentMiddleIndex(),
             this.currentRightIndex())
@@ -72,6 +91,9 @@ class CustomPicker extends CommonPickerModel {
             currentTime.year,
             currentTime.month,
             currentTime.day,
+        currentTime.hour,
+
+        this.currentveryLeftIndex(),
             this.currentLeftIndex(),
             this.currentMiddleIndex(),
             this.currentRightIndex());
