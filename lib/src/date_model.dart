@@ -1,11 +1,16 @@
+import 'dart:math';
+
 import 'package:flutter_datetime_picker/src/date_format.dart';
 import 'package:flutter_datetime_picker/src/i18n_model.dart';
+
 import 'datetime_util.dart';
-import 'dart:math';
 
 //interface for picker data model
 abstract class BasePickerModel {
   //a getter method for left column data, return null to end list
+  //ADD: runa
+  String? veryLeftStringAtIndex(int index);
+
   String? leftStringAtIndex(int index);
 
   //a getter method for middle column data, return null to end list
@@ -13,6 +18,9 @@ abstract class BasePickerModel {
 
   //a getter method for right column data, return null to end list
   String? rightStringAtIndex(int index);
+
+  //ADD:Runa
+  void setveryLeftIndex(int index);
 
   //set selected left index
   void setLeftIndex(int index);
@@ -22,6 +30,9 @@ abstract class BasePickerModel {
 
   //set selected right index
   void setRightIndex(int index);
+
+  //ADD: Runa
+  int currentveryLeftIndex();
 
   //return current left index
   int currentLeftIndex();
@@ -47,10 +58,15 @@ abstract class BasePickerModel {
 
 //a base class for picker data model
 class CommonPickerModel extends BasePickerModel {
+  //ADD:Runa
+  late List<String> veryLeftList;
   late List<String> leftList;
   late List<String> middleList;
   late List<String> rightList;
   late DateTime currentTime;
+
+  //ADD:Runa
+  late int _currentveryLeftIndex;
   late int _currentLeftIndex;
   late int _currentMiddleIndex;
   late int _currentRightIndex;
@@ -59,6 +75,12 @@ class CommonPickerModel extends BasePickerModel {
 
   CommonPickerModel({LocaleType? locale})
       : this.locale = locale ?? LocaleType.en;
+
+  //ADD:Runa
+  @override
+  String? veryLeftStringAtIndex(int index) {
+    return null;
+  }
 
   @override
   String? leftStringAtIndex(int index) {
@@ -73,6 +95,12 @@ class CommonPickerModel extends BasePickerModel {
   @override
   String? rightStringAtIndex(int index) {
     return null;
+  }
+
+  //ADD:Runa
+  @override
+  int currentveryLeftIndex() {
+    return _currentveryLeftIndex;
   }
 
   @override
@@ -90,6 +118,12 @@ class CommonPickerModel extends BasePickerModel {
     return _currentRightIndex;
   }
 
+  //ADD:Runa
+  @override
+  void setveryLeftIndex(int index) {
+    _currentveryLeftIndex = index;
+  }
+
   @override
   void setLeftIndex(int index) {
     _currentLeftIndex = index;
@@ -105,6 +139,12 @@ class CommonPickerModel extends BasePickerModel {
     _currentRightIndex = index;
   }
 
+  //ADD:Runa
+  @override
+  String veryleftDivider() {
+    return "";
+  }
+
   @override
   String leftDivider() {
     return "";
@@ -117,7 +157,7 @@ class CommonPickerModel extends BasePickerModel {
 
   @override
   List<int> layoutProportions() {
-    return [1, 1, 1];
+    return [1, 1, 1, 1];
   }
 
   @override
@@ -131,11 +171,10 @@ class DatePickerModel extends CommonPickerModel {
   late DateTime maxTime;
   late DateTime minTime;
 
-  DatePickerModel(
-      {DateTime? currentTime,
-      DateTime? maxTime,
-      DateTime? minTime,
-      LocaleType? locale})
+  DatePickerModel({DateTime? currentTime,
+    DateTime? maxTime,
+    DateTime? minTime,
+    LocaleType? locale})
       : super(locale: locale) {
     this.maxTime = maxTime ?? DateTime(2049, 12, 31);
     this.minTime = minTime ?? DateTime(1970, 1, 1);
@@ -150,15 +189,27 @@ class DatePickerModel extends CommonPickerModel {
 
     this.currentTime = currentTime;
 
+    //ADD:Runa
+    _fillveryLeftLists();
     _fillLeftLists();
     _fillMiddleLists();
     _fillRightLists();
     int minMonth = _minMonthOfCurrentYear();
     int minDay = _minDayOfCurrentMonth();
+    //ADD:Runa
+    _currentveryLeftIndex = this.currentTime.day - this.minTime.day; //todo:runa
     _currentLeftIndex = this.currentTime.year - this.minTime.year;
     _currentMiddleIndex = this.currentTime.month - minMonth;
     _currentRightIndex = this.currentTime.day - minDay;
   }
+
+  //ADD:Runa
+  void _fillveryLeftLists() {
+    this.leftList = List.generate(maxTime.day - minTime.day + 1, (int index) {
+      // print('LEFT LIST... ${minTime.year + index}${_localeYear()}');
+      return '${minTime.day + index}${_localeYear()}';
+    });
+  } //TODO:runa _localeYear()?した3ブロック
 
   void _fillLeftLists() {
     this.leftList = List.generate(maxTime.year - minTime.year + 1, (int index) {
@@ -178,14 +229,14 @@ class DatePickerModel extends CommonPickerModel {
   int _maxDayOfCurrentMonth() {
     int dayCount = calcDateCount(currentTime.year, currentTime.month);
     return currentTime.year == maxTime.year &&
-            currentTime.month == maxTime.month
+        currentTime.month == maxTime.month
         ? maxTime.day
         : dayCount;
   }
 
   int _minDayOfCurrentMonth() {
     return currentTime.year == minTime.year &&
-            currentTime.month == minTime.month
+        currentTime.month == minTime.month
         ? minTime.day
         : 1;
   }
@@ -207,6 +258,57 @@ class DatePickerModel extends CommonPickerModel {
     });
   }
 
+  //ADD:Runa //TODO:Runa
+  @override
+  void setveryLeftIndex(int index) {
+    super.setLeftIndex(index);
+    //adjust middle
+    int destYear = index + minTime.year;
+    int minMonth = _minMonthOfCurrentYear();
+    DateTime newTime;
+    //change date time
+    if (currentTime.month == 2 && currentTime.day == 29) {
+      newTime = currentTime.isUtc
+          ? DateTime.utc(
+        destYear,
+        currentTime.month,
+        calcDateCount(destYear, 2),
+      )
+          : DateTime(
+        destYear,
+        currentTime.month,
+        calcDateCount(destYear, 2),
+      );
+    } else {
+      newTime = currentTime.isUtc
+          ? DateTime.utc(
+        destYear,
+        currentTime.month,
+        currentTime.day,
+      )
+          : DateTime(
+        destYear,
+        currentTime.month,
+        currentTime.day,
+      );
+    }
+    //min/max check
+    if (newTime.isAfter(maxTime)) {
+      currentTime = maxTime;
+    } else if (newTime.isBefore(minTime)) {
+      currentTime = minTime;
+    } else {
+      currentTime = newTime;
+    }
+
+    _fillMiddleLists();
+    _fillRightLists();
+    minMonth = _minMonthOfCurrentYear();
+    int minDay = _minDayOfCurrentMonth();
+    _currentMiddleIndex = currentTime.month - minMonth;
+    _currentRightIndex = currentTime.day - minDay;
+  }
+
   @override
   void setLeftIndex(int index) {
     super.setLeftIndex(index);
@@ -218,27 +320,27 @@ class DatePickerModel extends CommonPickerModel {
     if (currentTime.month == 2 && currentTime.day == 29) {
       newTime = currentTime.isUtc
           ? DateTime.utc(
-              destYear,
-              currentTime.month,
-              calcDateCount(destYear, 2),
-            )
+        destYear,
+        currentTime.month,
+        calcDateCount(destYear, 2),
+      )
           : DateTime(
-              destYear,
-              currentTime.month,
-              calcDateCount(destYear, 2),
-            );
+        destYear,
+        currentTime.month,
+        calcDateCount(destYear, 2),
+      );
     } else {
       newTime = currentTime.isUtc
           ? DateTime.utc(
-              destYear,
-              currentTime.month,
-              currentTime.day,
-            )
+        destYear,
+        currentTime.month,
+        currentTime.day,
+      )
           : DateTime(
-              destYear,
-              currentTime.month,
-              currentTime.day,
-            );
+        destYear,
+        currentTime.month,
+        currentTime.day,
+      );
     }
     //min/max check
     if (newTime.isAfter(maxTime)) {
@@ -268,15 +370,15 @@ class DatePickerModel extends CommonPickerModel {
     int dayCount = calcDateCount(currentTime.year, destMonth);
     newTime = currentTime.isUtc
         ? DateTime.utc(
-            currentTime.year,
-            destMonth,
-            currentTime.day <= dayCount ? currentTime.day : dayCount,
-          )
+      currentTime.year,
+      destMonth,
+      currentTime.day <= dayCount ? currentTime.day : dayCount,
+    )
         : DateTime(
-            currentTime.year,
-            destMonth,
-            currentTime.day <= dayCount ? currentTime.day : dayCount,
-          );
+      currentTime.year,
+      destMonth,
+      currentTime.day <= dayCount ? currentTime.day : dayCount,
+    );
     //min/max check
     if (newTime.isAfter(maxTime)) {
       currentTime = maxTime;
@@ -297,15 +399,25 @@ class DatePickerModel extends CommonPickerModel {
     int minDay = _minDayOfCurrentMonth();
     currentTime = currentTime.isUtc
         ? DateTime.utc(
-            currentTime.year,
-            currentTime.month,
-            minDay + index,
-          )
+      currentTime.year,
+      currentTime.month,
+      minDay + index,
+    )
         : DateTime(
-            currentTime.year,
-            currentTime.month,
-            minDay + index,
-          );
+      currentTime.year,
+      currentTime.month,
+      minDay + index,
+    );
+  }
+
+  //ADD:Runa
+  @override
+  String? veryLeftStringAtIndex(int index) {
+    if (index >= 0 && index < veryLeftList.length) {
+      return veryLeftList[index];
+    } else {
+      return null;
+    }
   }
 
   @override
@@ -381,9 +493,21 @@ class TimePickerModel extends CommonPickerModel {
       : super(locale: locale) {
     this.currentTime = currentTime ?? DateTime.now();
 
+    //ADD:Runa
+    _currentveryLeftIndex = this.currentTime.day;
     _currentLeftIndex = this.currentTime.hour;
     _currentMiddleIndex = this.currentTime.minute;
     _currentRightIndex = this.currentTime.second;
+  }
+
+  //ADD:Runa todo
+  @override
+  String? veryLeftStringAtIndex(int index) {
+    if (index >= 0 && index < 24) {
+      return digits(index, 2);
+    } else {
+      return null;
+    }
   }
 
   @override
@@ -426,21 +550,22 @@ class TimePickerModel extends CommonPickerModel {
       return "";
   }
 
+  //todo: runa ??
   @override
   List<int> layoutProportions() {
     if (showSecondsColumn)
-      return [1, 1, 1];
+      return [1, 1, 1 ,1];
     else
-      return [1, 1, 0];
+      return [1, 1, 1, 0];
   }
 
   @override
   DateTime finalTime() {
     return currentTime.isUtc
         ? DateTime.utc(currentTime.year, currentTime.month, currentTime.day,
-            _currentLeftIndex, _currentMiddleIndex, _currentRightIndex)
+        _currentLeftIndex, _currentMiddleIndex, _currentRightIndex)
         : DateTime(currentTime.year, currentTime.month, currentTime.day,
-            _currentLeftIndex, _currentMiddleIndex, _currentRightIndex);
+        _currentLeftIndex, _currentMiddleIndex, _currentRightIndex);
   }
 }
 
@@ -508,9 +633,9 @@ class Time12hPickerModel extends CommonPickerModel {
     int hour = _currentLeftIndex + 12 * _currentRightIndex;
     return currentTime.isUtc
         ? DateTime.utc(currentTime.year, currentTime.month, currentTime.day,
-            hour, _currentMiddleIndex, 0)
+        hour, _currentMiddleIndex, 0)
         : DateTime(currentTime.year, currentTime.month, currentTime.day, hour,
-            _currentMiddleIndex, 0);
+        _currentMiddleIndex, 0);
   }
 }
 
@@ -519,11 +644,10 @@ class DateTimePickerModel extends CommonPickerModel {
   DateTime? maxTime;
   DateTime? minTime;
 
-  DateTimePickerModel(
-      {DateTime? currentTime,
-      DateTime? maxTime,
-      DateTime? minTime,
-      LocaleType? locale})
+  DateTimePickerModel({DateTime? currentTime,
+    DateTime? maxTime,
+    DateTime? minTime,
+    LocaleType? locale})
       : super(locale: locale) {
     if (currentTime != null) {
       this.currentTime = currentTime;
@@ -572,7 +696,9 @@ class DateTimePickerModel extends CommonPickerModel {
   bool isAtSameDay(DateTime? day1, DateTime? day2) {
     return day1 != null &&
         day2 != null &&
-        day1.difference(day2).inDays == 0 &&
+        day1
+            .difference(day2)
+            .inDays == 0 &&
         day1.day == day2.day;
   }
 
@@ -696,3 +822,5 @@ class DateTimePickerModel extends CommonPickerModel {
     return ':';
   }
 }
+
+
