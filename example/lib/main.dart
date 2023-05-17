@@ -72,31 +72,30 @@ class CustomPicker extends CommonPickerModel {
 
   @override
   List<int> layoutProportions() {
-    return [1, 2,1];
+    return [1, 1, 1, 1];
   }
 
   @override
   DateTime finalTime() {
     return currentTime.isUtc
         ? DateTime.utc(
-            currentTime.year,
-            currentTime.month,
-            currentTime.day,
+        currentTime.year,
+        currentTime.month,
+        currentTime.day,
         currentTime.hour,
-            this.currentveryLeftIndex(),
-            this.currentLeftIndex(),
-            this.currentMiddleIndex(),
-            this.currentRightIndex())
-        : DateTime(
-            currentTime.year,
-            currentTime.month,
-            currentTime.day,
-        currentTime.hour,
-
         this.currentveryLeftIndex(),
-            this.currentLeftIndex(),
-            this.currentMiddleIndex(),
-            this.currentRightIndex());
+        this.currentLeftIndex(),
+        this.currentMiddleIndex(),
+        this.currentRightIndex())
+        : DateTime(
+        currentTime.year,
+        currentTime.month,
+        currentTime.day,
+        currentTime.hour,
+        this.currentveryLeftIndex(),
+        this.currentLeftIndex(),
+        this.currentMiddleIndex(),
+        this.currentRightIndex());
   }
 }
 

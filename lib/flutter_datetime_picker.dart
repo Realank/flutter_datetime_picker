@@ -407,11 +407,28 @@ class _DatePickerState extends State<_DatePickerComponent> {
             Container(
               child: widget.pickerModel.layoutProportions()[0] > 0
                   ? _renderColumnView(
+                  ValueKey(widget.pickerModel.currentLeftIndex()),
+                  theme,
+                  widget.pickerModel.veryLeftStringAtIndex,
+                  leftScrollCtrl,
+                  widget.pickerModel.layoutProportions()[0], (index) {
+                widget.pickerModel.setLeftIndex(index);
+              }, (index) {
+                setState(() {
+                  refreshScrollOffset();
+                  _notifyDateChanged();
+                });
+              })
+                  : null,
+            ),
+            Container(
+              child: widget.pickerModel.layoutProportions()[0] > 0
+                  ? _renderColumnView(
                       ValueKey(widget.pickerModel.currentLeftIndex()),
                       theme,
                       widget.pickerModel.leftStringAtIndex,
                       leftScrollCtrl,
-                      widget.pickerModel.layoutProportions()[0], (index) {
+                      widget.pickerModel.layoutProportions()[1], (index) {
                       widget.pickerModel.setLeftIndex(index);
                     }, (index) {
                       setState(() {
@@ -426,7 +443,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
               style: theme.itemStyle,
             ),
             Container(
-              child: widget.pickerModel.layoutProportions()[1] > 0
+              child: widget.pickerModel.layoutProportions()[2] > 0
                   ? _renderColumnView(
                       ValueKey(widget.pickerModel.currentLeftIndex()),
                       theme,
@@ -447,7 +464,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
               style: theme.itemStyle,
             ),
             Container(
-              child: widget.pickerModel.layoutProportions()[2] > 0
+              child: widget.pickerModel.layoutProportions()[3] > 0
                   ? _renderColumnView(
                       ValueKey(widget.pickerModel.currentMiddleIndex() * 100 +
                           widget.pickerModel.currentLeftIndex()),

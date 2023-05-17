@@ -1,3 +1,4 @@
+
 import 'dart:math';
 
 import 'package:flutter_datetime_picker/src/date_format.dart';
@@ -556,11 +557,7 @@ class TimePickerModel extends CommonPickerModel {
     if (showSecondsColumn)
       return [1, 1, 1 ,1];
     else
-<<<<<<< HEAD
       return [1, 1, 1, 0];
-=======
-      return [1, 1, 1, 1];
->>>>>>> 194c776 (Working on adding additional column)
   }
 
   @override
@@ -579,9 +576,24 @@ class Time12hPickerModel extends CommonPickerModel {
       : super(locale: locale) {
     this.currentTime = currentTime ?? DateTime.now();
 
+
+    _currentveryLeftIndex = this.currentTime.day;
     _currentLeftIndex = this.currentTime.hour % 12;
     _currentMiddleIndex = this.currentTime.minute;
     _currentRightIndex = this.currentTime.hour < 12 ? 0 : 1;
+  }
+
+  @override
+  String? veryLeftStringAtIndex(int index) {
+    if (index >= 0 && index < 31) {
+      if (index == 0) {
+        return digits(12, 2);
+      } else {
+        return digits(index, 2);
+      }
+    } else {
+      return null;
+    }
   }
 
   @override
@@ -686,9 +698,10 @@ class DateTimePickerModel extends CommonPickerModel {
       this.maxTime = null;
     }
 
-    _currentLeftIndex = 0;
-    _currentMiddleIndex = this.currentTime.hour;
-    _currentRightIndex = this.currentTime.minute;
+    _currentveryLeftIndex = 0;
+    _currentLeftIndex = this.currentTime.hour % 12;
+    _currentMiddleIndex = this.currentTime.minute;
+    _currentRightIndex = this.currentTime.hour < 12 ? 0 : 1;
     if (this.minTime != null && isAtSameDay(this.minTime!, this.currentTime)) {
       _currentMiddleIndex = this.currentTime.hour - this.minTime!.hour;
       if (_currentMiddleIndex == 0) {
@@ -707,7 +720,7 @@ class DateTimePickerModel extends CommonPickerModel {
   }
 
   @override
-  void setLeftIndex(int index) {
+  void setveryLeftIndex(int index) {
     super.setLeftIndex(index);
     DateTime time = currentTime.add(Duration(days: index));
     if (isAtSameDay(minTime, time)) {
@@ -720,25 +733,7 @@ class DateTimePickerModel extends CommonPickerModel {
   }
 
   @override
-  void setMiddleIndex(int index) {
-    super.setMiddleIndex(index);
-    DateTime time = currentTime.add(Duration(days: _currentLeftIndex));
-    if (isAtSameDay(minTime, time) && index == 0) {
-      var maxIndex = 60 - minTime!.minute - 1;
-      if (_currentRightIndex > maxIndex) {
-        _currentRightIndex = maxIndex;
-      }
-    } else if (isAtSameDay(maxTime, time) &&
-        _currentMiddleIndex == maxTime!.hour) {
-      var maxIndex = maxTime!.minute;
-      if (_currentRightIndex > maxIndex) {
-        _currentRightIndex = maxIndex;
-      }
-    }
-  }
-
-  @override
-  String? leftStringAtIndex(int index) {
+  String? veryLeftStringAtIndex(int index) {
     DateTime time = currentTime.add(Duration(days: index));
     if (minTime != null &&
         time.isBefore(minTime!) &&
@@ -753,51 +748,61 @@ class DateTimePickerModel extends CommonPickerModel {
   }
 
   @override
-  String? middleStringAtIndex(int index) {
-    if (index >= 0 && index < 24) {
-      DateTime time = currentTime.add(Duration(days: _currentLeftIndex));
-      if (isAtSameDay(minTime, time)) {
-        if (index >= 0 && index < 24 - minTime!.hour) {
-          return digits(minTime!.hour + index, 2);
-        } else {
-          return null;
-        }
-      } else if (isAtSameDay(maxTime, time)) {
-        if (index >= 0 && index <= maxTime!.hour) {
-          return digits(index, 2);
-        } else {
-          return null;
-        }
-      }
-      return digits(index, 2);
+  String? rightStringAtIndex(int index) {
+    if (index == 0) {
+      return i18nObjInLocale(this.locale)["am"] as String?;
+    } else if (index == 1) {
+      return i18nObjInLocale(this.locale)["pm"] as String?;
+    } else {
+      return null;
     }
-
-    return null;
   }
 
   @override
-  String? rightStringAtIndex(int index) {
-    if (index >= 0 && index < 60) {
-      DateTime time = currentTime.add(Duration(days: _currentLeftIndex));
-      if (isAtSameDay(minTime, time) && _currentMiddleIndex == 0) {
-        if (index >= 0 && index < 60 - minTime!.minute) {
-          return digits(minTime!.minute + index, 2);
-        } else {
-          return null;
-        }
-      } else if (isAtSameDay(maxTime, time) &&
-          _currentMiddleIndex >= maxTime!.hour) {
-        if (index >= 0 && index <= maxTime!.minute) {
-          return digits(index, 2);
-        } else {
-          return null;
-        }
+  String? leftStringAtIndex(int index) {
+    if (index >= 0 && index < 12) {
+      if (index == 0) {
+        return digits(12, 2);
+      } else {
+        return digits(index, 2);
       }
-      return digits(index, 2);
+    } else {
+      return null;
     }
-
-    return null;
   }
+
+  @override
+  String? middleStringAtIndex(int index) {
+    if (index >= 0 && index < 60) {
+      return digits(index, 2);
+    } else {
+      return null;
+    }
+  }
+
+  // @override
+  // String? rightStringAtIndex(int index) {
+  //   if (index >= 0 && index < 60) {
+  //     DateTime time = currentTime.add(Duration(days: _currentLeftIndex));
+  //     if (isAtSameDay(minTime, time) && _currentMiddleIndex == 0) {
+  //       if (index >= 0 && index < 60 - minTime!.minute) {
+  //         return digits(minTime!.minute + index, 2);
+  //       } else {
+  //         return null;
+  //       }
+  //     } else if (isAtSameDay(maxTime, time) &&
+  //         _currentMiddleIndex >= maxTime!.hour) {
+  //       if (index >= 0 && index <= maxTime!.minute) {
+  //         return digits(index, 2);
+  //       } else {
+  //         return null;
+  //       }
+  //     }
+  //     return digits(index, 2);
+  //   }
+  //
+  //   return null;
+  // }
 
   @override
   DateTime finalTime() {
@@ -818,13 +823,15 @@ class DateTimePickerModel extends CommonPickerModel {
 
   @override
   List<int> layoutProportions() {
-    return [4, 1, 1];
+    return [3, 1, 1, 1];
   }
 
   @override
-  String rightDivider() {
-    return ':';
+  String leftDivider() {
+    return ":";
   }
+
 }
+
 
 
