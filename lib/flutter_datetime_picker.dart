@@ -355,7 +355,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
     return Expanded(
       flex: layoutProportion,
       child: Container(
-        padding: EdgeInsets.all(8.0),
+        padding: EdgeInsets.all(0.0),
         height: theme.containerHeight,
         decoration: BoxDecoration(color: theme.backgroundColor),
         child: NotificationListener(
