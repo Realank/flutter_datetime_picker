@@ -570,30 +570,16 @@ class TimePickerModel extends CommonPickerModel {
   }
 }
 
+
 //a time picker model
 class Time12hPickerModel extends CommonPickerModel {
   Time12hPickerModel({DateTime? currentTime, LocaleType? locale})
       : super(locale: locale) {
     this.currentTime = currentTime ?? DateTime.now();
 
-
-    _currentveryLeftIndex = this.currentTime.day;
     _currentLeftIndex = this.currentTime.hour % 12;
     _currentMiddleIndex = this.currentTime.minute;
     _currentRightIndex = this.currentTime.hour < 12 ? 0 : 1;
-  }
-
-  @override
-  String? veryLeftStringAtIndex(int index) {
-    if (index >= 0 && index < 31) {
-      if (index == 0) {
-        return digits(12, 2);
-      } else {
-        return digits(index, 2);
-      }
-    } else {
-      return null;
-    }
   }
 
   @override
@@ -654,6 +640,7 @@ class Time12hPickerModel extends CommonPickerModel {
         _currentMiddleIndex, 0);
   }
 }
+
 
 // a date&time picker model
 class DateTimePickerModel extends CommonPickerModel {
