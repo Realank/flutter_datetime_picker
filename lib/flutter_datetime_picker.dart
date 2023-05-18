@@ -271,7 +271,9 @@ class _DatePickerComponent extends StatefulWidget {
 }
 
 class _DatePickerState extends State<_DatePickerComponent> {
-  late FixedExtentScrollController leftScrollCtrl,
+  late FixedExtentScrollController
+  veryLeftScrollCtrl,
+      leftScrollCtrl,
       middleScrollCtrl,
       rightScrollCtrl;
 
@@ -283,6 +285,8 @@ class _DatePickerState extends State<_DatePickerComponent> {
 
   void refreshScrollOffset() {
 //    print('refreshScrollOffset ${widget.pickerModel.currentRightIndex()}');
+    veryLeftScrollCtrl = FixedExtentScrollController(
+        initialItem: widget.pickerModel.currentveryLeftIndex());
     leftScrollCtrl = FixedExtentScrollController(
         initialItem: widget.pickerModel.currentLeftIndex());
     middleScrollCtrl = FixedExtentScrollController(
@@ -407,12 +411,12 @@ class _DatePickerState extends State<_DatePickerComponent> {
             Container(
               child: widget.pickerModel.layoutProportions()[0] > 0
                   ? _renderColumnView(
-                  ValueKey(widget.pickerModel.currentLeftIndex()),
+                  ValueKey("DateColumn"),
                   theme,
                   widget.pickerModel.veryLeftStringAtIndex,
-                  leftScrollCtrl,
+                  veryLeftScrollCtrl,
                   widget.pickerModel.layoutProportions()[0], (index) {
-                widget.pickerModel.setLeftIndex(index);
+                widget.pickerModel.setveryLeftIndex(index);
               }, (index) {
                 setState(() {
                   refreshScrollOffset();
@@ -421,10 +425,11 @@ class _DatePickerState extends State<_DatePickerComponent> {
               })
                   : null,
             ),
+
             Container(
-              child: widget.pickerModel.layoutProportions()[0] > 0
+              child: widget.pickerModel.layoutProportions()[1] > 0
                   ? _renderColumnView(
-                      ValueKey(widget.pickerModel.currentLeftIndex()),
+                      ValueKey("HourColumn"),
                       theme,
                       widget.pickerModel.leftStringAtIndex,
                       leftScrollCtrl,
@@ -445,7 +450,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
             Container(
               child: widget.pickerModel.layoutProportions()[2] > 0
                   ? _renderColumnView(
-                      ValueKey(widget.pickerModel.currentLeftIndex()),
+                      ValueKey("MinColumn"),
                       theme,
                       widget.pickerModel.middleStringAtIndex,
                       middleScrollCtrl,
@@ -466,8 +471,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
             Container(
               child: widget.pickerModel.layoutProportions()[3] > 0
                   ? _renderColumnView(
-                      ValueKey(widget.pickerModel.currentMiddleIndex() * 100 +
-                          widget.pickerModel.currentLeftIndex()),
+                      ValueKey("AMPMColumn"),
                       theme,
                       widget.pickerModel.rightStringAtIndex,
                       rightScrollCtrl,

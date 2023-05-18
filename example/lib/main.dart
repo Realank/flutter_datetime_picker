@@ -201,7 +201,7 @@ class HomePage extends StatelessWidget {
                         date.timeZoneOffset.inHours.toString());
                   }, onConfirm: (date) {
                     print('confirm $date');
-                  }, currentTime: DateTime(2008, 12, 31, 23, 12, 34));
+                  }, currentTime: DateTime.now());
                 },
                 child: Text(
                   'show date time picker (English-America)',

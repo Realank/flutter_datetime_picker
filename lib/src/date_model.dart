@@ -198,7 +198,7 @@ class DatePickerModel extends CommonPickerModel {
     int minMonth = _minMonthOfCurrentYear();
     int minDay = _minDayOfCurrentMonth();
     //ADD:Runa
-    _currentveryLeftIndex = this.currentTime.day - this.minTime.day; //todo:runa
+    _currentveryLeftIndex = this.currentTime.year - this.minTime.year; //todo:runa
     _currentLeftIndex = this.currentTime.year - this.minTime.year;
     _currentMiddleIndex = this.currentTime.month - minMonth;
     _currentRightIndex = this.currentTime.day - minDay;
@@ -735,6 +735,7 @@ class DateTimePickerModel extends CommonPickerModel {
   @override
   String? veryLeftStringAtIndex(int index) {
     DateTime time = currentTime.add(Duration(days: index));
+    DateTime nextTime = currentTime.add(Duration(days: index +1));
     if (minTime != null &&
         time.isBefore(minTime!) &&
         !isAtSameDay(minTime!, time)) {
@@ -743,8 +744,13 @@ class DateTimePickerModel extends CommonPickerModel {
         time.isAfter(maxTime!) &&
         !isAtSameDay(maxTime, time)) {
       return null;
+    }  if (time.year == DateTime.now().year) {
+      return formatDate(time, [ymdw], locale);
+    } else {
+      return formatDate(time, [D,' ',M,' ',d,', ',yyyy ], locale);
     }
-    return formatDate(time, [ymdw], locale);
+
+    // return formatDate(time, [mm,dd,D], locale); //ymdy //[D,' ',M,' ',d]
   }
 
   @override
