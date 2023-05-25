@@ -642,7 +642,7 @@ class Time12hPickerModel extends CommonPickerModel {
 }
 
 
-// a date&time picker model
+// a date&time picker model //todo
 class DateTimePickerModel extends CommonPickerModel {
   DateTime? maxTime;
   DateTime? minTime;
@@ -690,9 +690,9 @@ class DateTimePickerModel extends CommonPickerModel {
     _currentMiddleIndex = this.currentTime.minute;
     _currentRightIndex = this.currentTime.hour < 12 ? 0 : 1;
     if (this.minTime != null && isAtSameDay(this.minTime!, this.currentTime)) {
-      _currentMiddleIndex = this.currentTime.hour - this.minTime!.hour;
-      if (_currentMiddleIndex == 0) {
-        _currentRightIndex = this.currentTime.minute - this.minTime!.minute;
+      _currentLeftIndex = this.currentTime.hour - this.minTime!.hour;
+      if (_currentLeftIndex == 0) {
+        _currentMiddleIndex = this.currentTime.minute - this.minTime!.minute;
       }
     }
   }
@@ -711,11 +711,11 @@ class DateTimePickerModel extends CommonPickerModel {
     super.setLeftIndex(index);
     DateTime time = currentTime.add(Duration(days: index));
     if (isAtSameDay(minTime, time)) {
-      var index = min(24 - minTime!.hour - 1, _currentMiddleIndex);
-      this.setMiddleIndex(index);
+      var index = min(24 - minTime!.hour - 1, _currentLeftIndex);
+      this.setLeftIndex(index);
     } else if (isAtSameDay(maxTime, time)) {
-      var index = min(maxTime!.hour, _currentMiddleIndex);
-      this.setMiddleIndex(index);
+      var index = min(maxTime!.hour, _currentLeftIndex);
+      this.setLeftIndex(index);
     }
   }
 
@@ -797,15 +797,34 @@ class DateTimePickerModel extends CommonPickerModel {
   //   return null;
   // }
 
+  // @override
+  // DateTime finalTime() {
+  //   DateTime time = currentTime.add(Duration(days: _currentveryLeftIndex));
+  //   var hour = _currentLeftIndex;
+  //   var minute = _currentMiddleIndex;
+  //   if (isAtSameDay(minTime, time)) {
+  //     hour += minTime!.hour;
+  //     if (minTime!.hour == hour) {
+  //       minute += minTime!.minute;
+  //     }
+  //   }
+  //
+  //   return currentTime.isUtc
+  //       ? DateTime.utc(time.year, time.month, time.day, hour, minute)
+  //       : DateTime(time.year, time.month, time.day, hour, minute);
+  // }
+
   @override
   DateTime finalTime() {
-    DateTime time = currentTime.add(Duration(days: _currentLeftIndex));
-    var hour = _currentMiddleIndex;
-    var minute = _currentRightIndex;
+    DateTime time = currentTime.add(Duration(days: _currentveryLeftIndex));
+    int hour = _currentLeftIndex;
+    int minute = _currentMiddleIndex;
+
     if (isAtSameDay(minTime, time)) {
       hour += minTime!.hour;
-      if (minTime!.hour == hour) {
-        minute += minTime!.minute;
+      if (minTime!.hour == hour && minTime!.minute > minute) {
+        // 分が最小時間よりも小さい場合、時間を1つ減らす
+        hour = (hour - 1) % 12;
       }
     }
 
