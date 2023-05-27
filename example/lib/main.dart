@@ -79,23 +79,23 @@ class CustomPicker extends CommonPickerModel {
   DateTime finalTime() {
     return currentTime.isUtc
         ? DateTime.utc(
-        currentTime.year,
-        currentTime.month,
-        currentTime.day,
-        currentTime.hour,
-        this.currentveryLeftIndex(),
-        this.currentLeftIndex(),
-        this.currentMiddleIndex(),
-        this.currentRightIndex())
+            currentTime.year,
+            currentTime.month,
+            currentTime.day,
+            currentTime.hour,
+            this.currentveryLeftIndex(),
+            this.currentLeftIndex(),
+            this.currentMiddleIndex(),
+            this.currentRightIndex())
         : DateTime(
-        currentTime.year,
-        currentTime.month,
-        currentTime.day,
-        currentTime.hour,
-        this.currentveryLeftIndex(),
-        this.currentLeftIndex(),
-        this.currentMiddleIndex(),
-        this.currentRightIndex());
+            currentTime.year,
+            currentTime.month,
+            currentTime.day,
+            currentTime.hour,
+            this.currentveryLeftIndex(),
+            this.currentLeftIndex(),
+            this.currentMiddleIndex(),
+            this.currentRightIndex());
   }
 }
 
@@ -129,7 +129,7 @@ class HomePage extends StatelessWidget {
                       showTitleActions: true,
                       minTime: DateTime(2018, 3, 5),
                       maxTime: DateTime(2019, 6, 7),
-                      theme: DatePickerTheme(
+                      theme: FlutterDatePickerTheme(
                           headerColor: Colors.orange,
                           backgroundColor: Colors.blue,
                           itemStyle: TextStyle(
