@@ -708,7 +708,7 @@ class DateTimePickerModel extends CommonPickerModel {
 
   @override
   void setveryLeftIndex(int index) {
-    super.setLeftIndex(index);
+    super.setveryLeftIndex(index);
     DateTime time = currentTime.add(Duration(days: index));
     if (isAtSameDay(minTime, time)) {
       var index = min(24 - minTime!.hour - 1, _currentLeftIndex);
