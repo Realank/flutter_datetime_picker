@@ -212,7 +212,7 @@ class HomePage extends StatelessWidget {
                   DatePicker.showDateTimePicker(context, showTitleActions: true,
                       onChanged: (date) {
                     print('change $date in time zone ' +
-                        date.timeZoneOffset.inHours.toString());
+                        date.timeZoneOffset.inHours.toString() );
                   }, onConfirm: (date) {
                     print('confirm $date');
                   },

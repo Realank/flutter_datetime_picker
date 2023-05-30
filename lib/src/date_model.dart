@@ -1,6 +1,7 @@
 
 import 'dart:math';
 
+import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/src/date_format.dart';
 import 'package:flutter_datetime_picker/src/i18n_model.dart';
 
@@ -59,6 +60,8 @@ abstract class BasePickerModel {
 
 //a base class for picker data model
 class CommonPickerModel extends BasePickerModel {
+
+
   //ADD:Runa
   late List<String> veryLeftList;
   late List<String> leftList;
@@ -641,8 +644,13 @@ class Time12hPickerModel extends CommonPickerModel {
   }
 }
 
+@override
 
+DateTimePickerModel model = DateTimePickerModel();
+int rightIndex = model._currentRightIndex;
 // a date&time picker model //todo:
+
+
 class DateTimePickerModel extends CommonPickerModel {
   DateTime? maxTime;
   DateTime? minTime;
@@ -719,131 +727,154 @@ class DateTimePickerModel extends CommonPickerModel {
     }
   }
 
-  @override
-  String? veryLeftStringAtIndex(int index) {
-    DateTime time = currentTime.add(Duration(days: index));
-    DateTime nextTime = currentTime.add(Duration(days: index +1));
-    if (minTime != null &&
-        time.isBefore(minTime!) &&
-        !isAtSameDay(minTime!, time)) {
-      return null;
-    } else if (maxTime != null &&
-        time.isAfter(maxTime!) &&
-        !isAtSameDay(maxTime, time)) {
-      return null;
-    }  if (time.year == DateTime.now().year) {
-      return formatDate(time, [ymdw], locale);
-    } else {
-      return formatDate(time, [D,' ',M,' ',d,', ',yyyy ], locale);
-    }
-
-    // return formatDate(time, [mm,dd,D], locale); //ymdy //[D,' ',M,' ',d]
-  }
+    bool _isAm = false;
+    bool _isPm = false;
 
   @override
-  String? rightStringAtIndex(int index) {
+  void setRightIndex(int index) {
+    super.setRightIndex(index);
     if (index == 0) {
-      return i18nObjInLocale(this.locale)["am"] as String?;
-    } else if (index == 1) {
-      return i18nObjInLocale(this.locale)["pm"] as String?;
-    } else {
-      return null;
+      _isAm = true;
+      _isPm = false;
+      print('picked AM');
+    }
+    if (index == 1) {
+      _isPm = true;
+      _isAm = false;
+      print('picked PM');
     }
   }
 
-  @override
-  String? leftStringAtIndex(int index) {
-    if (index >= 0 && index < 12) {
-      if (index == 0) {
-        return digits(12, 2);
+
+
+    @override
+    String? veryLeftStringAtIndex(int index) {
+      DateTime time = currentTime.add(Duration(days: index));
+      DateTime nextTime = currentTime.add(Duration(days: index + 1));
+      if (minTime != null &&
+          time.isBefore(minTime!) &&
+          !isAtSameDay(minTime!, time)) {
+        return null;
+      } else if (maxTime != null &&
+          time.isAfter(maxTime!) &&
+          !isAtSameDay(maxTime, time)) {
+        return null;
+      }
+      if (time.year == DateTime
+          .now()
+          .year) {
+        return formatDate(time, [ymdw], locale);
       } else {
+        return formatDate(time, [D, ' ', M, ' ', d, ', ', yyyy], locale);
+      }
+
+      // return formatDate(time, [mm,dd,D], locale); //ymdy //[D,' ',M,' ',d]
+    }
+
+    @override
+    String? rightStringAtIndex(int index) {
+      if (index == 0) {
+        return i18nObjInLocale(this.locale)["am"] as String?;
+      } else if (index == 1) {
+        return i18nObjInLocale(this.locale)["pm"] as String?;
+      } else {
+        return null;
+      }
+    }
+
+    @override
+    String? leftStringAtIndex(int index) {
+      if (index >= 0 && index < 12) {
+        if (index == 0) {
+          return digits(12, 2);
+        } else {
+          return digits(index, 2);
+        }
+      } else {
+        return null;
+      }
+    }
+
+    @override
+    String? middleStringAtIndex(int index) {
+      if (index >= 0 && index < 60) {
         return digits(index, 2);
-      }
-    } else {
-      return null;
-    }
-  }
-
-  @override
-  String? middleStringAtIndex(int index) {
-    if (index >= 0 && index < 60) {
-      return digits(index, 2);
-    } else {
-      return null;
-    }
-  }
-
-  // @override
-  // String? rightStringAtIndex(int index) {
-  //   if (index >= 0 && index < 60) {
-  //     DateTime time = currentTime.add(Duration(days: _currentLeftIndex));
-  //     if (isAtSameDay(minTime, time) && _currentMiddleIndex == 0) {
-  //       if (index >= 0 && index < 60 - minTime!.minute) {
-  //         return digits(minTime!.minute + index, 2);
-  //       } else {
-  //         return null;
-  //       }
-  //     } else if (isAtSameDay(maxTime, time) &&
-  //         _currentMiddleIndex >= maxTime!.hour) {
-  //       if (index >= 0 && index <= maxTime!.minute) {
-  //         return digits(index, 2);
-  //       } else {
-  //         return null;
-  //       }
-  //     }
-  //     return digits(index, 2);
-  //   }
-  //
-  //   return null;
-  // }
-
-  // @override
-  // DateTime finalTime() {
-  //   DateTime time = currentTime.add(Duration(days: _currentveryLeftIndex));
-  //   var hour = _currentLeftIndex;
-  //   var minute = _currentMiddleIndex;
-  //   if (isAtSameDay(minTime, time)) {
-  //     hour += minTime!.hour;
-  //     if (minTime!.hour == hour) {
-  //       minute += minTime!.minute;
-  //     }
-  //   }
-  //
-  //   return currentTime.isUtc
-  //       ? DateTime.utc(time.year, time.month, time.day, hour, minute)
-  //       : DateTime(time.year, time.month, time.day, hour, minute);
-  // }
-
-  @override
-  DateTime finalTime() {
-    DateTime time = currentTime.add(Duration(days: _currentveryLeftIndex));
-    int hour = _currentLeftIndex;
-    int minute = _currentMiddleIndex;
-
-    if (isAtSameDay(minTime, time)) {
-      hour += minTime!.hour;
-      if (minTime!.hour == hour && minTime!.minute > minute) {
-        // 分が最小時間よりも小さい場合、時間を1つ減らす
-        hour = (hour - 1) % 12;
+      } else {
+        return null;
       }
     }
 
-    return currentTime.isUtc
-        ? DateTime.utc(time.year, time.month, time.day, hour, minute)
-        : DateTime(time.year, time.month, time.day, hour, minute);
-  }
+    // @override
+    // String? rightStringAtIndex(int index) {
+    //   if (index >= 0 && index < 60) {
+    //     DateTime time = currentTime.add(Duration(days: _currentLeftIndex));
+    //     if (isAtSameDay(minTime, time) && _currentMiddleIndex == 0) {
+    //       if (index >= 0 && index < 60 - minTime!.minute) {
+    //         return digits(minTime!.minute + index, 2);
+    //       } else {
+    //         return null;
+    //       }
+    //     } else if (isAtSameDay(maxTime, time) &&
+    //         _currentMiddleIndex >= maxTime!.hour) {
+    //       if (index >= 0 && index <= maxTime!.minute) {
+    //         return digits(index, 2);
+    //       } else {
+    //         return null;
+    //       }
+    //     }
+    //     return digits(index, 2);
+    //   }
+    //
+    //   return null;
+    // }
 
-  @override
-  List<int> layoutProportions() {
-    return [3, 1, 1, 1];
-  }
+    // @override
+    // DateTime finalTime() {
+    //   DateTime time = currentTime.add(Duration(days: _currentveryLeftIndex));
+    //   var hour = _currentLeftIndex;
+    //   var minute = _currentMiddleIndex;
+    //   if (isAtSameDay(minTime, time)) {
+    //     hour += minTime!.hour;
+    //     if (minTime!.hour == hour) {
+    //       minute += minTime!.minute;
+    //     }
+    //   }
+    //
+    //   return currentTime.isUtc
+    //       ? DateTime.utc(time.year, time.month, time.day, hour, minute)
+    //       : DateTime(time.year, time.month, time.day, hour, minute);
+    // }
 
-  @override
-  String leftDivider() {
-    return ":";
-  }
+    @override
+    DateTime finalTime() {
+      DateTime time = currentTime.add(Duration(days: _currentveryLeftIndex));
+      int hour = _currentLeftIndex;
+      int minute = _currentMiddleIndex;
+      if (_isPm) {
+        hour = (hour + 12) % 24;
+      }
+      if (isAtSameDay(minTime, time)) {
+        hour += minTime!.hour;
+        if (minTime!.hour == hour && minTime!.minute > minute) {
+          hour = (hour - 1) % 12;
+        }
+      }
 
-}
+      return currentTime.isUtc
+          ? DateTime.utc(time.year, time.month, time.day, hour, minute)
+          : DateTime(time.year, time.month, time.day, hour, minute);
+    }
+
+    @override
+    List<int> layoutProportions() {
+      return [3, 1, 1, 1];
+    }
+
+    @override
+    String leftDivider() {
+      return ":";
+    }
+  }
 
 
 
