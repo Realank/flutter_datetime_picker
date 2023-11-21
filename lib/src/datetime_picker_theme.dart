@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide DatePickerTheme;
 
 // Migrate DiagnosticableMixin to Diagnosticable until
 // https://github.com/flutter/flutter/pull/51495 makes it into stable (v1.15.21)
