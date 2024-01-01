@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:flutter_datetime_picker/src/datetime_picker_theme.dart'
+    as datepickertheme;
 
 void main() => runApp(new MyApp());
 
@@ -108,7 +110,7 @@ class HomePage extends StatelessWidget {
                       showTitleActions: true,
                       minTime: DateTime(2018, 3, 5),
                       maxTime: DateTime(2019, 6, 7),
-                      theme: DatePickerTheme(
+                      theme: datepickertheme.DatePickerTheme(
                           headerColor: Colors.orange,
                           backgroundColor: Colors.blue,
                           itemStyle: TextStyle(
