@@ -1,4 +1,5 @@
 enum LocaleType {
+  uz,
   en,
   fa,
   zh,
@@ -39,6 +40,42 @@ enum LocaleType {
 }
 
 final _i18nModel = <LocaleType, Map<String, Object>>{
+  LocaleType.uz: {
+    'cancel': 'Bekor qilish',
+    'done': 'Tasdiqlash',
+    'today': 'Bugun',
+    'monthShort': [
+      'Yan',
+      'Fev',
+      'Mart',
+      'Apr',
+      'May',
+      'Iyun',
+      'Iyul',
+      'Avg',
+      'Sen',
+      'Okt',
+      'Noy',
+      'Dek'
+    ],
+    'monthLong': [
+      'Yanvar',
+      'Fevral',
+      'Mart',
+      'Aprel',
+      'May',
+      'Iyun',
+      'Iyul',
+      'Avgust',
+      'Sentabr',
+      'Oktabr',
+      'Noyabr',
+      'Dekabr'
+    ],
+    'day': ['Dush', 'Sesh', 'Chor', 'Pay', 'Jum', 'Shan', 'Yak'],
+    'am': 'AM',
+    'pm': 'PM'
+  },
   LocaleType.kh: {
     'cancel': 'បោះបង់',
     'done': 'រួចរាល់',
